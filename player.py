@@ -4,10 +4,10 @@ from settings import PLAYER_SPEED, ZOOM
 from utils import load_spritesheet  
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos):
+    def __init__(self, pos, camera):
         super().__init__()
 
-      
+        self.camera = camera
         self.frames = load_spritesheet("assets/sprites/player_sheet.png", 64, 64)
 
        
@@ -43,14 +43,21 @@ class Player(pygame.sprite.Sprite):
             keys[pygame.K_s] - keys[pygame.K_z]  
         )
 
+  
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        mouse_x += self.camera.offset.x
+
+        player_screen_x = self.rect.centerx  
+        print(player_screen_x, mouse_x)
+        if mouse_x < player_screen_x:
+            self.facing_left = True
+        else:
+            self.facing_left = False
         if direction.length() > 0:
             direction.normalize_ip()
             self.current_anim = "walk"
           
-            if direction.x < 0:
-                self.facing_left = True
-            elif direction.x > 0:
-                self.facing_left = False
+            
         else:
             self.current_anim = "idle"
 

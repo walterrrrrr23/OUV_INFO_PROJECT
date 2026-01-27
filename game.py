@@ -1,21 +1,30 @@
 # game.py
 import pygame
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM
 from player import Player
 from camera import Camera
 from map import load_tiles, draw_checker_map
+from weapon import Weapon
 class Game:
     def __init__(self, screen):
         self.screen = screen
 
         self.all_sprites = pygame.sprite.Group()
-
-        self.player = Player((0, 0))
+        self.camera = Camera()
+        self.player = Player((0, 0), self.camera)
         self.all_sprites.add(self.player)
 
-        self.camera = Camera()
+       
         self.camera.center(self.player)
 
+        sheet = pygame.image.load("assets/sprites/weaponsheet.png").convert_alpha()
+
+        weapon_image = sheet.subsurface(pygame.Rect(0, 0, 64, 64))
+        weapon_image = pygame.transform.scale(weapon_image, (64*ZOOM, 64*ZOOM))
+
+
+        self.weapon = Weapon(self.player, weapon_image, self.camera)
+        self.all_sprites.add(self.weapon)
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
 
     def update(self, dt):
