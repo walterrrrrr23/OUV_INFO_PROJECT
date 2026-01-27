@@ -1,0 +1,27 @@
+1 : Installer git
+
+2: aller sur 
+https://github.com/walterrrrrr23/OUV_INFO_PROJECT
+
+3: Creer unn dossier pour le jeux et l'ouvrir dans VS Code
+
+4: Dans le terminal VS Code : utiliser la commande suivante :
+git clone https://github.com/walterrrrrr23/OUV_INFO_PROJECT.git 
+
+5 Ouvrir le nouveaux dossier "OUV_INFO_PROJECT" et travailler dedans
+
+commandes :
+
+
+
+git pull : rafraichi votre copie local pour avoir les mises a jours du git
+(a faire régulièrement ou avant de commencer a coder)
+
+git add [fichier] : choisit quel fichier doit etre sauvegarder lors de la prochaine sauvegarde
+
+git commit -m [message de commit] : sauvegarde LOCALEMENT votre travail
+
+git push : Renvoie votre sauvegarde LOCAL sur le git et rend global tout changement 
+
+git status : retourne infos utiles comme les fichiers non mis a jour sur le git ou non ajouté pour la proichaine maj local
+ainsi que la branche de travail (normalement elle s'appelle 
