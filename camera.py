@@ -8,8 +8,8 @@ class Camera:
     def center(self, target):
         self.offset.x += target.rect.centerx - SCREEN_WIDTH // 2
         self.offset.y += target.rect.centery - SCREEN_HEIGHT // 2
-    def update(self, target):
-        self.offset += target.vel
+    def update(self, vect):
+        self.offset += vect
      
 
     def apply(self, rect):
