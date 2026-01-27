@@ -1,6 +1,6 @@
 # game.py
 import pygame
-from settings import BG_COLOR, SCREEN_WIDTH, SCREEN_HEIGHT
+from settings import BG_COLOR, SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD
 from player import Player
 from camera import Camera
 
@@ -14,10 +14,18 @@ class Game:
         self.all_sprites.add(self.player)
 
         self.camera = Camera()
+        self.camera.center(self.player)
 
     def update(self, dt):
         self.all_sprites.update(dt)
-        self.camera.update(self.player)
+        if self.player.pos.x - self.camera.offset.x > SCREEN_WIDTH - SCREEN_WIDTH/CAMERA_OFFSET_THRESHOLD :
+            self.camera.update(self.player)
+        elif self.player.pos.y - self.camera.offset.y > SCREEN_HEIGHT  - SCREEN_HEIGHT/CAMERA_OFFSET_THRESHOLD  :
+            self.camera.update(self.player)
+        elif self.player.pos.x - self.camera.offset.x < SCREEN_WIDTH/CAMERA_OFFSET_THRESHOLD :
+            self.camera.update(self.player)
+        elif self.player.pos.y - self.camera.offset.y < SCREEN_HEIGHT/CAMERA_OFFSET_THRESHOLD :
+            self.camera.update(self.player)
 
     def draw(self):
         self.screen.fill(BG_COLOR)

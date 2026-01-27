@@ -10,7 +10,7 @@ class Player(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect(center=pos)
         self.pos = pygame.Vector2(self.rect.center)
-
+        self.vel = pygame.Vector2(self.rect.center)
         self.speed = PLAYER_SPEED
 
     def update(self, dt):
@@ -23,6 +23,8 @@ class Player(pygame.sprite.Sprite):
 
         if direction.length() > 0:
             direction.normalize_ip()
-
-        self.pos += direction * self.speed * dt
+        self.vel.x = 0
+        self.vel.y = 0
+        self.vel = direction* self.speed * dt
+        self.pos += self.vel 
         self.rect.center = self.pos
