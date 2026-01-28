@@ -24,4 +24,4 @@ git commit -m [message de commit] : sauvegarde LOCALEMENT votre travail
 git push : Renvoie votre sauvegarde LOCAL sur le git et rend global tout changement 
 
 git status : retourne infos utiles comme les fichiers non mis a jour sur le git ou non ajouté pour la proichaine maj local
-ainsi que la branche de travail (normalement elle s'appelle 
+ainsi que la branche de travail (normalement elle s'appelle )
