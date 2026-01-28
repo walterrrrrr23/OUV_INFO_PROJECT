@@ -1,6 +1,6 @@
 # game.py
 import pygame
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE
 from player import Player
 from camera import Camera
 from map import load_tiles, draw_checker_map
@@ -19,7 +19,7 @@ class Game:
 
         sheet = pygame.image.load("assets/sprites/weaponsheet.png").convert_alpha()
 
-        weapon_image = sheet.subsurface(pygame.Rect(0, 0, 64, 64))
+        weapon_image = sheet.subsurface(pygame.Rect(4*TAILLE_SPRITE, 0*TAILLE_SPRITE, 64, 64))
         weapon_image = pygame.transform.scale(weapon_image, (64*ZOOM, 64*ZOOM))
 
 
