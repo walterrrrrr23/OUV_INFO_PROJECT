@@ -18,6 +18,11 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            
+        key_pressed = pygame.key.get_pressed()
+        if key_pressed[pygame.K_ESCAPE]:
+            pygame.quit()
+
 
         game.update(dt)
         game.draw()
