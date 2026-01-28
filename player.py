@@ -48,7 +48,7 @@ class Player(pygame.sprite.Sprite):
         mouse_x += self.camera.offset.x
 
         player_screen_x = self.rect.centerx  
-        print(player_screen_x, mouse_x)
+
         if mouse_x < player_screen_x:
             self.facing_left = True
         else:
