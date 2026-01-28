@@ -5,6 +5,7 @@ from player import Player
 from camera import Camera
 from map import load_tiles, draw_checker_map
 from weapon import Weapon
+from projectile import Projectile
 class Game:
     def __init__(self, screen):
         self.screen = screen
@@ -13,7 +14,6 @@ class Game:
         self.camera = Camera()
         self.player = Player((0, 0), self.camera)
         self.all_sprites.add(self.player)
-
        
         self.camera.center(self.player)
 
@@ -22,9 +22,12 @@ class Game:
         weapon_image = sheet.subsurface(pygame.Rect(4*TAILLE_SPRITE, 0*TAILLE_SPRITE, 64, 64))
         weapon_image = pygame.transform.scale(weapon_image, (64*ZOOM, 64*ZOOM))
 
-
         self.weapon = Weapon(self.player, weapon_image, self.camera)
         self.all_sprites.add(self.weapon)
+
+        self.player_shoot = Projectile(self.camera, weapon_image, 0, 0, pygame.Vector2(-64,0), 0, 0)
+        self.all_sprites.add(self.player_shoot)
+
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
 
     def update(self, dt):

@@ -13,7 +13,7 @@ def main():
 
     running = True
     while running:
-        dt = clock.tick(FPS) / 1000
+        dt = clock.tick(FPS) / 1000 #conversion en s
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -22,7 +22,7 @@ def main():
         game.update(dt)
         game.draw()
 
-        pygame.display.flip()
+        pygame.display.flip() #screen update
 
     pygame.quit()
 
