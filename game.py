@@ -25,7 +25,11 @@ class Game:
         self.weapon = Weapon(self.player, weapon_image, self.camera)
         self.all_sprites.add(self.weapon)
 
-        self.player_shoot = Projectile(self.camera, weapon_image, 0, 0, pygame.Vector2(-64,0), 0, 0)
+        sheet2 = pygame.image.load("assets/sprites/bulletsheet.png").convert_alpha()
+
+        bullet_image = sheet2.subsurface(pygame.Rect(0*TAILLE_SPRITE, 0*TAILLE_SPRITE, 64, 64))
+        bullet_image = pygame.transform.scale(bullet_image, (64*ZOOM, 64*ZOOM))
+        self.player_shoot = Projectile(self.camera, bullet_image, 0, 0, pygame.Vector2(-64,0), 0, 0)
         self.all_sprites.add(self.player_shoot)
 
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
