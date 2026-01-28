@@ -1,6 +1,6 @@
 # game.py
 import pygame
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE, MOUSE_SENSITIVITY
 from player import Player
 from camera import Camera
 from map import load_tiles, draw_checker_map
@@ -31,6 +31,13 @@ class Game:
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
 
     def update(self, dt):
+        self.camera.calclateOffset()
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        mouse_x = ((mouse_x - SCREEN_WIDTH/2)/SCREEN_WIDTH) * MOUSE_SENSITIVITY
+        mouse_y = ((mouse_y - SCREEN_WIDTH/2)/SCREEN_HEIGHT) * MOUSE_SENSITIVITY
+
+        self.camera.updateMouse(pygame.Vector2(mouse_x, mouse_y))
+
         self.all_sprites.update(dt)
         if self.player.pos.x - self.camera.offset.x > SCREEN_WIDTH - SCREEN_WIDTH/CAMERA_OFFSET_THRESHOLD :
             self.camera.update(pygame.Vector2(self.player.vel.x, 0))

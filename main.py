@@ -1,7 +1,8 @@
 # main.py
 import pygame
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT, FPS
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, PAUSE
 from game import Game
+from menu_pause import Pause
 
 def main():
     pygame.init()
@@ -18,6 +19,16 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            
+        key_pressed = pygame.key.get_pressed()
+        if key_pressed[pygame.K_ESCAPE]:
+            pygame.quit()
+
+        key_pressed = pygame.key.get_pressed()
+        if key_pressed[pygame.K_p]:
+            PAUSE = not PAUSE
+            print(Pause)
+
 
         game.update(dt)
         game.draw()
