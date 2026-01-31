@@ -20,18 +20,18 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            
+
+        #Quit the game    
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_ESCAPE]:
             pygame.quit()
 
+        #Pause
         if key_pressed[pygame.K_p]:
             ppause = not ppause
-        
         if ppause:
             print("hell yeah")
             pause()
-
         else :
             print("hell no")
 

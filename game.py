@@ -6,10 +6,10 @@ from camera import Camera
 from map import load_tiles, draw_checker_map
 from weapon import Weapon
 from projectile import Projectile
+
 class Game:
     def __init__(self, screen):
         self.screen = screen
-
         self.all_sprites = pygame.sprite.Group()
         self.camera = Camera()
         self.player = Player((0, 0), self.camera)
