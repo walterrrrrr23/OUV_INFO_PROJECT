@@ -20,23 +20,26 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            
+            if event.type == pygame.KEYDOWN:
 
-        #Quit the game    
-        key_pressed = pygame.key.get_pressed()
-        if key_pressed[pygame.K_ESCAPE]:
-            pygame.quit()
+                # quiiter le jeu
+                if event.key == pygame.K_ESCAPE:
+                    running = False
 
-        #Pause
-        if key_pressed[pygame.K_p]:
-            ppause = not ppause
-        if ppause:
-            print("hell yeah")
-            pause()
-        else :
-            print("hell no")
-
-        game.update(dt)
-        game.draw()
+                # afficher le menu pause
+                if event.key == pygame.K_p:
+                    ppause = not ppause
+            
+        # si on est en pause, on affiche le menu
+        if ppause :
+            game.draw()
+            pause(screen)
+        
+        # si on est pas en pause, on update
+        else:
+            game.update(dt)
+            game.draw()
 
         pygame.display.flip() #screen update
 
