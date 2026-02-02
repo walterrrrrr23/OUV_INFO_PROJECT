@@ -7,6 +7,7 @@ from map import load_tiles, draw_checker_map
 from weapon import Weapon
 from projectile import Projectile
 from enemy import Enemy
+from menu_pause import HealthBar
 class Game:
     def __init__(self):
         self.camera = Camera()
@@ -19,8 +20,7 @@ class Game:
         self.sprite_player.add(self.player)
 
 
-        self.enemy = Enemy((10, 10), self.camera, self.player)
-        self.sprite_mob.add(self.enemy)
+      
 
         #image arme
         sheet = pygame.image.load("assets/sprites/weaponsheet.png").convert_alpha()
@@ -36,6 +36,9 @@ class Game:
         self.weapon = Weapon(self.player, weapon_image, self.camera, bullet_image)
         self.sprite_player.add(self.weapon)
 
+        self.enemy = Enemy((10, 10), self.camera, self.player, bullet_image)
+        self.sprite_mob.add(self.enemy)
+
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
 
     def update(self, dt):
@@ -47,10 +50,7 @@ class Game:
         self.camera.updateMouse(pygame.Vector2(mouse_x, mouse_y))
 
         self.sprite_player.update(dt) #->player, weapon...
-        #self.sprite_player.draw()
-        for sprite in self.sprite_mob:
-            sprite.update(dt)
-      
+        self.sprite_mob.update(dt)
 
         if self.player.pos.x - self.camera.offset.x > SCREEN_WIDTH - SCREEN_WIDTH/CAMERA_OFFSET_THRESHOLD :
             self.camera.update(pygame.Vector2(self.player.vel.x, 0))
@@ -66,12 +66,10 @@ class Game:
         
         for sprite in self.sprite_mob:
             sprite.draw(window)
-            
-        for sprite in self.sprite_player:
-            sprite.draw(window)
 
-            """ Karl quelle est cette horreur
-            self.screen.blit(
-                sprite.image,
-                self.camera.apply(sprite.rect)
-            )"""
+        for sprite in self.sprite_player:
+           sprite.draw(window)
+
+        #GUI
+
+        HealthBar(self.player, window)

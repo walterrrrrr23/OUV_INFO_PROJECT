@@ -22,6 +22,9 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             
+            if game.player.health <= 0 :
+                running = False #METTRE LOGIQUE GAME_OVER
+
             if event.type == pygame.KEYDOWN:
 
                 # quiiter le jeu

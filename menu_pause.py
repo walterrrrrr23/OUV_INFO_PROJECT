@@ -1,6 +1,32 @@
 import pygame
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, PAUSE
 
+
+def HealthBar(player, display):
+
+    bar_lenght_pixel = SCREEN_WIDTH//4 + 100
+    health = player.health
+    maxhealth = player.max_health
+    offsetx = 240
+    offsety = 200
+    sizex = health/maxhealth*bar_lenght_pixel
+    sizey = 35
+
+    #bar de fond
+    pygame.draw.rect(display, pygame.Color(0,0,0), (offsetx, offsety, bar_lenght_pixel, sizey))
+    #bar rouge
+    pygame.draw.rect(display, pygame.Color(255,0,0), (offsetx, offsety, sizex, sizey))
+
+    font_title = pygame.font.SysFont("arial", 80, bold=True)
+    font_text = pygame.font.SysFont("arial", 40)
+    info1_surface = font_text.render(f"{health} / {maxhealth}", True, (200, 200, 200))
+
+    info_rect = info1_surface.get_rect(center=(sizex//2 + offsetx, sizey//2 + offsety))
+
+    display.blit(info1_surface, info_rect)
+
+   
+
 def pause(screen):
 
     #mettre en pause game

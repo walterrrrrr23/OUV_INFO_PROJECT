@@ -1,10 +1,11 @@
 
 import pygame
 from settings import PLAYER_SPEED, ZOOM, PLAYER_ACCELERATION
-from utils import load_spritesheet  
+from utils import load_spritesheet 
+from projectile import Projectile 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, pos, camera, target):
+    def __init__(self, pos, camera, target, image_projectile):
         super().__init__()
 
         self.camera = camera
@@ -35,17 +36,31 @@ class Enemy(pygame.sprite.Sprite):
         self.timer = 0
         self.facing_left = False  
 
+        self.img_bullet = image_projectile
 
+        self.sprite_projectiles = pygame.sprite.Group()
 
         #VARIABLES
 
         self.speed = 150
         self.acceleration = .1
         self.damage = 10
+        self.cooldown = 300 #en ticks
+        self.last = 0
+
+    def shoot(self):
+        self.last = pygame.time.get_ticks()
+        dir = (self.target.pos - self.pos).normalize()
+        self.player_shoot = Projectile(self.camera, self.img_bullet, self.pos.x, self.pos.y, dir, 300, 0, 0)
+        self.sprite_projectiles.add(self.player_shoot)
+
 
     def update(self, dt):
       
-
+        self.sprite_projectiles.update(dt)
+        now = pygame.time.get_ticks()
+        if now - self.last > self.cooldown :
+            self.shoot()
 
         dir = self.target.pos - self.pos
 
@@ -72,7 +87,7 @@ class Enemy(pygame.sprite.Sprite):
 
         
         self.vel = self.direction * self.speed*dt
-        print(self.direction)
+       
         self.pos += self.vel
         self.rect.center = self.pos
 
@@ -89,3 +104,6 @@ class Enemy(pygame.sprite.Sprite):
 
     def draw(self, window):
         window.blit(self.image, self.camera.apply(self.rect))
+
+        for sprite in self.sprite_projectiles:
+            sprite.draw(window)
