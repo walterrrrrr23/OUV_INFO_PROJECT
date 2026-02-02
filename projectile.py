@@ -1,4 +1,5 @@
 import pygame
+import math
 
 class Projectile(pygame.sprite.Sprite):
     def __init__(self, camera, image, x, y, direction, speed, damage, knockback=0): #Knockback optionnel (0 par défault)
@@ -12,7 +13,14 @@ class Projectile(pygame.sprite.Sprite):
         self.kb = knockback
         self.rect = self.image.get_rect(center=self.pos) #Hitbox de la dimension du sprite
 
+        angle = self.direction.angle_to(pygame.Vector2(1,0))
+
+        self.image = pygame.transform.rotate(self.image, angle)
+   
+      
+
     def update(self, dt):
+      
         self.pos = self.pos + self.direction*self.speed*dt
         self.rect.center = self.pos
 
