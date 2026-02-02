@@ -95,3 +95,6 @@ class Player(pygame.sprite.Sprite):
         
             if self.facing_left:
                 self.image = pygame.transform.flip(self.image, True, False)
+
+    def draw(self, window):
+        window.blit(self.image, self.camera.apply(self.rect))

@@ -8,29 +8,29 @@ from weapon import Weapon
 from projectile import Projectile
 
 class Game:
-    def __init__(self, screen):
-        self.screen = screen
-        self.all_sprites = pygame.sprite.Group()
+    def __init__(self):
         self.camera = Camera()
         self.player = Player((0, 0), self.camera)
-        self.all_sprites.add(self.player)
-       
         self.camera.center(self.player)
 
-        sheet = pygame.image.load("assets/sprites/weaponsheet.png").convert_alpha()
+        self.sprite_player = pygame.sprite.Group()
+        self.sprite_mob = pygame.sprite.Group()
+        
+        self.sprite_player.add(self.player)
 
+        #image arme
+        sheet = pygame.image.load("assets/sprites/weaponsheet.png").convert_alpha()
         weapon_image = sheet.subsurface(pygame.Rect(4*TAILLE_SPRITE, 0*TAILLE_SPRITE, 64, 64))
         weapon_image = pygame.transform.scale(weapon_image, (64*ZOOM, 64*ZOOM))
 
-        self.weapon = Weapon(self.player, weapon_image, self.camera)
-        self.all_sprites.add(self.weapon)
-
+        #image balle
         sheet2 = pygame.image.load("assets/sprites/bulletsheet.png").convert_alpha()
-
         bullet_image = sheet2.subsurface(pygame.Rect(0*TAILLE_SPRITE, 0*TAILLE_SPRITE, 64, 64))
         bullet_image = pygame.transform.scale(bullet_image, (64*ZOOM, 64*ZOOM))
-        self.player_shoot = Projectile(self.camera, bullet_image, 0, 0, pygame.Vector2(-64,0), 0, 0)
-        self.all_sprites.add(self.player_shoot)
+
+        #def arme (à qui on associe une balle (=son image))
+        self.weapon = Weapon(self.player, weapon_image, self.camera, bullet_image)
+        self.sprite_player.add(self.weapon)
 
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
 
@@ -42,7 +42,10 @@ class Game:
 
         self.camera.updateMouse(pygame.Vector2(mouse_x, mouse_y))
 
-        self.all_sprites.update(dt)
+        self.sprite_player.update(dt) #->player, weapon...
+        #self.sprite_player.draw()
+        #self.sprite_mob.update(dt) # !!!plus tard!!!
+
         if self.player.pos.x - self.camera.offset.x > SCREEN_WIDTH - SCREEN_WIDTH/CAMERA_OFFSET_THRESHOLD :
             self.camera.update(pygame.Vector2(self.player.vel.x, 0))
         if self.player.pos.y - self.camera.offset.y > SCREEN_HEIGHT  - SCREEN_HEIGHT/CAMERA_OFFSET_THRESHOLD  :
@@ -52,11 +55,13 @@ class Game:
         if self.player.pos.y - self.camera.offset.y < SCREEN_HEIGHT/CAMERA_OFFSET_THRESHOLD :
             self.camera.update(pygame.Vector2(0,self.player.vel.y))
 
-    def draw(self):
-        draw_checker_map(self.screen, self.camera, self.tile1, self.tile2)
+    def draw(self, window):
+        draw_checker_map(window, self.camera, self.tile1, self.tile2)
 
-        for sprite in self.all_sprites:
+        for sprite in self.sprite_player:
+            sprite.draw(window)
+            """ Karl quelle est cette horreur
             self.screen.blit(
                 sprite.image,
                 self.camera.apply(sprite.rect)
-            )
+            )"""

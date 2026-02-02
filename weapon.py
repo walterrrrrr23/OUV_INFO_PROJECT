@@ -1,15 +1,17 @@
 # weapon.pyimport pygame
 import math
 import pygame
+from projectile import Projectile
 
 class Weapon(pygame.sprite.Sprite):
-    def __init__(self, player, image_surface, camera):
+    def __init__(self, player, image_surface, camera, image_projectile):
         super().__init__()
         self.camera = camera
         self.player = player 
         self.original_image = image_surface
         self.image = self.original_image
         self.rect = self.image.get_rect(center=self.player.pos)
+        self.img_bullet = image_projectile
 
         self.sprite_projectiles = pygame.sprite.Group()
 
@@ -36,6 +38,20 @@ class Weapon(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect(center=self.player.pos + handoffset) #modificationd de l'affichage
 
+    def shoot(self):
+        x, y = self.player.pos
+        self.player_shoot = Projectile(self.camera, self.img_bullet, x, y, pygame.Vector2(-64,0), 0, 0)
+        self.sprite_projectiles.add(self.player_shoot)
+
+    def draw(self, window):
+        window.blit(self.image, self.camera.apply(self.rect))
+        for sprite in self.sprite_projectiles:
+            sprite.draw(window)
+
     def update(self, dt):
         self.display_weapon()
+        mouse_clicks = pygame.mouse.get_pressed()[0]#num_buttons=1)
+        if mouse_clicks:
+            self.shoot()
+        self.sprite_projectiles.update(dt)
         

@@ -10,7 +10,7 @@ def main():
     pygame.display.set_caption("test")
 
     clock = pygame.time.Clock()
-    game = Game(screen)
+    game = Game()
     ppause = False
 
     running = True
@@ -33,13 +33,13 @@ def main():
             
         # si on est en pause, on affiche le menu
         if ppause :
-            game.draw()
+            game.draw(screen)
             pause(screen)
         
         # si on est pas en pause, on update
         else:
             game.update(dt)
-            game.draw()
+            game.draw(screen)
 
         pygame.display.flip() #screen update
 
