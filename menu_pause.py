@@ -1,7 +1,6 @@
 import pygame
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, PAUSE
 
-
 def HealthBar(player, display):
 
     bar_lenght_pixel = SCREEN_WIDTH//4 + 100
@@ -24,9 +23,7 @@ def HealthBar(player, display):
     info_rect = info1_surface.get_rect(center=(sizex//2 + offsetx, sizey//2 + offsety))
 
     display.blit(info1_surface, info_rect)
-
-   
-
+    
 def pause(screen):
 
     #mettre en pause game
@@ -57,7 +54,7 @@ def pause(screen):
     info_rect = info1_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30))
     quit_rect = info2_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 80))
 
-    # bouton pour repprendre la partie
+    # bouton pour repprendre
 
     # afficher le titre
 
