@@ -11,29 +11,31 @@ class Weapon(pygame.sprite.Sprite):
         self.image = self.original_image
         self.rect = self.image.get_rect(center=self.player.pos)
 
-    def update(self, dt):
+        self.sprite_projectiles = pygame.sprite.Group()
+
+    def display_weapon(self):
+        """
+        Rotation de l'arme dans la direction de la souris
+        """
+        self.rect.center = self.player.pos #position du jouer
+        mouse_x, mouse_y = pygame.mouse.get_pos() #postion de la souris
+        mouse_x += self.camera.offset.x #déplacement en x de la souris relativement à la caméra
+        mouse_y += self.camera.offset.y #déplacement en y de la souris relativement à la caméra
+        dx = mouse_x - self.player.pos.x #distance en x entre la souris et le joueur
+        dy = mouse_y - self.player.pos.y #distance en x entre la souris et le joueur
+        angle = math.degrees(math.atan2(-dy, dx)) #angle entre l'arme et le joueur 
         
-        self.rect.center = self.player.pos
-
-   
-        mouse_x, mouse_y = pygame.mouse.get_pos()
-        mouse_x += self.camera.offset.x
-        mouse_y += self.camera.offset.y
-
-     
-        dx = mouse_x - self.player.pos.x
-        dy = mouse_y - self.player.pos.y
-        angle = math.degrees(math.atan2(-dy, dx))  
-
         handoffset =  pygame.Vector2(0,10)
         if self.player.facing_left:
             handoffset.x = -3
-            self.image = pygame.transform.flip(self.original_image, False, True)
-           
-            self.image = pygame.transform.rotate(self.image, angle)
+            self.image = pygame.transform.flip(self.original_image, False, True) #direction de l'arme
+            self.image = pygame.transform.rotate(self.image, angle) #angle de l'arme --> direction de la souris
         else:
             handoffset.x = 3
             self.image = pygame.transform.rotate(self.original_image, angle)
 
-     
-        self.rect = self.image.get_rect(center=self.player.pos + handoffset)
+        self.rect = self.image.get_rect(center=self.player.pos + handoffset) #modificationd de l'affichage
+
+    def update(self, dt):
+        self.display_weapon()
+        
