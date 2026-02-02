@@ -30,10 +30,16 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=pos)
         self.pos = pygame.Vector2(pos)
         self.vel = pygame.Vector2(0, 0)
-        self.speed = PLAYER_SPEED
-        self.acceleration = PLAYER_ACCELERATION
         self.timer = 0
         self.facing_left = False  
+
+        #VAR
+
+        self.speed = PLAYER_SPEED
+        self.acceleration = PLAYER_ACCELERATION
+        self.max_health = 20
+        self.health = 20
+        
 
     def update(self, dt):
         keys = pygame.key.get_pressed()
