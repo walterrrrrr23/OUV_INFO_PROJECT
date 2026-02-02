@@ -57,6 +57,8 @@ def pause(screen):
     info_rect = info1_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30))
     quit_rect = info2_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 80))
 
+    # bouton pour repprendre la partie
+
     # afficher le titre
 
     screen.blit(title_surface, title_rect)

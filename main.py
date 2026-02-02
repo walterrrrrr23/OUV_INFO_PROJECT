@@ -11,9 +11,10 @@ def main():
 
     clock = pygame.time.Clock()
     game = Game()
-    ppause = False
 
+    ppause = False
     running = True
+    
     while running:
         dt = clock.tick(FPS) / 1000 #conversion en s
 
