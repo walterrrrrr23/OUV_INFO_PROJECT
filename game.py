@@ -47,10 +47,7 @@ class Game:
         self.camera.updateMouse(pygame.Vector2(mouse_x, mouse_y))
 
         self.sprite_player.update(dt) #->player, weapon...
-        #self.sprite_player.draw()
-        for sprite in self.sprite_mob:
-            sprite.update(dt)
-      
+        self.sprite_mob.update(dt)
 
         if self.player.pos.x - self.camera.offset.x > SCREEN_WIDTH - SCREEN_WIDTH/CAMERA_OFFSET_THRESHOLD :
             self.camera.update(pygame.Vector2(self.player.vel.x, 0))
@@ -66,12 +63,6 @@ class Game:
         
         for sprite in self.sprite_mob:
             sprite.draw(window)
-            
-        for sprite in self.sprite_player:
-            sprite.draw(window)
 
-            """ Karl quelle est cette horreur
-            self.screen.blit(
-                sprite.image,
-                self.camera.apply(sprite.rect)
-            )"""
+        for sprite in self.sprite_player:
+           sprite.draw(window)
