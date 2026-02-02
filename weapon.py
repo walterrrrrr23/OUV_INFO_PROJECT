@@ -40,7 +40,8 @@ class Weapon(pygame.sprite.Sprite):
 
     def shoot(self):
         x, y = self.player.pos
-        self.player_shoot = Projectile(self.camera, self.img_bullet, x, y, pygame.Vector2(-64,0), 0, 0)
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        self.player_shoot = Projectile(self.camera, self.img_bullet, x, y, pygame.Vector2(mouse_x, mouse_y), 0, 0)
         self.sprite_projectiles.add(self.player_shoot)
 
     def draw(self, window):
