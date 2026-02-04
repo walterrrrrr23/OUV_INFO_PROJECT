@@ -103,4 +103,5 @@ class Player(pygame.sprite.Sprite):
                 self.image = pygame.transform.flip(self.image, True, False)
 
     def draw(self, window):
+        #pygame.draw.rect(window, (255, 0, 0), self.rect, 2) TEST HITBOX JOUEUR
         window.blit(self.image, self.camera.apply(self.rect))
