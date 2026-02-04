@@ -51,7 +51,7 @@ class Enemy(pygame.sprite.Sprite):
     def shoot(self):
         self.last = pygame.time.get_ticks()
         dir = (self.target.pos - self.pos).normalize()
-        self.player_shoot = Projectile(self.camera, self.img_bullet, self.pos.x, self.pos.y, dir, 300, 0, 0)
+        self.player_shoot = Projectile(self.camera, self.img_bullet, self.pos, dir, 300, 0, 0)
         self.sprite_projectiles.add(self.player_shoot)
 
 

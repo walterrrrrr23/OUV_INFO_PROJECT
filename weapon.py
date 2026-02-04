@@ -25,7 +25,7 @@ class Weapon(pygame.sprite.Sprite):
         """
         Rotation de l'arme dans la direction de la souris
         """
-        self.rect.center = self.player.pos #position du jouer
+        self.rect.center = self.player.pos #position du joueur
         mouse_x, mouse_y = pygame.mouse.get_pos() #postion de la souris
         mouse_x += self.camera.offset.x #déplacement en x de la souris relativement à la caméra
         mouse_y += self.camera.offset.y #déplacement en y de la souris relativement à la caméra
@@ -47,19 +47,20 @@ class Weapon(pygame.sprite.Sprite):
     def shoot(self):
         #direction de la balle relativement à la postion du joueur et de la caméra (cf. display_weapon)
         self.last = pygame.time.get_ticks()
-        x, y = self.rect.right, self.rect.centery
-        mouse_x, mouse_y = pygame.mouse.get_pos()
-        mouse_x += self.camera.offset.x
-        mouse_y += self.camera.offset.y
-        dx = mouse_x - self.player.pos.x
-        dy = mouse_y - self.player.pos.y
-
+        
+        bullet_pos = pygame.math.Vector2.copy(self.player.pos)
+        mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
+        mouse_pos += self.camera.offset
+        direction = (mouse_pos - bullet_pos).normalize()
+        bullet_pos += direction*64#self.img_bullet.get_width()
+        
         #Création du projectile
-        self.player_shoot = Projectile(self.camera, self.img_bullet, x, y, pygame.Vector2(dx, dy).normalize(), 500, 0, 0)
+        self.player_shoot = Projectile(self.camera, self.img_bullet, bullet_pos, direction, 500, 0, 0)
         self.sprite_projectiles.add(self.player_shoot)
 
     def draw(self, window):
         window.blit(self.image, self.camera.apply(self.rect))
+        #pygame.draw.rect(window, (255, 0, 0), self.rect, 2) TEST HITBOX ARMES
         for sprite in self.sprite_projectiles:
             sprite.draw(window)
 
@@ -67,8 +68,7 @@ class Weapon(pygame.sprite.Sprite):
         self.display_weapon()
         mouse_clicks = pygame.mouse.get_pressed()[0]#num_buttons=1)
         now = pygame.time.get_ticks()
-     
         if mouse_clicks and now - self.last > self.cooldown :
-            self.shoot()
+            self.shoot() 
         self.sprite_projectiles.update(dt)
         
