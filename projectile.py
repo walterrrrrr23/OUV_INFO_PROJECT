@@ -11,7 +11,7 @@ class Projectile(pygame.sprite.Sprite):
         self.speed = speed
         self.damage = damage
         self.kb = knockback
-        self.rect = self.image.get_rect(center=self.pos) #Hitbox de la dimension du sprite
+        self.rect = pygame.Rect(position, (15,15))
 
         angle = self.direction.angle_to(pygame.Vector2(1,0))
 
@@ -22,8 +22,11 @@ class Projectile(pygame.sprite.Sprite):
         self.rect.center = self.pos
 
     def draw(self, window):
-        window.blit(self.image, self.camera.apply(self.rect))
-        #pygame.draw.rect(window, (255, 0, 0), self.rect, 2) TEST HITBOX ARMES
+        screen_rect = self.camera.apply(self.rect)      
+        image_rect = self.image.get_rect()    
+        image_rect.center = screen_rect.center 
+        window.blit(self.image, image_rect)
+        pygame.draw.rect(window, (255, 0, 0), screen_rect, 2)
         
 
 

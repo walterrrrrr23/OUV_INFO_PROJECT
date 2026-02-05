@@ -10,7 +10,7 @@ class Weapon(pygame.sprite.Sprite):
         self.player = player 
         self.original_image = image_surface
         self.image = self.original_image
-        self.rect = self.image.get_rect(center=self.player.pos)
+        self.rect = pygame.Rect((0,0), (10,10))
         self.img_bullet = image_projectile
         self.last = 0
         self.sprite_projectiles = pygame.sprite.Group()
@@ -59,8 +59,11 @@ class Weapon(pygame.sprite.Sprite):
         self.sprite_projectiles.add(self.player_shoot)
 
     def draw(self, window):
-        window.blit(self.image, self.camera.apply(self.rect))
-        #pygame.draw.rect(window, (255, 0, 0), self.rect, 2) TEST HITBOX ARMES
+        screen_rect = self.camera.apply(self.rect)      
+        image_rect = self.image.get_rect()    
+        image_rect.center = screen_rect.center 
+        window.blit(self.image, image_rect)
+        #pygame.draw.rect(window, (255, 0, 0), screen_rect, 2)
         for sprite in self.sprite_projectiles:
             sprite.draw(window)
 

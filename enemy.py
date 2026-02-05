@@ -29,7 +29,7 @@ class Enemy(pygame.sprite.Sprite):
         self.animation_speed = 10 
         self.image = self.animations[self.current_anim][self.frame_index]
         self.direction = pygame.Vector2(0,0)
-        self.rect = self.image.get_rect(center=pos)
+        self.rect = pygame.Rect((0,0), (35,60))
         self.pos = pygame.Vector2(pos)
         self.vel = pygame.Vector2(0, 0)
  
@@ -103,7 +103,12 @@ class Enemy(pygame.sprite.Sprite):
                 self.image = pygame.transform.flip(self.image, True, False)
 
     def draw(self, window):
-        window.blit(self.image, self.camera.apply(self.rect))
+        screen_rect = self.camera.apply(self.rect)      
+        image_rect = self.image.get_rect()    
+        image_rect.center = screen_rect.center 
+        window.blit(self.image, image_rect)
+        pygame.draw.rect(window, (255, 0, 0), screen_rect, 2)
+
 
         for sprite in self.sprite_projectiles:
             sprite.draw(window)

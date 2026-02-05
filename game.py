@@ -36,7 +36,7 @@ class Game:
         self.weapon = Weapon(self.player, weapon_image, self.camera, bullet_image)
         self.sprite_player.add(self.weapon)
 
-        self.enemy = Enemy((10, 10), self.camera, self.player, bullet_image)
+        self.enemy = Enemy((100, 100), self.camera, self.player, bullet_image)
         self.sprite_mob.add(self.enemy)
 
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
