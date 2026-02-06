@@ -52,10 +52,10 @@ class Weapon(pygame.sprite.Sprite):
         mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
         mouse_pos += self.camera.offset
         direction = (mouse_pos - bullet_pos).normalize()
-        bullet_pos += direction*64#self.img_bullet.get_width()
+        bullet_pos += direction*64
         
         #Création du projectile
-        self.player_shoot = Projectile(self.camera, self.img_bullet, bullet_pos, direction, 500, 0, 0)
+        self.player_shoot = Projectile(self.camera, self.img_bullet, bullet_pos, direction, 100, 0, 0)
         self.sprite_projectiles.add(self.player_shoot)
 
     def draw(self, window):
@@ -72,6 +72,9 @@ class Weapon(pygame.sprite.Sprite):
         mouse_clicks = pygame.mouse.get_pressed()[0]#num_buttons=1)
         now = pygame.time.get_ticks()
         if mouse_clicks and now - self.last > self.cooldown :
-            self.shoot() 
-        self.sprite_projectiles.update(dt)
+            self.shoot()
+        for projectile in self.sprite_projectiles:
+            projectile.update(dt)
+            if projectile.is_out_of_screen(self.player.pos):
+                projectile.kill()
         

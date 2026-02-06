@@ -1,5 +1,6 @@
 import pygame
 import math
+from settings import SCREEN_WIDTH
 
 class Projectile(pygame.sprite.Sprite):
     def __init__(self, camera, image, position, direction, speed, damage, knockback=0): #Knockback optionnel (0 par défault)
@@ -16,6 +17,12 @@ class Projectile(pygame.sprite.Sprite):
         angle = self.direction.angle_to(pygame.Vector2(1,0))
 
         self.image = pygame.transform.rotate(self.image, angle)
+
+    def is_out_of_screen(self, player_pos):
+        distance = pygame.math.Vector2.distance_to(self.pos, player_pos)
+        if distance > SCREEN_WIDTH:
+            return True
+        return False
 
     def update(self, dt):
         self.pos = self.pos + self.direction*self.speed*dt
