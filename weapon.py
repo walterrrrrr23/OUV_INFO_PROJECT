@@ -55,7 +55,7 @@ class Weapon(pygame.sprite.Sprite):
         bullet_pos += direction*64
         
         #Création du projectile
-        self.player_shoot = Projectile(self.camera, self.img_bullet, bullet_pos, direction, 100, 0, 0)
+        self.player_shoot = Projectile(self.camera, self.img_bullet, bullet_pos, direction, 1000, 0, 0)
         self.sprite_projectiles.add(self.player_shoot)
 
     def draw(self, window):
