@@ -16,8 +16,8 @@ def HealthBar(player, display):
     #bar rouge
     pygame.draw.rect(display, pygame.Color(255,0,0), (offsetx, offsety, sizex, sizey))
 
-    font_title = pygame.font.SysFont("arial", 80, bold=True)
-    font_text = pygame.font.SysFont("arial", 40)
+    font_title = pygame.font.Font("assets/fonts/Pix32.ttf", 40)
+    font_text = pygame.font.Font("assets/fonts/Pix32.ttf", 20)
     info1_surface = font_text.render(f"{health} / {maxhealth}", True, (200, 200, 200))
 
     info_rect = info1_surface.get_rect(center=(bar_lenght_pixel//2 + offsetx, sizey//2 + offsety))
@@ -35,7 +35,7 @@ def pause(screen, boutons):
 
     # les polices d'ecritures du menu pause
 
-    font_title = pygame.font.SysFont("arial", 80, bold=True)
+    font_title = pygame.font.Font("assets/fonts/Pix32.ttf", 50)
     #font_text = pygame.font.SysFont("arial", 40)
 
     # le texte du menu pause
@@ -76,7 +76,7 @@ def crea_boutons():
 
     #couleur, taille et position
 
-    font_bouton = pygame.font.SysFont("arial", 40, bold=True)
+    font_bouton = pygame.font.Font("assets/fonts/Pix32Thin.ttf", 20)
     bouton_width, bouton_height = 300, 60
     center_x = SCREEN_WIDTH // 2 - bouton_width // 2
 
