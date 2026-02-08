@@ -24,16 +24,23 @@ class Projectile(pygame.sprite.Sprite):
             return True
         return False
 
-    def update(self, dt):
+    def update(self, dt, targetlist):
         self.pos = self.pos + self.direction*self.speed*dt
         self.rect.center = self.pos
+
+        hit_list = pygame.sprite.spritecollide(self, targetlist, False)
+
+        for enemy in hit_list:
+            enemy.take_damage(self.damage, self.direction, self.kb)
+            self.kill()  
+            break
 
     def draw(self, window):
         screen_rect = self.camera.apply(self.rect)      
         image_rect = self.image.get_rect()    
         image_rect.center = screen_rect.center 
         window.blit(self.image, image_rect)
-        pygame.draw.rect(window, (255, 0, 0), screen_rect, 2)
+        #pygame.draw.rect(window, (255, 0, 0), screen_rect, 2)
         
 
 

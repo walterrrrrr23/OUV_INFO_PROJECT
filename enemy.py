@@ -37,27 +37,43 @@ class Enemy(pygame.sprite.Sprite):
         self.facing_left = False  
 
         self.img_bullet = image_projectile
-
+      
         self.sprite_projectiles = pygame.sprite.Group()
+       
+        #KNOCKBACK HANDLER :
+
+        self.knocked = False
+        self.knockedtime = 0
+        self.knockdirection = pygame.Vector2(0,0)
 
         #VARIABLES
 
+        self.maxhealth = 20
+        self.health = 20
         self.speed = 150
         self.acceleration = .1
         self.damage = 10
         self.cooldown = 300 #en ticks
+        self.knockammount = 100 #en ticks
         self.last = 0
 
+    def take_damage(self, damage, direction, kb):
+        self.health -= damage
+        self.knocked = True
+        self.knockdirection = direction * kb
+        self.knockedtime =  pygame.time.get_ticks()
+        if self.health <= 0 :
+            self.kill()
     def shoot(self):
         self.last = pygame.time.get_ticks()
         dir = (self.target.pos - self.pos).normalize()
-        self.player_shoot = Projectile(self.camera, self.img_bullet, self.pos, dir, 300, 0, 0)
+        self.player_shoot = Projectile(self.camera, self.img_bullet, self.pos, dir, 300, 1, 10)
         self.sprite_projectiles.add(self.player_shoot)
 
 
-    def update(self, dt):
+    def update(self, dt, player):
       
-        self.sprite_projectiles.update(dt)
+        self.sprite_projectiles.update(dt, player)
         now = pygame.time.get_ticks()
         if now - self.last > self.cooldown :
             self.shoot()
@@ -88,8 +104,19 @@ class Enemy(pygame.sprite.Sprite):
         
         self.vel = self.direction * self.speed*dt
        
-        self.pos += self.vel
-        self.rect.center = self.pos
+        if not self.knocked :
+            self.pos += self.vel
+            self.rect.center = self.pos
+        else :
+            self.pos += self.knockdirection
+            self.rect.center = self.pos
+            self.knockdirection = self.knockdirection/1.5
+            if  pygame.time.get_ticks() - self.knockedtime > self.knockammount :
+                self.knocked = False
+                self.knockdirection = pygame.Vector2(0,0)
+
+                
+
 
        
         self.timer += dt
@@ -107,7 +134,7 @@ class Enemy(pygame.sprite.Sprite):
         image_rect = self.image.get_rect()    
         image_rect.center = screen_rect.center 
         window.blit(self.image, image_rect)
-        pygame.draw.rect(window, (255, 0, 0), screen_rect, 2)
+        #pygame.draw.rect(window, (255, 0, 0), screen_rect, 2)
 
 
         for sprite in self.sprite_projectiles:

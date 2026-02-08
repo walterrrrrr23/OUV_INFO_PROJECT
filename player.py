@@ -33,13 +33,28 @@ class Player(pygame.sprite.Sprite):
         self.timer = 0
         self.facing_left = False  
 
+
+         #KNOCKBACK HANDLER :
+
+        self.knocked = False
+        self.knockedtime = 0
+        self.knockdirection = pygame.Vector2(0,0)
+
+
         #VAR
 
         self.speed = PLAYER_SPEED
         self.acceleration = PLAYER_ACCELERATION
         self.max_health = 20
         self.health = 20
+        self.knockammount = 100 #en ticks
         
+    def take_damage(self, damage, direction, kb):
+        self.health -= damage
+        self.knocked = True
+        self.knockdirection = direction * kb
+        self.knockedtime =  pygame.time.get_ticks()
+        #Logique game over dans main
 
     def update(self, dt):
         keys = pygame.key.get_pressed()
@@ -88,9 +103,16 @@ class Player(pygame.sprite.Sprite):
 
         
         self.vel = self.direction * self.speed*dt
-        self.pos += self.vel
-        self.rect.center = self.pos
-
+        if not self.knocked :
+            self.pos += self.vel
+            self.rect.center = self.pos
+        else :
+            self.pos += self.knockdirection
+            self.rect.center = self.pos
+            self.knockdirection = self.knockdirection/1.5
+            if  pygame.time.get_ticks() - self.knockedtime > self.knockammount :
+                self.knocked = False
+                self.knockdirection = pygame.Vector2(0,0)
        
         self.timer += dt
         if self.timer >= 1 / self.animation_speed:
@@ -108,4 +130,4 @@ class Player(pygame.sprite.Sprite):
         image_rect = self.image.get_rect()    
         image_rect.center = screen_rect.center 
         window.blit(self.image, image_rect)
-        pygame.draw.rect(window, (255, 0, 0), screen_rect, 2)
+        #pygame.draw.rect(window, (255, 0, 0), screen_rect, 2)

@@ -20,7 +20,7 @@ def HealthBar(player, display):
     font_text = pygame.font.SysFont("arial", 40)
     info1_surface = font_text.render(f"{health} / {maxhealth}", True, (200, 200, 200))
 
-    info_rect = info1_surface.get_rect(center=(sizex//2 + offsetx, sizey//2 + offsety))
+    info_rect = info1_surface.get_rect(center=(bar_lenght_pixel//2 + offsetx, sizey//2 + offsety))
 
     display.blit(info1_surface, info_rect)
     
