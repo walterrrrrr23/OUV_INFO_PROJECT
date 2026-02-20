@@ -23,11 +23,6 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             
-            # gestion du gameover
-
-            if game.player.health <= 0 :
-                running = False #METTRE LOGIQUE GAME_OVER
-
             # gestion des touches
 
             if event.type == pygame.KEYDOWN:
@@ -63,6 +58,11 @@ def main():
         else:
             game.update(dt)
             game.draw(screen)
+        
+        # gestion du gameover
+
+            if game.player.health <= 0 :
+                running = False #METTRE LOGIQUE GAME_OVER
 
         pygame.display.flip() #screen update
 
