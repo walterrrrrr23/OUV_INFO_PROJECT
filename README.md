@@ -12,12 +12,19 @@
 - [ ] Faire un menu settings
 - [ ] Faire un menu ingame pour les capacités
 - [ ] Faire le drop de pieces
+- [ ] Faire le drop d'armes
+- [ ] Faire une boutique ingame pour acheter des armes
+- [ ] Faire une boutique ingame pour achter des capactites
+- [ ] Faire une barre d'experience
 - [x] Faire la barre de vie
 - [x] Faire un ennemi
-- [ ] Faire l'apparition d'ennemis
+- [ ] Faire l'apparition aleatoire d'ennemis
 - [x] Faire une caméra qui suit le personnage
 - [x] Faire l'impact des tirs
-- [ ] Faire les tables d'informations
 - [ ] Faire l'attraction des pieces par le joueur
 - [ ] Faire un menu credits
 - [ ] Faire une map
+- [ ] Definir le taux de drop de pieces
+- [ ] Definir le taux de drop d'armes
+- [ ] Definir les caracteristiques de chaque armes
+- [ ] Definir les caracteristiques de chaque ennmi
