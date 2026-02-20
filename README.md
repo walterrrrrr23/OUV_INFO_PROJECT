@@ -1,5 +1,7 @@
 # OUV_INFO_PROJECT
-- [ ] Faire un menu start
+- [ ] Faire un menu d'acceuil
+- [ ] Faire un bouton start
+- [ ] Faire un bouton settings
 - [x] Faire un menu pause (Mathis)
 - [x] Faire un bouton reprendre (Mathis)
 - [x] Faire un bouton quitter (Mathis)
@@ -9,9 +11,11 @@
 - [ ] Faire un boutou retry
 - [ ] Faire un menu settings
 - [ ] Faire un menu ingame pour les capacités
-- [ ] Faire le drop d'objets
+- [ ] Faire le drop de pieces
 - [x] Faire la barre de vie
 - [x] Faire un ennemi
 - [ ] Faire l'apparition d'ennemis
 - [x] Faire une caméra qui suit le personnage
 - [x] Faire l'impact des tirs
+- [ ] Faire les tables d'informations
+- [ ] Faire l'attraction des pieces par le joueur
