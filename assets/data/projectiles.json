@@ -1,0 +1,18 @@
+{
+  "Orb": {
+    "speed": 300,
+    "damage": 10,
+    "kb": 10,
+    "spritexoffset" : 3,
+    "spriteyoffset" : 1
+    
+  },
+  "SmallBullet": {
+    "speed": 1500,
+    "damage": 20,
+    "kb": 10,
+    "spritexoffset" : 1,
+    "spriteyoffset" : 0
+    
+  }
+}

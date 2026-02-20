@@ -1,0 +1,15 @@
+{
+  "Revolver": {
+    "screenshakeammount" : 5,
+    "screenshaketime" : 4,
+    "damage" : 20,
+    "kb" : 10,
+    "bulletspeed" : 1500,
+    "cooldown" : 300,
+   "recoil_kick" : 40,       
+    "recoil_return_speed" : 100,
+    "spritexoffset": 1,
+    "spriteyoffset": 0,
+    "projectile" : "SmallBullet"
+  }
+}

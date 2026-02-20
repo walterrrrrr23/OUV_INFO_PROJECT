@@ -1,12 +1,21 @@
 import pygame
 import math
 from settings import SCREEN_WIDTH
+from utils import load_json
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE, MOUSE_SENSITIVITY
 
 class Projectile(pygame.sprite.Sprite):
-    def __init__(self, camera, image, position, direction, speed, damage, knockback=0): #Knockback optionnel (0 par défault)
+    def __init__(self, camera, name, position, direction, speed, damage, knockback=0): #Knockback optionnel (0 par défault)
         super().__init__()
+
+        projectile_data = load_json("assets/data/projectiles.json")[name]
+       
+        sheet = pygame.image.load("assets/sprites/bulletsheet.png").convert_alpha()
+        projectile_image = sheet.subsurface(pygame.Rect(projectile_data["spritexoffset"]*TAILLE_SPRITE, projectile_data["spriteyoffset"]*TAILLE_SPRITE, 64, 64))
+        projectile_image = pygame.transform.scale(projectile_image, (64*ZOOM, 64*ZOOM))
+
         self.camera = camera
-        self.image = image
+        self.image = projectile_image
         self.pos = position
         self.direction = direction
         self.speed = speed

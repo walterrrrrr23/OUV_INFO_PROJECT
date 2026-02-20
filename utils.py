@@ -1,6 +1,12 @@
 
 import pygame
+import json
 
+
+def load_json(path):
+    with open(path, "r") as file:
+        data = json.load(file)
+    return data
 def load_spritesheet(path, frame_width, frame_height):
     sheet = pygame.image.load(path).convert_alpha()
     sheet_width, sheet_height = sheet.get_size()
@@ -16,3 +22,5 @@ def load_spritesheet(path, frame_width, frame_height):
             row.append(sheet.subsurface(rect))
         frames.append(row)
     return frames
+
+

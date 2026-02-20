@@ -2,31 +2,42 @@
 import math
 import pygame
 from projectile import Projectile
+from utils import load_json
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE, MOUSE_SENSITIVITY
 
 class Weapon(pygame.sprite.Sprite):
-    def __init__(self, player, image_surface, camera, image_projectile):
+    def __init__(self, player, camera, name):
+
+        weapon_data = load_json("assets/data/weapons.json")[name]
+       
+        sheet = pygame.image.load("assets/sprites/weaponsheet.png").convert_alpha()
+        #offset = coordonné de l'arme dans la spritesheet
+        #x = colonne
+        #y = ligne
+        weapon_image = sheet.subsurface(pygame.Rect(weapon_data["spritexoffset"]*TAILLE_SPRITE, weapon_data["spriteyoffset"]*TAILLE_SPRITE, 64, 64))
+        weapon_image = pygame.transform.scale(weapon_image, (64*ZOOM, 64*ZOOM))
         super().__init__()
         self.camera = camera
         self.player = player 
-        self.original_image = image_surface
+        self.original_image = weapon_image
         self.image = self.original_image
         self.rect = pygame.Rect((0,0), (10,10))
-        self.img_bullet = image_projectile
+
         self.last = 0
         self.sprite_projectiles = pygame.sprite.Group()
-
+        self.recoil_angle = 0
 
         #VAR
 
-        self.screenshakeammount = 8
-        self.screenshaketime = 5
-        self.damage = 3
-        self.kb = 10
-        self.bulletspeed = 1500
-        self.cooldown = 300 #en ticks
-        self.recoil_angle = 0
-        self.recoil_kick = 40 #angle        
-        self.recoil_return_speed = 100 #vitesse
+        self.screenshakeammount = weapon_data["screenshakeammount"]
+        self.screenshaketime = weapon_data["screenshaketime"]
+        self.damage = weapon_data["damage"]
+        self.kb = weapon_data["kb"]
+        self.bulletspeed = weapon_data["bulletspeed"]
+        self.cooldown = weapon_data["cooldown"]
+        self.projectile = weapon_data["projectile"]
+        self.recoil_kick = weapon_data["recoil_kick"]      
+        self.recoil_return_speed = weapon_data["recoil_return_speed"]
         
 
     def display_weapon(self, dt):
@@ -75,7 +86,7 @@ class Weapon(pygame.sprite.Sprite):
         bullet_pos += direction*64
         
         #Création du projectile
-        self.player_shoot = Projectile(self.camera, self.img_bullet, bullet_pos, direction, self.bulletspeed, self.damage, self.kb)
+        self.player_shoot = Projectile(self.camera, self.projectile, bullet_pos, direction, self.bulletspeed, self.damage, self.kb)
         self.sprite_projectiles.add(self.player_shoot)
 
         #creation d'un recoil = petit angle de différence quand on tire pour plus de réalisme

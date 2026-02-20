@@ -3,15 +3,24 @@ import pygame
 from settings import PLAYER_SPEED, ZOOM, PLAYER_ACCELERATION
 from utils import load_spritesheet 
 from projectile import Projectile 
+from utils import load_json
+from coin import Coin
+import random
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE, MOUSE_SENSITIVITY
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, pos, camera, target, image_projectile):
+    def __init__(self, pos, camera, target, name, coingroup):
         super().__init__()
 
+        ennemy_data = load_json("assets/data/enemies.json")[name]
+        self.loot_data = load_json("assets/data/loot_tables.json")[name]
+       
+
+        self.coingroup = coingroup
         self.camera = camera
         self.target = target
-        self.frames = load_spritesheet("assets/sprites/enemies/player_sheet.png", 64, 64)
-
+        self.frames = load_spritesheet(ennemy_data["sprite"], 64, 64)
+       
        
         self.animations = {
             "idle": self.frames[0],
@@ -36,26 +45,30 @@ class Enemy(pygame.sprite.Sprite):
         self.timer = 0
         self.facing_left = False  
 
-        self.img_bullet = image_projectile
+        
       
         self.sprite_projectiles = pygame.sprite.Group()
        
+        self.acceleration = .1
+       
+        self.last = 0
         #KNOCKBACK HANDLER :
 
         self.knocked = False
         self.knockedtime = 0
         self.knockdirection = pygame.Vector2(0,0)
-
+        self.knockammount = 100 #en ticks
         #VARIABLES
 
-        self.maxhealth = 20
-        self.health = 20
-        self.speed = 150
-        self.acceleration = .1
-        self.damage = 10
-        self.cooldown = 300 #en ticks
-        self.knockammount = 100 #en ticks
-        self.last = 0
+        self.maxhealth = ennemy_data["health"]
+        self.health =  self.maxhealth
+        self.speed = ennemy_data["speed"]
+        self.damage = ennemy_data["damage"]
+        self.cooldown = ennemy_data["cooldown"]
+        self.projectile = ennemy_data["projectile"]
+        self.kb = ennemy_data["kb"]
+        self.bulletspeed = ennemy_data["bulletspeed"]
+        
 
     def take_damage(self, damage, direction, kb):
         self.health -= damage
@@ -63,11 +76,18 @@ class Enemy(pygame.sprite.Sprite):
         self.knockdirection = direction * kb
         self.knockedtime =  pygame.time.get_ticks()
         if self.health <= 0 :
+            for i in self.loot_data["entries"]:
+                chance = random.randint(0, 100)
+                if chance < self.loot_data["entries"][i]["chance"] :
+                    ammount = random.randint(self.loot_data["entries"][i]["min"], self.loot_data["entries"][i]["max"])
+                    for j  in range(ammount) :
+                        coin = Coin(self.pos + pygame.Vector2(random.randint(-50,50),random.randint(-50,50)), self.camera, self.target)
+                        self.coingroup.add(coin)
             self.kill()
     def shoot(self):
         self.last = pygame.time.get_ticks()
         dir = (self.target.pos - self.pos).normalize()
-        self.player_shoot = Projectile(self.camera, self.img_bullet, self.pos, dir, 300, 1, 10)
+        self.player_shoot = Projectile(self.camera,  self.projectile, self.pos, dir,   self.bulletspeed,  self.damage,   self.kb)
         self.sprite_projectiles.add(self.player_shoot)
 
 

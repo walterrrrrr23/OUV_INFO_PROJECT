@@ -1,0 +1,12 @@
+{
+  "Joker": {
+    "health": 100,
+    "speed": 150,
+    "damage": 1,
+    "cooldown" : 300,
+    "sprite": "assets/sprites/enemies/player_sheet.png",
+    "projectile" : "Orb",
+    "kb" : 10,
+    "bulletspeed" : 500
+  }
+}

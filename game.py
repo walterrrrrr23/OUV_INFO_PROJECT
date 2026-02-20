@@ -25,30 +25,19 @@ class Game:
 
       
 
-        #image arme
-        sheet = pygame.image.load("assets/sprites/weaponsheet.png").convert_alpha()
-        weapon_image = sheet.subsurface(pygame.Rect(1*TAILLE_SPRITE, 0*TAILLE_SPRITE, 64, 64))
-        weapon_image = pygame.transform.scale(weapon_image, (64*ZOOM, 64*ZOOM))
 
-        #image balle
-        sheet2 = pygame.image.load("assets/sprites/bulletsheet.png").convert_alpha()
-        bullet_image = sheet2.subsurface(pygame.Rect(1*TAILLE_SPRITE, 0*TAILLE_SPRITE, 64, 64))
-        bullet_image = pygame.transform.scale(bullet_image, (64*ZOOM, 64*ZOOM))
+       
 
-        bullet_image2 = sheet2.subsurface(pygame.Rect(3*TAILLE_SPRITE, 1*TAILLE_SPRITE, 64, 64))
-        bullet_image2 = pygame.transform.scale(bullet_image2, (64*ZOOM, 64*ZOOM))
-
-        #def arme (à qui on associe une balle (=son image))
-        self.weapon = Weapon(self.player, weapon_image, self.camera, bullet_image)
+        #def arme (à qui on associe un nom)
+        self.weapon = Weapon(self.player, self.camera, "Revolver")
         #self.sprite_player.add(self.weapon) update weapon individuellement
 
-        self.enemy = Enemy((100, 100), self.camera, self.player, bullet_image2)
+        self.enemy = Enemy((100, 100), self.camera, self.player, "Joker", self.sprite_coins)
         self.sprite_mob.add(self.enemy)
 
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
 
-        self.coin = Coin((100, 100), self.camera, self.player)
-        self.sprite_coins.add(self.coin)
+       
 
     def update(self, dt):
         self.camera.calclateOffset()
@@ -61,6 +50,8 @@ class Game:
         self.sprite_player.update(dt) #->player.
         self.weapon.update(dt, self.sprite_mob)
         self.sprite_mob.update(dt, self.sprite_player)
+        self.sprite_coins.update(dt)
+
 
         if self.player.pos.x - self.camera.offset.x > SCREEN_WIDTH - SCREEN_WIDTH/CAMERA_OFFSET_THRESHOLD :
             self.camera.update(pygame.Vector2(self.player.vel.x + self.player.knockdirection.x, 0))
@@ -73,7 +64,9 @@ class Game:
 
     def draw(self, window):
         draw_checker_map(window, self.camera, self.tile1, self.tile2)
-        
+        for sprite in self.sprite_coins:
+            sprite.draw(window)
+
         for sprite in self.sprite_mob:
             sprite.draw(window)
 

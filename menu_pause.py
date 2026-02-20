@@ -1,5 +1,6 @@
 import pygame
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, PAUSE
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE, MOUSE_SENSITIVITY
+
 
 def HealthBar(player, display):
 
@@ -24,9 +25,17 @@ def HealthBar(player, display):
 
     display.blit(info1_surface, info_rect)
 
+    sheet = pygame.image.load("assets/sprites/coin_sheet.png").convert_alpha()
+    coin = sheet.subsurface(pygame.Rect(0*TAILLE_SPRITE, 0*TAILLE_SPRITE, 64, 64))
+    coin = pygame.transform.scale(coin, (64*ZOOM*1.5, 64*ZOOM*1.5))
+
+    rect = pygame.Rect((0,0), (10,10))
+    rect.center = (offsetx-90, offsety + 15)
+    display.blit(coin, rect)
+
     info1_surface = font_text.render(f"{player.coin}", True, (200, 200, 200))
 
-    info_rect = info1_surface.get_rect(center=(offsetx, offsety*2))
+    info_rect = info1_surface.get_rect(center=(offsetx+60, offsety+120))
 
     display.blit(info1_surface, info_rect)
     
