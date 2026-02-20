@@ -80,18 +80,34 @@ def crea_boutons():
     bouton_width, bouton_height = 300, 60
     center_x = SCREEN_WIDTH // 2 - bouton_width // 2
 
+    #hauteur d'affichage du premir bouton
+
+    hauteur_premier = SCREEN_HEIGHT // 2 - 50
+
+    #ecart entre les boutons
+
+    ecart = 80
+
     #boutons : repprendre et quitter
 
     boutons = [
         {
             "text": "REPRENDRE",
-            "rect": pygame.Rect(center_x, SCREEN_HEIGHT // 2, bouton_width, bouton_height),
+            "rect": pygame.Rect(center_x, hauteur_premier, bouton_width, bouton_height),
             "action": "resume",
             "surf": font_bouton.render("REPRENDRE", True, (255, 255, 255))
         },
+
+        {
+            "text": "RECOMMENCER",
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*1, bouton_width, bouton_height),
+            "action": "restart", # Nouvelle action !
+            "surf": font_bouton.render("RECOMMENCER", True, (255, 255, 255))
+        },
+
         {
             "text": "QUITTER",
-            "rect": pygame.Rect(center_x, SCREEN_HEIGHT // 2 + 80, bouton_width, bouton_height),
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*2 , bouton_width, bouton_height),
             "action": "quit",
             "surf": font_bouton.render("QUITTER", True, (255, 255, 255))
         }

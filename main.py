@@ -23,8 +23,12 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             
+            # gestion du gameover
+
             if game.player.health <= 0 :
                 running = False #METTRE LOGIQUE GAME_OVER
+
+            # gestion des touches
 
             if event.type == pygame.KEYDOWN:
 
@@ -35,13 +39,18 @@ def main():
                 # afficher le menu pause
                 if event.key == pygame.K_p:
                     ppause = not ppause
-                
-                # si on clique sur les boutons
+
+            # gestion souris
 
             if ppause:
                 action = ca_clique(event, les_boutons)
                 if action == "resume":
                     ppause = False
+
+                elif action == "restart":
+                    game = Game() 
+                    ppause = False
+
                 elif action == "quit":
                     running = False
             
