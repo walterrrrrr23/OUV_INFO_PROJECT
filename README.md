@@ -28,3 +28,5 @@
 - [ ] Definir le taux de drop d'armes
 - [ ] Definir les caracteristiques de chaque armes
 - [ ] Definir les caracteristiques de chaque ennmi
+- [ ] corriger bug boutons
+- [ ] corriger bug sortie d'ecran

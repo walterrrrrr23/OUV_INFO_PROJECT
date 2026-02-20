@@ -49,6 +49,7 @@ def main():
                 elif action == "restart":
                     game = Game() 
                     ppause = False
+                    estmort = False
 
                 elif action == "quit":
                     running = False
@@ -65,10 +66,10 @@ def main():
         
         # gestion du gameover
 
-            if game.player.health <= 0 :
-                estmort = not estmort
-                gameover(screen, les_boutons_gameover)
-                #running = False #METTRE LOGIQUE GAME_OVER
+        if game.player.health <= 0 :
+            estmort = not estmort
+            gameover(screen, les_boutons_gameover)
+            #running = False #METTRE LOGIQUE GAME_OVER
 
         pygame.display.flip() #screen update
 

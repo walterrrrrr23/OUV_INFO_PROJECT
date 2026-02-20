@@ -45,8 +45,8 @@ class Player(pygame.sprite.Sprite):
 
         self.speed = PLAYER_SPEED
         self.acceleration = PLAYER_ACCELERATION
-        self.max_health = 100
-        self.health = 100
+        self.max_health = 20
+        self.health = 20
         self.knockammount = 100 #en ticks
         self.coin = 0
 
