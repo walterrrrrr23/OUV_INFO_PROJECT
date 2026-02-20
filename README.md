@@ -19,3 +19,5 @@
 - [x] Faire l'impact des tirs
 - [ ] Faire les tables d'informations
 - [ ] Faire l'attraction des pieces par le joueur
+- [ ] Faire un menu credits
+- [ ] Faire une map
