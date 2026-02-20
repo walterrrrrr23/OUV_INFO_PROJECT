@@ -18,10 +18,18 @@ class Weapon(pygame.sprite.Sprite):
 
         #VAR
 
+        self.screenshakeammount = 8
+        self.screenshaketime = 5
+        self.damage = 3
+        self.kb = 10
+        self.bulletspeed = 1500
         self.cooldown = 300 #en ticks
+        self.recoil_angle = 0
+        self.recoil_kick = 40 #angle        
+        self.recoil_return_speed = 100 #vitesse
         
 
-    def display_weapon(self):
+    def display_weapon(self, dt):
         """
         Rotation de l'arme dans la direction de la souris
         """
@@ -33,6 +41,12 @@ class Weapon(pygame.sprite.Sprite):
         dy = mouse_y - self.player.pos.y #distance en x entre la souris et le joueur
         angle = math.degrees(math.atan2(-dy, dx)) #angle entre l'arme et le joueur 
         
+        if self.player.facing_left :
+             angle -= self.recoil_angle #applique le recoil
+        else:
+             angle += self.recoil_angle #applique le recoil
+
+       
         handoffset =  pygame.Vector2(0,10)
         if self.player.facing_left:
             handoffset.x = -3
@@ -44,19 +58,30 @@ class Weapon(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect(center=self.player.pos + handoffset) #modification de l'affichage
 
+
+        #retourne l'arme a son orientation normale de maniere smooth
+        self.recoil_angle -= self.recoil_return_speed * dt
+        if self.recoil_angle < 0:
+            self.recoil_angle = 0
     def shoot(self):
         #direction de la balle relativement à la postion du joueur et de la caméra (cf. display_weapon)
         self.last = pygame.time.get_ticks()
+        
         
         bullet_pos = pygame.math.Vector2.copy(self.player.pos)
         mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
         mouse_pos += self.camera.offset
         direction = (mouse_pos - bullet_pos).normalize()
-        bullet_pos += direction*64#self.img_bullet.get_width()
+        bullet_pos += direction*64
         
         #Création du projectile
-        self.player_shoot = Projectile(self.camera, self.img_bullet, bullet_pos, direction, 500, 0, 0)
+        self.player_shoot = Projectile(self.camera, self.img_bullet, bullet_pos, direction, self.bulletspeed, self.damage, self.kb)
         self.sprite_projectiles.add(self.player_shoot)
+
+        #creation d'un recoil = petit angle de différence quand on tire pour plus de réalisme
+        self.recoil_angle = 0
+       
+        self.recoil_angle += self.recoil_kick
 
     def draw(self, window):
         screen_rect = self.camera.apply(self.rect)      
@@ -67,11 +92,15 @@ class Weapon(pygame.sprite.Sprite):
         for sprite in self.sprite_projectiles:
             sprite.draw(window)
 
-    def update(self, dt):
-        self.display_weapon()
+    def update(self, dt, enemies):
+        self.display_weapon(dt)
         mouse_clicks = pygame.mouse.get_pressed()[0]#num_buttons=1)
         now = pygame.time.get_ticks()
         if mouse_clicks and now - self.last > self.cooldown :
-            self.shoot() 
-        self.sprite_projectiles.update(dt)
+            self.camera.screenshake(self.screenshaketime, self.screenshakeammount)
+            self.shoot()
+        for projectile in self.sprite_projectiles:
+            projectile.update(dt, enemies)
+            if projectile.is_out_of_screen(self.player.pos):
+                projectile.kill()
         
