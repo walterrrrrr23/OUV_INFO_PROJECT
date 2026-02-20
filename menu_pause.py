@@ -23,6 +23,12 @@ def HealthBar(player, display):
     info_rect = info1_surface.get_rect(center=(bar_lenght_pixel//2 + offsetx, sizey//2 + offsety))
 
     display.blit(info1_surface, info_rect)
+
+    info1_surface = font_text.render(f"{player.coin}", True, (200, 200, 200))
+
+    info_rect = info1_surface.get_rect(center=(offsetx, offsety*2))
+
+    display.blit(info1_surface, info_rect)
     
 def pause(screen, boutons):
 

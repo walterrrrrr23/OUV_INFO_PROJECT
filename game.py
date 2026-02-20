@@ -7,6 +7,7 @@ from map import load_tiles, draw_checker_map
 from weapon import Weapon
 from projectile import Projectile
 from enemy import Enemy
+from coin import Coin
 from menu_pause import HealthBar
 class Game:
     def __init__(self):
@@ -16,6 +17,8 @@ class Game:
 
         self.sprite_player = pygame.sprite.Group()
         self.sprite_mob = pygame.sprite.Group()
+        self.sprite_coins = pygame.sprite.Group()
+        
         
         self.sprite_player.add(self.player)
 
@@ -43,6 +46,9 @@ class Game:
         self.sprite_mob.add(self.enemy)
 
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
+
+        self.coin = Coin((100, 100), self.camera, self.player)
+        self.sprite_coins.add(self.coin)
 
     def update(self, dt):
         self.camera.calclateOffset()

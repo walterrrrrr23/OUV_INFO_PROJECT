@@ -48,6 +48,7 @@ class Player(pygame.sprite.Sprite):
         self.max_health = 20
         self.health = 20
         self.knockammount = 100 #en ticks
+        self.coin = 0
         
     def take_damage(self, damage, direction, kb):
         self.health -= damage
