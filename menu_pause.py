@@ -69,12 +69,67 @@ def pause(screen, boutons):
 
     screen.blit(title_surface, title_rect)
 
+    """
     # afficher le texte
 
-    #screen.blit(info1_surface, info_rect)
-    #screen.blit(info2_surface, quit_rect)
+    screen.blit(info1_surface, info_rect)
+    screen.blit(info2_surface, quit_rect)
 
     # afficher les boutons
+    """
+
+    # gestion de la souris
+
+    pos_souris = pygame.mouse.get_pos()
+
+    for b in boutons :
+        # Couleur change si survolé
+        color = (150, 150, 150) if b["rect"].collidepoint(pos_souris) else (100, 100, 100)
+        pygame.draw.rect(screen, color, b["rect"], border_radius=10)
+        
+        text_rect = b["surf"].get_rect(center=b["rect"].center)
+        screen.blit(b["surf"], text_rect)
+
+def gameover(screen, boutons):
+
+    # floutage
+
+    floutage = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+    floutage.set_alpha(150)     # 0 transparant -> 255 opaque
+    floutage.fill((150,150,150))
+    screen.blit(floutage,(0,0))
+
+    # les polices d'ecritures du menu pause
+
+    font_title = pygame.font.Font("assets/fonts/Pix32.ttf", 50)
+    #font_text = pygame.font.SysFont("arial", 40)
+
+    # le texte du menu pause
+
+    title_surface = font_title.render("GAMEOVER", True, (255, 255, 255))
+    #info1_surface = font_text.render("Appuyez sur P pour reprendre", True, (200, 200, 200))
+    #info2_surface = font_text.render("Appuyez sur ESC pour quitter", True, (200, 200, 200))
+
+    # pour center ce qu'on a ecrit
+
+    title_rect = title_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50))
+    #info_rect = info1_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30))
+    #quit_rect = info2_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 80))
+
+    # afficher le titre
+
+    screen.blit(title_surface, title_rect)
+
+    """
+    # afficher le texte
+
+    screen.blit(info1_surface, info_rect)
+    screen.blit(info2_surface, quit_rect)
+
+    # afficher les boutons
+    """
+
+    # gestion de la souris
 
     pos_souris = pygame.mouse.get_pos()
 
@@ -87,7 +142,7 @@ def pause(screen, boutons):
         screen.blit(b["surf"], text_rect)
 
 
-def crea_boutons():
+def crea_boutons_pause():
 
     #couleur, taille et position
 
@@ -95,18 +150,113 @@ def crea_boutons():
     bouton_width, bouton_height = 300, 60
     center_x = SCREEN_WIDTH // 2 - bouton_width // 2
 
-    #boutons : repprendre et quitter
+    #hauteur d'affichage du premir bouton
+
+    hauteur_premier = SCREEN_HEIGHT // 2 - 50
+
+    #ecart entre les boutons
+
+    ecart = 80
 
     boutons = [
+
+        #bouton reprendre (fin de pause)
+
         {
             "text": "REPRENDRE",
-            "rect": pygame.Rect(center_x, SCREEN_HEIGHT // 2, bouton_width, bouton_height),
+            "rect": pygame.Rect(center_x, hauteur_premier, bouton_width, bouton_height),
             "action": "resume",
             "surf": font_bouton.render("REPRENDRE", True, (255, 255, 255))
         },
+
+        #bouton recommencer (la partie repart a 0)
+
+        {
+            "text": "RECOMMENCER",
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*1, bouton_width, bouton_height),
+            "action": "restart",
+            "surf": font_bouton.render("RECOMMENCER", True, (255, 255, 255))
+        },
+
+        #bouton menu principal (fin de la partie et menu principal)
+
+        {
+            "text": "MENU PRINCIPAL",
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*2, bouton_width, bouton_height),
+            "action": "home",
+            "surf": font_bouton.render("MENU PRINCIPAL", True, (255, 255, 255))
+        },
+
+        #bouton parametre (affichage des parametres)
+
+        {
+            "text": "SETTINGS",
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*3, bouton_width, bouton_height),
+            "action": "settings",
+            "surf": font_bouton.render("SETTINGS", True, (255, 255, 255))
+        },
+
+        #bouton quitter (fermer la fenetre)
+
         {
             "text": "QUITTER",
-            "rect": pygame.Rect(center_x, SCREEN_HEIGHT // 2 + 80, bouton_width, bouton_height),
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*4 , bouton_width, bouton_height),
+            "action": "quit",
+            "surf": font_bouton.render("QUITTER", True, (255, 255, 255))
+        }
+    ]
+    return boutons
+
+def crea_boutons_gameover():
+
+    #couleur, taille et position
+
+    font_bouton = pygame.font.Font("assets/fonts/Pix32Thin.ttf", 20)
+    bouton_width, bouton_height = 300, 60
+    center_x = SCREEN_WIDTH // 2 - bouton_width // 2
+
+    #hauteur d'affichage du premir bouton
+
+    hauteur_premier = SCREEN_HEIGHT // 2 - 50
+
+    #ecart entre les boutons
+
+    ecart = 80
+
+    boutons = [
+
+        #bouton recommencer (la partie repart a 0)
+
+        {
+            "text": "RECOMMENCER",
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*1, bouton_width, bouton_height),
+            "action": "restart",
+            "surf": font_bouton.render("RECOMMENCER", True, (255, 255, 255))
+        },
+
+        #bouton menu principal (fin de la partie et menu principal)
+
+        {
+            "text": "MENU PRINCIPAL",
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*2, bouton_width, bouton_height),
+            "action": "home",
+            "surf": font_bouton.render("MENU PRINCIPAL", True, (255, 255, 255))
+        },
+
+        #bouton parametre (affichage des parametres)
+
+        {
+            "text": "SETTINGS",
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*3, bouton_width, bouton_height),
+            "action": "settings",
+            "surf": font_bouton.render("SETTINGS", True, (255, 255, 255))
+        },
+
+        #bouton quitter (fermer la fenetre)
+
+        {
+            "text": "QUITTER",
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*4 , bouton_width, bouton_height),
             "action": "quit",
             "surf": font_bouton.render("QUITTER", True, (255, 255, 255))
         }
