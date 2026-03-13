@@ -1,5 +1,6 @@
 # game.py
 import pygame
+from random import randint
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE, MOUSE_SENSITIVITY
 from player import Player
 from camera import Camera
@@ -15,6 +16,9 @@ class Game:
         self.player = Player((0, 0), self.camera)
         self.camera.center(self.player)
 
+        self.stage = 0
+        self.time = 0
+
         self.sprite_player = pygame.sprite.Group()
         self.sprite_mob = pygame.sprite.Group()
         self.sprite_coins = pygame.sprite.Group()
@@ -22,9 +26,6 @@ class Game:
         #définition du joueur et de son arme 
         self.sprite_player.add(self.player)
         self.weapon = Weapon(self.player, self.camera, "Revolver")
-
-        self.enemy = Enemy((100, 100), self.camera, self.player, "Joker", self.sprite_coins)
-        self.sprite_mob.add(self.enemy)
 
         #définition des tiles -> map
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
@@ -46,14 +47,28 @@ class Game:
         mouse_y = ((mouse_y - SCREEN_WIDTH/2)/SCREEN_HEIGHT) * MOUSE_SENSITIVITY
         self.camera.updateMouse(pygame.Vector2(mouse_x, mouse_y))
 
+    def advancement(self):
+        if self.time > self.stage*10: #multiple de 10 secondes
+            self.spawn()
+            self.stage += 1
+
+    def spawn(self):
+        #for i in range((self.stage)):
+        pos_x = self.camera.offset.x + SCREEN_WIDTH/2 + randint(-1,1)*randint(SCREEN_WIDTH/2, SCREEN_WIDTH)
+        pos_y = self.camera.offset.y + SCREEN_HEIGHT/2 + randint(-1,1)*randint(SCREEN_HEIGHT/2, SCREEN_HEIGHT)
+        self.enemy = Enemy((pos_x, pos_y), self.camera, self.player, "Joker", self.sprite_coins)
+        print(pos_x, pos_x)
+        self.sprite_mob.add(self.enemy)
+
     def update(self, dt):
+        self.time += dt
         self.update_mouse()
         self.sprite_player.update(dt) #->player.
         self.weapon.update(dt, self.sprite_mob)
         self.sprite_mob.update(dt, self.sprite_player)
         self.sprite_coins.update(dt)
         self.update_camera()
-
+        self.advancement()
 
     def draw(self, window):
         draw_checker_map(window, self.camera, self.tile1, self.tile2)
