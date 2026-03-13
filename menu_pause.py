@@ -210,34 +210,14 @@ def crea_boutons_home():
 
     boutons = [
 
-        #bouton reprendre (fin de pause)
-
-        {
-            "text": "REPRENDRE",
-            "rect": pygame.Rect(center_x, hauteur_premier, bouton_width, bouton_height),
-            "action": "resume",
-            "surf": font_bouton.render("REPRENDRE", True, (255, 255, 255))
-        },
-
         #bouton recommencer (la partie repart a 0)
 
         {
-            "text": "RECOMMENCER",
+            "text": "COMMENCER",
             "rect": pygame.Rect(center_x, hauteur_premier + ecart*1, bouton_width, bouton_height),
-            "action": "restart",
-            "surf": font_bouton.render("RECOMMENCER", True, (255, 255, 255))
+            "action": "start",
+            "surf": font_bouton.render("COMMENCER", True, (255, 255, 255))
         },
-
-        #bouton menu principal (fin de la partie et menu principal)
-
-        {
-            "text": "MENU PRINCIPAL",
-            "rect": pygame.Rect(center_x, hauteur_premier + ecart*2, bouton_width, bouton_height),
-            "action": "home",
-            "surf": font_bouton.render("MENU PRINCIPAL", True, (255, 255, 255))
-        },
-
-        #bouton parametre (affichage des parametres)
 
         {
             "text": "SETTINGS",
