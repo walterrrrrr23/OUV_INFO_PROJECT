@@ -1,4 +1,8 @@
 # OUV_INFO_PROJECT
+
+Paticipants : Karl Collet, Théophile Grenier, Mathis Le Mineur
+
+<!-- Ceci est un commentaire -->
 - [ ] Faire un menu d'acceuil
 - [ ] Faire un bouton start
 - [x] Faire un bouton settings
