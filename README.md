@@ -31,3 +31,9 @@
 - [x] corriger bug boutons
 - [ ] corriger bug sortie d'ecran
 - [ ] corriger bug de pouvoir continuer a jouer prendant le menu gameover ( si estmort ne pas faire -= 1)
+- [ ] pouvoir changer ses touches
+- [ ] bouton pour changer le volume de la musique
+- [ ] bouton pour changer le volume des interractions
+- [ ] pouvoir desactiver les vibrations
+- [ ] faire un bouton credits
+- [ ] faire une page credits
