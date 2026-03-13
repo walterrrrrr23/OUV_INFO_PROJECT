@@ -2,10 +2,10 @@
 - [ ] Faire un menu d'acceuil
 - [ ] Faire un bouton start
 - [x] Faire un bouton settings
-- [x] Faire un menu pause (Mathis)
-- [x] Faire un bouton reprendre (Mathis)
-- [x] Faire un bouton quitter (Mathis)
-- [x] Faire un bouton restart (Mathis)
+- [x] Faire un menu pause
+- [x] Faire un bouton reprendre
+- [x] Faire un bouton quitter
+- [x] Faire un bouton restart
 - [x] Faire un projectile
 - [x] Faire un menu game over
 - [x] Faire un boutou retry
@@ -30,3 +30,4 @@
 - [x] Definir les caracteristiques de chaque ennmi
 - [x] corriger bug boutons
 - [ ] corriger bug sortie d'ecran
+- [ ] corriger bug de pouvoir continuer a jouer prendant le menu gameover ( si estmort ne pas faire -= 1)

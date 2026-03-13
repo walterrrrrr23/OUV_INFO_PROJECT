@@ -59,17 +59,17 @@ def main():
             game.draw(screen)
             pause(screen, les_boutons_pause)
         
-        # si on est pas en pause, on update
-        else:
-            game.update(dt)
-            game.draw(screen)
-        
         # gestion du gameover
 
         if game.player.health <= 0 :
             estmort = not estmort
             gameover(screen, les_boutons_gameover)
             #running = False #METTRE LOGIQUE GAME_OVER
+
+        # si on est pas en pause, on update
+        if not ppause and game.player.health > 0:
+            game.update(dt)
+            game.draw(screen)
 
         pygame.display.flip() #screen update
 
