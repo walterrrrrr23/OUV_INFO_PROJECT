@@ -7,9 +7,9 @@ from utils import load_json
 from coin import Coin
 import random
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE, MOUSE_SENSITIVITY
-
+from damage_indicator import Damage_Indicator
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, pos, camera, target, name, coingroup):
+    def __init__(self, pos, camera, target, name, coingroup, sprite_bullets, sprite_dmg_ind):
         super().__init__()
 
         ennemy_data = load_json("assets/data/enemies.json")[name]
@@ -21,7 +21,7 @@ class Enemy(pygame.sprite.Sprite):
         self.target = target
         self.frames = load_spritesheet(ennemy_data["sprite"], 64, 64)
        
-       
+        self.sprite_dmg_ind = sprite_dmg_ind
         self.animations = {
             "idle": self.frames[0],
             "walk": self.frames[1]
@@ -47,7 +47,7 @@ class Enemy(pygame.sprite.Sprite):
 
         
       
-        self.sprite_projectiles = pygame.sprite.Group()
+        self.sprite_projectiles = sprite_bullets
        
         self.acceleration = .1
        
@@ -71,6 +71,9 @@ class Enemy(pygame.sprite.Sprite):
         
 
     def take_damage(self, damage, direction, kb):
+
+        dmg = Damage_Indicator(pygame.Vector2(self.pos.x, self.pos.y), self.camera, damage)
+        self.sprite_dmg_ind.add(dmg)
         self.health -= damage
         self.knocked = True
         self.knockdirection = direction * kb
@@ -81,7 +84,7 @@ class Enemy(pygame.sprite.Sprite):
                 if chance < self.loot_data["entries"][i]["chance"] :
                     ammount = random.randint(self.loot_data["entries"][i]["min"], self.loot_data["entries"][i]["max"])
                     for j  in range(ammount) :
-                        coin = Coin(self.pos + pygame.Vector2(random.randint(-50,50),random.randint(-50,50)), self.camera, self.target)
+                        coin = Coin(self.pos, self.camera, self.target, i)
                         self.coingroup.add(coin)
             self.kill()
     def shoot(self):
@@ -93,7 +96,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def update(self, dt, player):
       
-        self.sprite_projectiles.update(dt, player)
+    
         now = pygame.time.get_ticks()
         if now - self.last > self.cooldown :
             self.shoot()
@@ -156,6 +159,3 @@ class Enemy(pygame.sprite.Sprite):
         window.blit(self.image, image_rect)
         #pygame.draw.rect(window, (255, 0, 0), screen_rect, 2)
 
-
-        for sprite in self.sprite_projectiles:
-            sprite.draw(window)

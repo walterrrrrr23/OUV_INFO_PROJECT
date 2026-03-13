@@ -2,7 +2,7 @@
   "Revolver": {
     "screenshakeammount" : 5,
     "screenshaketime" : 4,
-    "damage" : 20,
+    "damage" : 45,
     "kb" : 10,
     "bulletspeed" : 1500,
     "cooldown" : 300,

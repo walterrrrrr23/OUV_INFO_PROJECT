@@ -17,7 +17,7 @@ def HealthBar(player, display):
     #bar rouge
     pygame.draw.rect(display, pygame.Color(255,0,0), (offsetx, offsety, sizex, sizey))
 
-    font_title = pygame.font.Font("assets/fonts/Pix32.ttf", 40)
+    
     font_text = pygame.font.Font("assets/fonts/Pix32.ttf", 20)
     info1_surface = font_text.render(f"{health} / {maxhealth}", True, (200, 200, 200))
 
@@ -51,32 +51,18 @@ def home(screen, boutons):
     # les polices d'ecritures du menu pause
 
     font_title = pygame.font.Font("assets/fonts/Pix32.ttf", 50)
-    #font_text = pygame.font.SysFont("arial", 40)
 
     # le texte du menu pause
 
     title_surface = font_title.render("HOME", True, (255, 255, 255))
-    #info1_surface = font_text.render("Appuyez sur P pour reprendre", True, (200, 200, 200))
-    #info2_surface = font_text.render("Appuyez sur ESC pour quitter", True, (200, 200, 200))
 
     # pour center ce qu'on a ecrit
 
     title_rect = title_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50))
-    #info_rect = info1_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30))
-    #quit_rect = info2_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 80))
 
     # afficher le titre
 
     screen.blit(title_surface, title_rect)
-
-    """
-    # afficher le texte
-
-    screen.blit(info1_surface, info_rect)
-    screen.blit(info2_surface, quit_rect)
-
-    # afficher les boutons
-    """
 
     # gestion de la souris
 
@@ -102,32 +88,18 @@ def pause(screen, boutons):
     # les polices d'ecritures du menu pause
 
     font_title = pygame.font.Font("assets/fonts/Pix32.ttf", 50)
-    #font_text = pygame.font.SysFont("arial", 40)
 
     # le texte du menu pause
 
     title_surface = font_title.render("PAUSE", True, (255, 255, 255))
-    #info1_surface = font_text.render("Appuyez sur P pour reprendre", True, (200, 200, 200))
-    #info2_surface = font_text.render("Appuyez sur ESC pour quitter", True, (200, 200, 200))
 
     # pour center ce qu'on a ecrit
 
     title_rect = title_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50))
-    #info_rect = info1_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30))
-    #quit_rect = info2_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 80))
 
     # afficher le titre
 
     screen.blit(title_surface, title_rect)
-
-    """
-    # afficher le texte
-
-    screen.blit(info1_surface, info_rect)
-    screen.blit(info2_surface, quit_rect)
-
-    # afficher les boutons
-    """
 
     # gestion de la souris
 
@@ -158,27 +130,14 @@ def gameover(screen, boutons):
     # le texte du menu pause
 
     title_surface = font_title.render("GAMEOVER", True, (255, 255, 255))
-    #info1_surface = font_text.render("Appuyez sur P pour reprendre", True, (200, 200, 200))
-    #info2_surface = font_text.render("Appuyez sur ESC pour quitter", True, (200, 200, 200))
 
     # pour center ce qu'on a ecrit
 
     title_rect = title_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50))
-    #info_rect = info1_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30))
-    #quit_rect = info2_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 80))
 
     # afficher le titre
 
     screen.blit(title_surface, title_rect)
-
-    """
-    # afficher le texte
-
-    screen.blit(info1_surface, info_rect)
-    screen.blit(info2_surface, quit_rect)
-
-    # afficher les boutons
-    """
 
     # gestion de la souris
 
@@ -210,34 +169,14 @@ def crea_boutons_home():
 
     boutons = [
 
-        #bouton reprendre (fin de pause)
-
-        {
-            "text": "REPRENDRE",
-            "rect": pygame.Rect(center_x, hauteur_premier, bouton_width, bouton_height),
-            "action": "resume",
-            "surf": font_bouton.render("REPRENDRE", True, (255, 255, 255))
-        },
-
         #bouton recommencer (la partie repart a 0)
 
         {
-            "text": "RECOMMENCER",
+            "text": "COMMENCER",
             "rect": pygame.Rect(center_x, hauteur_premier + ecart*1, bouton_width, bouton_height),
-            "action": "restart",
-            "surf": font_bouton.render("RECOMMENCER", True, (255, 255, 255))
+            "action": "start",
+            "surf": font_bouton.render("COMMENCER", True, (255, 255, 255))
         },
-
-        #bouton menu principal (fin de la partie et menu principal)
-
-        {
-            "text": "MENU PRINCIPAL",
-            "rect": pygame.Rect(center_x, hauteur_premier + ecart*2, bouton_width, bouton_height),
-            "action": "home",
-            "surf": font_bouton.render("MENU PRINCIPAL", True, (255, 255, 255))
-        },
-
-        #bouton parametre (affichage des parametres)
 
         {
             "text": "SETTINGS",
