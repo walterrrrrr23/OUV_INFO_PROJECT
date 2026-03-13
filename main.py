@@ -19,7 +19,7 @@ def main():
     les_boutons_gameover = crea_boutons_gameover()
     
     while running:
-        dt = clock.tick(FPS) / 1000 #conversion en s
+        dt = clock.tick(FPS) / 2000 #conversion en s
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
