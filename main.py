@@ -22,7 +22,7 @@ def main():
     les_boutons_home = crea_boutons_home()
     
     while running:
-        dt = clock.tick(FPS) / 1000 #conversion en s
+        dt = clock.tick(FPS) / 2000 #conversion en s
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
