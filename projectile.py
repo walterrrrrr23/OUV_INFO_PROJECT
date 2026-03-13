@@ -45,6 +45,7 @@ class Projectile(pygame.sprite.Sprite):
             break
 
     def draw(self, window):
+
         screen_rect = self.camera.apply(self.rect)      
         image_rect = self.image.get_rect()    
         image_rect.center = screen_rect.center 

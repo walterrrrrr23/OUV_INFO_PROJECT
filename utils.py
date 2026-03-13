@@ -13,7 +13,7 @@ def load_spritesheet(path, frame_width, frame_height):
     
     frames = []
     rows = sheet_height // frame_height
-    cols = sheet_width // frame_width
+    cols = sheet_width // frame_width 
     
     for y in range(rows):
         row = []

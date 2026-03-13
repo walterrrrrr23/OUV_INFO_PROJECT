@@ -17,7 +17,7 @@ def HealthBar(player, display):
     #bar rouge
     pygame.draw.rect(display, pygame.Color(255,0,0), (offsetx, offsety, sizex, sizey))
 
-    font_title = pygame.font.Font("assets/fonts/Pix32.ttf", 40)
+    
     font_text = pygame.font.Font("assets/fonts/Pix32.ttf", 20)
     info1_surface = font_text.render(f"{health} / {maxhealth}", True, (200, 200, 200))
 

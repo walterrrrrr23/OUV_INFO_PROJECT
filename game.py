@@ -9,6 +9,7 @@ from projectile import Projectile
 from enemy import Enemy
 from coin import Coin
 from menu_pause import HealthBar
+from damage_indicator import Damage_Indicator
 class Game:
     def __init__(self):
         self.camera = Camera()
@@ -18,10 +19,12 @@ class Game:
         self.sprite_player = pygame.sprite.Group()
         self.sprite_mob = pygame.sprite.Group()
         self.sprite_coins = pygame.sprite.Group()
-        
+        self.sprite_bullets = pygame.sprite.Group()
+        self.damage_indicator = pygame.sprite.Group()
         
         self.sprite_player.add(self.player)
 
+      
 
       
 
@@ -32,8 +35,10 @@ class Game:
         self.weapon = Weapon(self.player, self.camera, "Revolver")
         #self.sprite_player.add(self.weapon) update weapon individuellement
 
-        self.enemy = Enemy((100, 100), self.camera, self.player, "Joker", self.sprite_coins)
+        self.enemy = Enemy((100, 100), self.camera, self.player, "Joker", self.sprite_coins, self.sprite_bullets, self.damage_indicator)
         self.sprite_mob.add(self.enemy)
+
+      
 
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
 
@@ -51,7 +56,8 @@ class Game:
         self.weapon.update(dt, self.sprite_mob)
         self.sprite_mob.update(dt, self.sprite_player)
         self.sprite_coins.update(dt)
-
+        self.sprite_bullets.update(dt, self.sprite_player)
+        self.damage_indicator.update(dt)
 
         if self.player.pos.x - self.camera.offset.x > SCREEN_WIDTH - SCREEN_WIDTH/CAMERA_OFFSET_THRESHOLD :
             self.camera.update(pygame.Vector2(self.player.vel.x , 0))
@@ -74,7 +80,14 @@ class Game:
            sprite.draw(window)
 
         self.weapon.draw(window)
+        
+        for sprite in self.sprite_bullets:
+       
+           sprite.draw(window)
 
+        for sprite in self.damage_indicator:
+       
+           sprite.draw(window)
         #GUI
 
         HealthBar(self.player, window)
