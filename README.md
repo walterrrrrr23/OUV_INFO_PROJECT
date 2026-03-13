@@ -49,7 +49,10 @@ Tâches :
 - Partie ennemis :
 
 - [x] Faire un ennemi
-- [ ] Faire l'apparition aleatoire d'ennemis
+- [x] Faire l'apparition de plusieurs ennemis
+- [ ] Faire l'apparition à des coordonnées aléatoires
+- [ ] Faire un système de vague
+- [ ] Faire différents types d'ennemis
 
 - [x] Faire un projectile
 - [x] Faire l'impact des projectiles
@@ -58,11 +61,16 @@ Tâches :
 
 - [x] Faire le drop de pieces
 - [ ] Faire le drop d'armes
-- [x] Faire l'attraction des pieces par le joueur
+- [x] Faire l'attraction des pieces par le joueur (= magnétisme)
 
 - Partie statistiques :
 
 - [x] Definir le taux de drop de pieces
+- [ ] Definir les différents types de pieces
+- [ ] Definir les différentes valeurs de pièces
+  
 - [ ] Definir le taux de drop d'armes
-- [x] Definir les caracteristiques de chaque armes
-- [x] Definir les caracteristiques de chaque ennemi
+- [ ] Definir les différents types d'armes
+
+- [x] Definir les caracteristiques de chaque armes ( dégats, recul infligé, cooldown entre les tirs, vitesse du projectile, ...)
+- [x] Definir les caracteristiques de chaque ennemi ( points de vie, vitesse, cooldown entre les tirs, projectil assigné, recul infligé au joueur)
