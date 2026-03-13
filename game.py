@@ -19,6 +19,7 @@ class Game:
         self.sprite_player = pygame.sprite.Group()
         self.sprite_mob = pygame.sprite.Group()
         self.sprite_coins = pygame.sprite.Group()
+<<<<<<< HEAD
         self.sprite_bullets = pygame.sprite.Group()
         self.damage_indicator = pygame.sprite.Group()
         
@@ -32,12 +33,17 @@ class Game:
        
 
         #def arme (à qui on associe un nom)
+=======
+
+        #définition du joueur et de son arme 
+        self.sprite_player.add(self.player)
+>>>>>>> 128f513212106673b685953086ff5333e11b1f05
         self.weapon = Weapon(self.player, self.camera, "Revolver")
-        #self.sprite_player.add(self.weapon) update weapon individuellement
 
         self.enemy = Enemy((100, 100), self.camera, self.player, "Joker", self.sprite_coins, self.sprite_bullets, self.damage_indicator)
         self.sprite_mob.add(self.enemy)
 
+<<<<<<< HEAD
       
 
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
@@ -59,6 +65,13 @@ class Game:
         self.sprite_bullets.update(dt, self.sprite_player)
         self.damage_indicator.update(dt)
 
+=======
+        #définition des tiles -> map
+        self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png")
+
+    def update_camera(self):
+        self.camera.calculateOffset()
+>>>>>>> 128f513212106673b685953086ff5333e11b1f05
         if self.player.pos.x - self.camera.offset.x > SCREEN_WIDTH - SCREEN_WIDTH/CAMERA_OFFSET_THRESHOLD :
             self.camera.update(pygame.Vector2(self.player.vel.x , 0))
         if self.player.pos.y - self.camera.offset.y > SCREEN_HEIGHT  - SCREEN_HEIGHT/CAMERA_OFFSET_THRESHOLD  :
@@ -67,6 +80,21 @@ class Game:
            self.camera.update(pygame.Vector2(self.player.vel.x , 0))
         if self.player.pos.y - self.camera.offset.y < SCREEN_HEIGHT/CAMERA_OFFSET_THRESHOLD :
             self.camera.update(pygame.Vector2(0,self.player.vel.y ))
+
+    def update_mouse(self):
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        mouse_x = ((mouse_x - SCREEN_WIDTH/2)/SCREEN_WIDTH) * MOUSE_SENSITIVITY
+        mouse_y = ((mouse_y - SCREEN_WIDTH/2)/SCREEN_HEIGHT) * MOUSE_SENSITIVITY
+        self.camera.updateMouse(pygame.Vector2(mouse_x, mouse_y))
+
+    def update(self, dt):
+        self.update_mouse()
+        self.sprite_player.update(dt) #->player.
+        self.weapon.update(dt, self.sprite_mob)
+        self.sprite_mob.update(dt, self.sprite_player)
+        self.sprite_coins.update(dt)
+        self.update_camera()
+
 
     def draw(self, window):
         draw_checker_map(window, self.camera, self.tile1, self.tile2)
