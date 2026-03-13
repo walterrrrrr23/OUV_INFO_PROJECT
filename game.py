@@ -54,13 +54,13 @@ class Game:
 
 
         if self.player.pos.x - self.camera.offset.x > SCREEN_WIDTH - SCREEN_WIDTH/CAMERA_OFFSET_THRESHOLD :
-            self.camera.update(pygame.Vector2(self.player.vel.x + self.player.knockdirection.x, 0))
+            self.camera.update(pygame.Vector2(self.player.vel.x , 0))
         if self.player.pos.y - self.camera.offset.y > SCREEN_HEIGHT  - SCREEN_HEIGHT/CAMERA_OFFSET_THRESHOLD  :
-            self.camera.update(pygame.Vector2(0,self.player.vel.y +self.player.knockdirection.y ))
+            self.camera.update(pygame.Vector2(0,self.player.vel.y  ))
         if self.player.pos.x - self.camera.offset.x < SCREEN_WIDTH/CAMERA_OFFSET_THRESHOLD :
-           self.camera.update(pygame.Vector2(self.player.vel.x + self.player.knockdirection.x, 0))
+           self.camera.update(pygame.Vector2(self.player.vel.x , 0))
         if self.player.pos.y - self.camera.offset.y < SCREEN_HEIGHT/CAMERA_OFFSET_THRESHOLD :
-            self.camera.update(pygame.Vector2(0,self.player.vel.y + self.player.knockdirection.y))
+            self.camera.update(pygame.Vector2(0,self.player.vel.y ))
 
     def draw(self, window):
         draw_checker_map(window, self.camera, self.tile1, self.tile2)

@@ -48,7 +48,7 @@ class Coin(pygame.sprite.Sprite):
         playerpos = self.player.pos - self.camera.offset
         selfpos = self.pos - self.camera.offset
         dir = pygame.Vector2(playerpos - selfpos)
-        print(dir)
+       
         if dir == pygame.Vector2(0,0):
               self.player.coin += 10
               self.kill()

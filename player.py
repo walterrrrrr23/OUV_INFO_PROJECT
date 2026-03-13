@@ -108,7 +108,8 @@ class Player(pygame.sprite.Sprite):
             self.pos += self.vel
             self.rect.center = self.pos
         else :
-            self.pos += self.knockdirection
+            self.vel = self.knockdirection
+            self.pos += self.vel
             self.rect.center = self.pos
             self.knockdirection = self.knockdirection/1.5
             if  pygame.time.get_ticks() - self.knockedtime > self.knockammount :
