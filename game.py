@@ -45,19 +45,6 @@ class Game:
 
     def update_camera(self, dt):
         self.camera.calculateOffset()
-        mouse_x, mouse_y = pygame.mouse.get_pos()
-        mouse_x = ((mouse_x - SCREEN_WIDTH/2)/SCREEN_WIDTH) * MOUSE_SENSITIVITY
-        mouse_y = ((mouse_y - SCREEN_WIDTH/2)/SCREEN_HEIGHT) * MOUSE_SENSITIVITY
-
-        self.camera.updateMouse(pygame.Vector2(mouse_x, mouse_y))
-
-        self.sprite_player.update(dt) #->player.
-        self.weapon.update(dt, self.sprite_mob)
-        self.sprite_mob.update(dt, self.sprite_player)
-        self.sprite_coins.update(dt)
-        self.sprite_bullets.update(dt, self.sprite_player)
-        self.damage_indicator.update(dt)
-
         if self.player.pos.x - self.camera.offset.x > SCREEN_WIDTH - SCREEN_WIDTH/CAMERA_OFFSET_THRESHOLD :
             self.camera.update(pygame.Vector2(self.player.vel.x , 0))
         if self.player.pos.y - self.camera.offset.y > SCREEN_HEIGHT  - SCREEN_HEIGHT/CAMERA_OFFSET_THRESHOLD  :
@@ -78,6 +65,7 @@ class Game:
         self.sprite_player.update(dt) #->player.
         self.weapon.update(dt, self.sprite_mob)
         self.sprite_mob.update(dt, self.sprite_player)
+        self.sprite_bullets.update(dt, self.sprite_player)
         self.sprite_coins.update(dt)
         self.damage_indicator.update(dt)
         self.update_camera(dt)
