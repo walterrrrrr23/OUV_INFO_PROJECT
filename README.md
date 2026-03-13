@@ -2,6 +2,7 @@
 
 Paticipants : Karl Collet, Théophile Grenier, Mathis Le Mineur
 
+- hello word
 <!-- Ceci est un commentaire -->
 - [ ] Faire un menu d'acceuil
 - [ ] Faire un bouton start
