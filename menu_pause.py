@@ -95,7 +95,7 @@ def pause(screen, boutons):
 
     # pour center ce qu'on a ecrit
 
-    title_rect = title_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50))
+    title_rect = title_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 80))
 
     # afficher le titre
 
@@ -151,6 +151,45 @@ def gameover(screen, boutons):
         text_rect = b["surf"].get_rect(center=b["rect"].center)
         screen.blit(b["surf"], text_rect)
 
+def parametrage(screen, boutons):
+    # floutage
+
+    floutage = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+    floutage.set_alpha(150)     # 0 transparant -> 255 opaque
+    floutage.fill((0,0,0))
+    screen.blit(floutage,(0,0))
+
+    # les polices d'ecritures du menu pause
+
+    font_title = pygame.font.Font("assets/fonts/Pix32.ttf", 50)
+
+    # le texte du menu pause
+
+    title_surface = font_title.render("Paramètres", True, (255, 255, 255))
+    blabla1_surface = font_title.render("hihiha", True, (0, 255, 255))
+
+    # pour center ce qu'on a ecrit
+
+    title_rect = title_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 80))
+    title_rect2 = blabla1_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 80 ))
+
+    # afficher le titre
+
+    screen.blit(title_surface, title_rect)
+    screen.blit(blabla1_surface, title_rect2)
+
+    # gestion de la souris
+
+    pos_souris = pygame.mouse.get_pos()
+
+    for b in boutons :
+        # Couleur change si survolé
+        color = (150, 150, 150) if b["rect"].collidepoint(pos_souris) else (100, 100, 100)
+        pygame.draw.rect(screen, color, b["rect"], border_radius=10)
+        
+        text_rect = b["surf"].get_rect(center=b["rect"].center)
+        screen.blit(b["surf"], text_rect)
+
 def crea_boutons_home():
 
     #couleur, taille et position
@@ -179,10 +218,10 @@ def crea_boutons_home():
         },
 
         {
-            "text": "SETTINGS",
+            "text": "PARAMETRES",
             "rect": pygame.Rect(center_x, hauteur_premier + ecart*3, bouton_width, bouton_height),
-            "action": "settings",
-            "surf": font_bouton.render("SETTINGS", True, (255, 255, 255))
+            "action": "parametres",
+            "surf": font_bouton.render("PARAMETRES", True, (255, 255, 255))
         },
 
         #bouton quitter (fermer la fenetre)
@@ -244,10 +283,10 @@ def crea_boutons_pause():
         #bouton parametre (affichage des parametres)
 
         {
-            "text": "SETTINGS",
+            "text": "PARAMETRES",
             "rect": pygame.Rect(center_x, hauteur_premier + ecart*3, bouton_width, bouton_height),
-            "action": "settings",
-            "surf": font_bouton.render("SETTINGS", True, (255, 255, 255))
+            "action": "parametres",
+            "surf": font_bouton.render("PARAMETRES", True, (255, 255, 255))
         },
 
         #bouton quitter (fermer la fenetre)
@@ -300,10 +339,10 @@ def crea_boutons_gameover():
         #bouton parametre (affichage des parametres)
 
         {
-            "text": "SETTINGS",
+            "text": "PARAMETRES",
             "rect": pygame.Rect(center_x, hauteur_premier + ecart*3, bouton_width, bouton_height),
-            "action": "settings",
-            "surf": font_bouton.render("SETTINGS", True, (255, 255, 255))
+            "action": "parametres",
+            "surf": font_bouton.render("PARAMETRES", True, (255, 255, 255))
         },
 
         #bouton quitter (fermer la fenetre)
@@ -314,6 +353,34 @@ def crea_boutons_gameover():
             "action": "quit",
             "surf": font_bouton.render("QUITTER", True, (255, 255, 255))
         }
+    ]
+    return boutons
+
+def crea_boutons_parametrage():
+
+    #couleur, taille et position
+
+    font_bouton = pygame.font.Font("assets/fonts/Pix32Thin.ttf", 20)
+    bouton_width, bouton_height = 300, 60
+    center_x = SCREEN_WIDTH // 2 - bouton_width // 2
+
+    #hauteur d'affichage du premir bouton
+
+    hauteur_premier = SCREEN_HEIGHT // 2 - 50
+
+    #ecart entre les boutons
+
+    ecart = 80
+
+    boutons = [
+
+        {
+            "text": "REPRENDRE",
+            "rect": pygame.Rect(center_x, hauteur_premier, bouton_width, bouton_height),
+            "action": "qparam",
+            "surf": font_bouton.render("REPRENDRE", True, (255, 255, 255))
+        }
+
     ]
     return boutons
 

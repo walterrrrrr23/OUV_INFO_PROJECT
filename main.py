@@ -2,7 +2,7 @@
 import pygame
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, PAUSE
 from game import Game
-from menu_pause import pause, crea_boutons_pause, ca_clique, gameover, crea_boutons_gameover, home, crea_boutons_home
+from menu_pause import pause, crea_boutons_pause, ca_clique, gameover, crea_boutons_gameover, home, crea_boutons_home, parametrage, crea_boutons_parametrage
 
 def main():
     pygame.init()
@@ -16,10 +16,12 @@ def main():
     estmort = False
     running = True
     hhome = True
+    param = False
 
     les_boutons_pause = crea_boutons_pause()
     les_boutons_gameover = crea_boutons_gameover()
     les_boutons_home = crea_boutons_home()
+    les_boutons_param = crea_boutons_parametrage()
     
     while running:
         dt = clock.tick(FPS) / 1000 #conversion en s
@@ -39,10 +41,22 @@ def main():
                 # afficher le menu pause
                 if event.key == pygame.K_p:
                     ppause = True
+                
+                if event.key == pygame.K_r:
+                    game = Game()
+                
+                if event.key == pygame.K_m:
+                    hhome = True
 
             # gestion boutons selon les etats du jeu
 
-            if hhome:
+            if param:
+                action = ca_clique(event, les_boutons_param)
+
+                if action == "qparam":
+                    param = False
+
+            elif hhome:
                 action = ca_clique(event, les_boutons_home)
 
                 if action == "start":
@@ -51,6 +65,9 @@ def main():
                 
                 elif action == "quit":
                     running = False
+
+                elif action == "parametres":
+                    param = True
 
             elif ppause:
                 action = ca_clique(event, les_boutons_pause)
@@ -64,7 +81,10 @@ def main():
 
                 elif action == "restart":
                     game = Game()
-                    ppause = False 
+                    ppause = False
+
+                elif action == "parametres":
+                    param = True 
 
                 elif action == "quit":
                     running = False
@@ -78,7 +98,10 @@ def main():
 
                 elif action == "restart":
                     game = Game()
-                    estmort = False 
+                    estmort = False
+
+                elif action == "parametres":
+                    param = True
 
                 elif action == "quit":
                     running = False
@@ -89,7 +112,7 @@ def main():
             estmort = True
 
         # si on est pas en pause, ni mortn ni dans le menu home on update
-        if not ppause and not estmort and not hhome:
+        if not ppause and not estmort and not hhome and not param:
             game.update(dt)
         
         if not hhome:
@@ -102,6 +125,9 @@ def main():
             gameover(screen, les_boutons_gameover)
         elif ppause:
             pause(screen, les_boutons_pause)
+
+        if param:
+            parametrage(screen, les_boutons_param)
 
 
         pygame.display.flip() #screen update
