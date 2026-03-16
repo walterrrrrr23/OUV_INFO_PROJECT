@@ -6,7 +6,7 @@ from utils import load_json
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE, MOUSE_SENSITIVITY
 
 class Weapon(pygame.sprite.Sprite):
-    def __init__(self, player, camera, name):
+    def __init__(self, player, camera, name, spritebullet_player):
 
         weapon_data = load_json("assets/data/weapons.json")[name]
        
@@ -22,9 +22,10 @@ class Weapon(pygame.sprite.Sprite):
         self.original_image = weapon_image
         self.image = self.original_image
         self.rect = pygame.Rect((0,0), (10,10))
+        self.spritebullet_player = spritebullet_player
 
         self.last = 0
-        self.sprite_projectiles = pygame.sprite.Group()
+        self.sprite_projectiles = spritebullet_player
         self.recoil_angle = 0
 
         #VAR
@@ -100,8 +101,7 @@ class Weapon(pygame.sprite.Sprite):
         image_rect.center = screen_rect.center 
         window.blit(self.image, image_rect)
         #pygame.draw.rect(window, (255, 0, 0), screen_rect, 2)
-        for sprite in self.sprite_projectiles:
-            sprite.draw(window)
+      
 
     def update(self, dt, enemies):
         self.display_weapon(dt)
@@ -111,7 +111,6 @@ class Weapon(pygame.sprite.Sprite):
             self.camera.screenshake(self.screenshaketime, self.screenshakeammount)
             self.shoot()
         for projectile in self.sprite_projectiles:
-            projectile.update(dt, enemies)
             if projectile.is_out_of_screen(self.player.pos):
                 projectile.kill()
         
