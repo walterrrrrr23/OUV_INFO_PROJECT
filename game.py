@@ -28,7 +28,7 @@ class Game:
         self.damage_indicator = pygame.sprite.Group()
         self.sprite_bullets_player = pygame.sprite.Group()
         self.sprite_player.add(self.player)
-        self.weapon = Weapon(self.player, self.camera, "Revolver")
+        self.weapon = Weapon(self.player, self.camera, "Revolver", self.sprite_bullets_player)
 
         #définition des tiles -> map
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png") 
