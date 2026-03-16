@@ -190,6 +190,86 @@ def parametrage(screen, boutons):
         text_rect = b["surf"].get_rect(center=b["rect"].center)
         screen.blit(b["surf"], text_rect)
 
+        
+def parametrage(screen, boutons, waiting_for_key=None):
+    # floutage
+    floutage = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+    floutage.set_alpha(150)
+    floutage.fill((0,0,0))
+    screen.blit(floutage,(0,0))
+
+    font_title = pygame.font.Font("assets/fonts/Pix32.ttf", 50)
+    font_text = pygame.font.Font("assets/fonts/Pix32.ttf", 30)
+
+    title_surface = font_title.render("Paramètres", True, (255, 255, 255))
+    
+    # Message qui change si on attend une touche
+    if waiting_for_key:
+        msg = f"Appuyez sur la nouvelle touche pour : {waiting_for_key.upper()}"
+        color = (255, 255, 0) # Jaune pour attirer l'attention
+    else:
+        msg = "Cliquez sur une action pour modifier"
+        color = (0, 255, 255)
+
+    info_surface = font_text.render(msg, True, color)
+
+    title_rect = title_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 200))
+    info_rect = info_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 130))
+
+    screen.blit(title_surface, title_rect)
+    screen.blit(info_surface, info_rect)
+
+    pos_souris = pygame.mouse.get_pos()
+
+    for b in boutons :
+        color = (150, 150, 150) if b["rect"].collidepoint(pos_souris) else (100, 100, 100)
+        pygame.draw.rect(screen, color, b["rect"], border_radius=10)
+        
+        text_rect = b["surf"].get_rect(center=b["rect"].center)
+        screen.blit(b["surf"], text_rect)
+
+
+def crea_boutons_parametrage(keybindings):
+    font_bouton = pygame.font.Font("assets/fonts/Pix32Thin.ttf", 20)
+    bouton_width, bouton_height = 400, 50 # Un peu plus large pour le texte
+    center_x = SCREEN_WIDTH // 2 - bouton_width // 2
+
+    hauteur_premier = SCREEN_HEIGHT // 2 - 80
+    ecart = 60
+
+    boutons = []
+    
+    # Liste des actions modifiables
+    actions = [
+        ("up", "HAUT"), 
+        ("down", "BAS"), 
+        ("left", "GAUCHE"), 
+        ("right", "DROITE")
+    ]
+    
+    for i, (action, text) in enumerate(actions):
+        # pygame.key.name() permet de transformer l'ID de la touche (ex: 122) en texte (ex: "z")
+        key_name = pygame.key.name(keybindings[action]).upper()
+        display_text = f"{text} : {key_name}"
+        
+        boutons.append({
+            "text": display_text,
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart * i, bouton_width, bouton_height),
+            "action": f"bind_{action}", # L'action commence par "bind_" pour la repérer facilement
+            "surf": font_bouton.render(display_text, True, (255, 255, 255))
+        })
+
+    # Bouton de retour à la fin
+    boutons.append({
+        "text": "RETOUR",
+        "rect": pygame.Rect(center_x, hauteur_premier + ecart * 4 + 20, bouton_width, bouton_height),
+        "action": "qparam",
+        "surf": font_bouton.render("RETOUR", True, (255, 255, 255))
+    })
+
+    return boutons
+
+
 def crea_boutons_home():
 
     #couleur, taille et position
