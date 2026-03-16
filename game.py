@@ -56,8 +56,8 @@ class Game:
 
     def spawn(self):
         #for i in range((self.stage)):
-        pos_x = self.camera.offset.x + SCREEN_WIDTH/2 + randint(-1,1)*randint(SCREEN_WIDTH/2, SCREEN_WIDTH)
-        pos_y = self.camera.offset.y + SCREEN_HEIGHT/2 + randint(-1,1)*randint(SCREEN_HEIGHT/2, SCREEN_HEIGHT)
+        pos_x = self.camera.offset.x + SCREEN_WIDTH//2 + randint(-1,1)*randint(SCREEN_WIDTH//2, SCREEN_WIDTH)
+        pos_y = self.camera.offset.y + SCREEN_HEIGHT//2 + randint(-1,1)*randint(SCREEN_HEIGHT//2, SCREEN_HEIGHT)
         self.enemy = Enemy((pos_x, pos_y), self.camera, self.player, "Joker", self.sprite_coins, self.sprite_bullets, self.damage_indicator)
         print(pos_x, pos_x)
         self.sprite_mob.add(self.enemy)
