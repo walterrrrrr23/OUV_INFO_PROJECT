@@ -195,8 +195,10 @@ def parametroge(screen, boutons):
         screen.blit(b["surf"], text_rect)
 
         
-def parametrage(screen, boutons, changementdecle=None):
+def parametrage(screen, boutons, changementdecle = None):
+
     # floutage
+
     floutage = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
     floutage.set_alpha(150)
     floutage.fill((0,0,0))
@@ -244,6 +246,7 @@ def parametrage(screen, boutons, changementdecle=None):
 
 
 def crea_boutons_parametrage(dicocle):
+    
     font_bouton = pygame.font.Font("assets/fonts/Pix32Thin.ttf", 20)
     largeur_du_bouton, hauteur_du_bouton = 400, 50 # Un peu plus large pour le texte
     center_x = SCREEN_WIDTH // 2 - largeur_du_bouton // 2

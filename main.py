@@ -63,7 +63,7 @@ def main():
 
                 # afficher le menu pause
                 if event.key == pygame.K_p:
-                    ppause = True
+                    ppause = True               # variable pour activer l'affichage du menu pause
                 
                 # relancer la partie
                 if event.key == pygame.K_r:
@@ -71,7 +71,7 @@ def main():
                 
                 # aller sur le menu principal (abandon de la game)
                 if event.key == pygame.K_m:
-                    hhome = True
+                    hhome = True                # variable pour activer l'affichage du menu principal
 
             # gestion boutons selon les etats du jeu
 
@@ -95,13 +95,13 @@ def main():
 
                 if action == "start":           # on lance la parti et on quite le menu principal
                     game = Game(dicocle)
-                    hhome = False
+                    hhome = False               # variable pour activer l'affichage du menu principal
                 
                 elif action == "quit":          # on arrete le jeu, la fenetre se coupe
                     running = False
 
-                elif action == "parametres":    # on affiche le menu parametre
-                    param = True
+                elif action == "parametres":
+                    param = True                # variable pour activer l'affichage du menu parametre
 
             # si on est dans le menu pause
 
@@ -110,15 +110,15 @@ def main():
                 action = ca_clique(event, les_boutons_pause)
 
                 if action == "home":            # on va dans le menu principal donc on quite le menu pause et on abandonne la partie
-                    hhome = True
-                    ppause = False
+                    hhome = True                # variable pour activer l'affichage du menu principal
+                    ppause = False              # variable pour activer l'affichage du menu pause
 
                 if action == "resume":          # la partie n'est plus en pause et le menu pause disparait
-                    ppause = False
+                    ppause = False              # variable pour activer l'affichage du menu pause
 
                 elif action == "restart":       # on n'est plus en pause et on relance une game a zero
                     game = Game(dicocle)
-                    ppause = False
+                    ppause = False              # variable pour activer l'affichage du menu pause
 
                 elif action == "parametres":
                     param = True                # variable pour activer l'affichage du menu parametre
