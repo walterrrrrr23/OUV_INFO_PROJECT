@@ -4,10 +4,11 @@ from settings import PLAYER_SPEED, ZOOM, PLAYER_ACCELERATION
 from utils import load_spritesheet  
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, camera):
+    def __init__(self, pos, camera, dicocle):
         super().__init__()
 
         self.camera = camera
+        self.dicocle = dicocle
         self.frames = load_spritesheet("assets/sprites/player_sheet.png", 64, 64)
 
        
@@ -62,8 +63,8 @@ class Player(pygame.sprite.Sprite):
 
 
         dir = pygame.Vector2(
-            keys[pygame.K_d] - keys[pygame.K_q],
-            keys[pygame.K_s] - keys[pygame.K_z]
+            keys[self.dicocle["right"]] - keys[self.dicocle["left"]],
+            keys[self.dicocle["down"]] - keys[self.dicocle["up"]]
         )
 
         dirmax = 1
@@ -71,16 +72,16 @@ class Player(pygame.sprite.Sprite):
         if dir.x != 0 and dir.y != 0:
             dirmax = .75
         self.direction *= 1-PLAYER_ACCELERATION
-        if keys[pygame.K_d] :
+        if keys[self.dicocle["right"]] :
             self.direction.x += PLAYER_ACCELERATION
             self.direction.x = min(self.direction.x, dirmax)
-        elif keys[pygame.K_q] :
+        elif keys[self.dicocle["left"]] :
             self.direction.x -= PLAYER_ACCELERATION
             self.direction.x = max(self.direction.x, -dirmax)
-        if keys[pygame.K_s] :
+        if keys[self.dicocle["down"]] :
             self.direction.y += PLAYER_ACCELERATION
             self.direction.y = min(self.direction.y, dirmax)
-        elif keys[pygame.K_z] :
+        elif keys[self.dicocle["up"]] :
             self.direction.y -= PLAYER_ACCELERATION
             self.direction.y = max(self.direction.y, -dirmax)
   

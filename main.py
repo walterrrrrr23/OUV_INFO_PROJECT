@@ -167,7 +167,7 @@ def main():
             screen.fill((20,20,20))         # fond noir
             home(screen, les_boutons_home)  #
         elif estmort:
-            gameover(screen, les_boutons_gameover)
+            gameover(screen, les_boutons_gameover)                      # affichage du menu gameover
         elif ppause:
             pause(screen, les_boutons_pause)
         if param:
