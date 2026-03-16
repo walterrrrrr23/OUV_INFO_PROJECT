@@ -11,10 +11,11 @@ from enemy import Enemy
 from coin import Coin
 from menu_pause import HealthBar
 from damage_indicator import Damage_Indicator
+
 class Game:
-    def __init__(self):
+    def __init__(self, dicocle):
         self.camera = Camera()
-        self.player = Player((0, 0), self.camera)
+        self.player = Player((0, 0), self.camera,dicocle)
         self.camera.center(self.player)
 
         self.stage = 0
