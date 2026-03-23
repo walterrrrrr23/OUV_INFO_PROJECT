@@ -23,14 +23,14 @@ Tâches :
 - [x] Faire un bouton settings
 - [x] Faire un bouton quitter
 
-- [ ] Faire un menu settings
-- [ ] pouvoir changer ses touches
+- [x] Faire un menu settings
+- [x] pouvoir changer ses touches
 - [ ] bouton pour changer le volume de la musique
 - [ ] bouton pour changer le volume des interractions
 - [ ] pouvoir desactiver les vibrations
-- [ ] Faire un bouton retour
+- [x] Faire un bouton retour
 
-- [ ] faire une page credits
+- [x] faire une page credits
 
 - Partie ingame :
 
