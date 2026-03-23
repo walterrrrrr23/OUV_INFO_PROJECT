@@ -26,12 +26,21 @@ class Game:
         self.sprite_coins = pygame.sprite.Group()
         self.sprite_bullets = pygame.sprite.Group()
         self.damage_indicator = pygame.sprite.Group()
-        
+        self.sprite_bullets_player = pygame.sprite.Group()
         self.sprite_player.add(self.player)
-        self.weapon = Weapon(self.player, self.camera, "Revolver")
+        self.weapon = Weapon(self.player, self.camera, "Revolver", self.sprite_bullets_player)
 
         #définition des tiles -> map
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png") 
+
+        self.vignette = pygame.image.load("assets/sprites/vignette3.png").convert_alpha()
+
+    def get_scaled_vignette(self):
+        w, h = SCREEN_WIDTH, SCREEN_HEIGHT 
+        return pygame.transform.smoothscale(self.vignette, (w, h))
+
+    
+
 
     def update_camera(self):
         self.camera.calculateOffset()
@@ -70,6 +79,7 @@ class Game:
         self.weapon.update(dt, self.sprite_mob)
         self.sprite_mob.update(dt, self.sprite_player)
         self.sprite_bullets.update(dt, self.sprite_player)
+        self.sprite_bullets_player.update(dt, self.sprite_mob)
         self.sprite_coins.update(dt)
         self.update_camera()
         self.advancement()
@@ -87,11 +97,17 @@ class Game:
            sprite.draw(window)
 
         self.weapon.draw(window)
+
+
+        vignette_scaled = self.get_scaled_vignette()
+        window.blit(vignette_scaled,(0,0))
         
         for sprite in self.sprite_bullets:
        
            sprite.draw(window)
 
+        for sprite in self.sprite_bullets_player:
+            sprite.draw(window)
         for sprite in self.damage_indicator:
        
            sprite.draw(window)

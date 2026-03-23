@@ -59,7 +59,7 @@ def main():
 
                 # quiiter le jeu
                 if event.key == pygame.K_ESCAPE:
-                    running = False
+                    ppause = True
 
                 # afficher le menu pause
                 if event.key == pygame.K_p:
@@ -120,8 +120,8 @@ def main():
                     game = Game(dicocle)
                     ppause = False              # variable pour activer l'affichage du menu pause
 
-                elif action == "parametres":
-                    param = True                # variable pour activer l'affichage du menu parametre
+                elif action == "parametres":    # affichage du menu parametre
+                    param = True 
 
                 elif action == "quit":          # on arrete le jeu, la fenetre se coupe
                     running = False
@@ -164,14 +164,15 @@ def main():
             game.draw(screen)
 
         if hhome:
-            screen.fill((20,20,20))                                     # fond presque noir mais vu noir par l'oeil humain
-            home(screen, les_boutons_home)                              # affichage du menu principal
+            screen.fill((20,20,20))         # fond noir
+            home(screen, les_boutons_home)  #
         elif estmort:
             gameover(screen, les_boutons_gameover)                      # affichage du menu gameover
         elif ppause:
-            pause(screen, les_boutons_pause)                            # affichage du menu pause
+            pause(screen, les_boutons_pause)
         if param:
-            parametrage(screen, les_boutons_param, changementdecle)     # affichage du menu parametre
+            parametrage(screen, les_boutons_param, changementdecle)
+
 
         pygame.display.flip() #screen update
 
