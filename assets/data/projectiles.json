@@ -1,11 +1,86 @@
 {
-  "Orb": {
+  "ShootgunBulletYellow": {
+    "spritexoffset" : 0,
+    "spriteyoffset" : 0
+  },
+
+  "SmallBulletYellow": {
+    "spritexoffset" : 1,
+    "spriteyoffset" : 0
+  },
+
+  "LittleOrbYellow": {
+    "spritexoffset" : 2,
+    "spriteyoffset" : 0
+    
+  },
+
+  "OrbYellow": {
+    "spritexoffset" : 3,
+    "spriteyoffset" : 0
+    
+  },
+  
+  "SmallRocketYellow": {
+    "spritexoffset" : 4,
+    "spriteyoffset" : 0
+  },
+
+  "BigRocketYellow": {
+    "spritexoffset" : 5,
+    "spriteyoffset" : 0
+  },
+
+  "ShortBulletYellow": {
+    "spritexoffset" : 6,
+    "spriteyoffset" : 0
+  },
+
+  "LongBulletYellow": {
+    "spritexoffset" : 7,
+    "spriteyoffset" : 0
+  },
+
+  "ShootgunBulletRed": {
+    "spritexoffset" : 0,
+    "spriteyoffset" : 0
+  },
+
+
+  "SmallBulletRed": {
+    "spritexoffset" : 1,
+    "spriteyoffset" : 1
+  },
+
+  "LittleOrbRed": {
+    "spritexoffset" : 2,
+    "spriteyoffset" : 1
+    
+  },
+
+  "OrbRed": {
     "spritexoffset" : 3,
     "spriteyoffset" : 1
     
   },
-  "SmallBullet": {
-    "spritexoffset" : 1,
-    "spriteyoffset" : 0
+  
+  "SmallRocketRed": {
+    "spritexoffset" : 4,
+    "spriteyoffset" : 1
+  },
+
+  "BigRocketRed": {
+    "spritexoffset" : 5,
+    "spriteyoffset" : 1
+  },
+
+  "ShortBulletRed": {
+    "spritexoffset" : 6,
+    "spriteyoffset" : 1
+  },
+
+  "LongBulletRed": {
+    "spritexoffset" : 7,
+    "spriteyoffset" : 1
   }
 }

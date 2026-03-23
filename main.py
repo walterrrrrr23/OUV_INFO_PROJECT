@@ -87,6 +87,7 @@ def main():
                     param = False
                 
                 elif action and action.startswith("bind_"):
+            
                     changementdecle = action.split("_")[1]
             
             elif cred:

@@ -5,7 +5,7 @@
     "damage": 1,
     "cooldown" : 300,
     "sprite": "assets/sprites/enemies/player_sheet.png",
-    "projectile" : "Orb",
+    "projectile" : "OrbRed",
     "kb" : 10,
     "bulletspeed" : 500,
     "range_min" : 500 
