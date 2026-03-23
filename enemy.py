@@ -68,6 +68,7 @@ class Enemy(pygame.sprite.Sprite):
         self.projectile = ennemy_data["projectile"]
         self.kb = ennemy_data["kb"]
         self.bulletspeed = ennemy_data["bulletspeed"]
+        self.range_min = ennemy_data["range_min"]
         
 
     def take_damage(self, damage, direction, kb):
@@ -116,17 +117,18 @@ class Enemy(pygame.sprite.Sprite):
             self.facing_left = True
         else:
             self.facing_left = False
+        
+        distance = pygame.math.Vector2.distance_to(self.pos, self.target.pos)
+        if distance <= self.range_min:
+            self.direction = pygame.Vector2(0,0)
+        
         if self.direction.length() > .2:
-    
             self.current_anim = "walk"
           
-            
         else:
             self.current_anim = "idle"
-
         
         self.vel = self.direction * self.speed*dt
-       
         if not self.knocked :
             self.pos += self.vel
             self.rect.center = self.pos
@@ -137,6 +139,7 @@ class Enemy(pygame.sprite.Sprite):
             if  pygame.time.get_ticks() - self.knockedtime > self.knockammount :
                 self.knocked = False
                 self.knockdirection = pygame.Vector2(0,0)
+        
 
                 
 
