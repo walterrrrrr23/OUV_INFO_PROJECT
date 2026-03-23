@@ -70,8 +70,12 @@ def home(screen, boutons):
     pos_souris = pygame.mouse.get_pos()
 
     for b in boutons :
-        # Couleur change si survolé
-        color = (150, 150, 150) if b["rect"].collidepoint(pos_souris) else (100, 100, 100)
+        if b["rect"].collidepoint(pos_souris):
+            color = (180, 180, 180)
+            pygame.draw.rect(screen, (255, 255, 255), b["rect"].inflate(4,4), border_radius = 10, width = 2)
+        else :
+            color = (100, 100, 100)
+
         pygame.draw.rect(screen, color, b["rect"], border_radius=10)
         
         text_rect = b["surf"].get_rect(center=b["rect"].center)
@@ -108,8 +112,12 @@ def pause(screen, boutons):
     pos_souris = pygame.mouse.get_pos()
 
     for b in boutons :
-        # Couleur change si survolé
-        color = (150, 150, 150) if b["rect"].collidepoint(pos_souris) else (100, 100, 100)
+        if b["rect"].collidepoint(pos_souris):
+            color = (180, 180, 180)
+            pygame.draw.rect(screen, (255, 255, 255), b["rect"].inflate(4,4), border_radius = 10, width = 2)
+        else :
+            color = (100, 100, 100)
+
         pygame.draw.rect(screen, color, b["rect"], border_radius=10)
         
         text_rect = b["surf"].get_rect(center=b["rect"].center)
@@ -147,8 +155,12 @@ def gameover(screen, boutons):
     pos_souris = pygame.mouse.get_pos()
 
     for b in boutons :
-        # Couleur change si survolé
-        color = (150, 150, 150) if b["rect"].collidepoint(pos_souris) else (100, 100, 100)
+        if b["rect"].collidepoint(pos_souris):
+            color = (180, 180, 180)
+            pygame.draw.rect(screen, (255, 255, 255), b["rect"].inflate(4,4), border_radius = 10, width = 2)
+        else :
+            color = (100, 100, 100)
+
         pygame.draw.rect(screen, color, b["rect"], border_radius=10)
         
         text_rect = b["surf"].get_rect(center=b["rect"].center)
@@ -187,8 +199,12 @@ def parametroge(screen, boutons):
     pos_souris = pygame.mouse.get_pos()
 
     for b in boutons :
-        # Couleur change si survolé
-        color = (150, 150, 150) if b["rect"].collidepoint(pos_souris) else (100, 100, 100)
+        if b["rect"].collidepoint(pos_souris):
+            color = (180, 180, 180)
+            pygame.draw.rect(screen, (255, 255, 255), b["rect"].inflate(4,4), border_radius = 10, width = 2)
+        else :
+            color = (100, 100, 100)
+
         pygame.draw.rect(screen, color, b["rect"], border_radius=10)
         
         text_rect = b["surf"].get_rect(center=b["rect"].center)
@@ -200,8 +216,8 @@ def parametrage(screen, boutons, changementdecle = None):
     # floutage
 
     floutage = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
-    floutage.set_alpha(150)
-    floutage.fill((0,0,0))
+    floutage.set_alpha(255)
+    floutage.fill((10,10,15))
     screen.blit(floutage,(0,0))
 
     # les polices d'ecritures du menu pause
@@ -238,7 +254,72 @@ def parametrage(screen, boutons, changementdecle = None):
     # gestion de la souris
 
     for b in boutons :
-        color = (150, 150, 150) if b["rect"].collidepoint(pos_souris) else (100, 100, 100)
+        if b["rect"].collidepoint(pos_souris):
+            color = (180, 180, 180)
+            pygame.draw.rect(screen, (255, 255, 255), b["rect"].inflate(4,4), border_radius = 10, width = 2)
+        else :
+            color = (100, 100, 100)
+
+        pygame.draw.rect(screen, color, b["rect"], border_radius=10)
+        
+        text_rect = b["surf"].get_rect(center=b["rect"].center)
+        screen.blit(b["surf"], text_rect)
+
+
+def credits(screen, boutons):
+
+    # quelques variables utiles
+
+    ecart = 80
+    hauteur_premier = SCREEN_HEIGHT // 2 - ecart * 2
+    
+    # floutage
+
+    floutage = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+    floutage.set_alpha(255)     # 0 transparant -> 255 opaque
+    floutage.fill((0,0,0))
+    screen.blit(floutage,(0,0))
+
+    # les polices d'ecritures du menu pause
+
+    police_du_titre = pygame.font.Font("assets/fonts/Pix32.ttf", 50)
+    police_du_nom_des_createurs = pygame.font.Font("assets/fonts/Pix32Thin.ttf", 16)
+
+    # le texte du menu pause
+
+    titre = police_du_titre.render("Credits", True, (255, 255, 255))
+    les_createurs = police_du_nom_des_createurs.render("Les créateurs de ce superbe jeu vidéo sont :", True, (255, 255, 255))
+    karl = police_du_nom_des_createurs.render("Karl Collet", True, (255, 255, 255))
+    mathis = police_du_nom_des_createurs.render("Mathis Le Mineur", True, (255, 255, 255))
+    theophile = police_du_nom_des_createurs.render("Théophile Grenier", True, (255, 255, 255))
+
+    # pour center ce qu'on a ecrit
+
+    rectangle_du_titre = titre.get_rect(center=(SCREEN_WIDTH // 2, hauteur_premier))
+    rectangle_du_nom_des_createurs = les_createurs.get_rect(center=(SCREEN_WIDTH // 2, hauteur_premier + ecart * 1 + 20))
+    rectangle_karl = karl.get_rect(center=(SCREEN_WIDTH // 2, hauteur_premier + ecart * 2 + 20))
+    rectangle_mathis = mathis.get_rect(center=(SCREEN_WIDTH // 2, hauteur_premier + ecart * 3 + 20))
+    rectangle_theophile = theophile.get_rect(center=(SCREEN_WIDTH // 2, hauteur_premier + ecart * 4 + 20))
+
+    # afficher le titre
+
+    screen.blit(titre, rectangle_du_titre)
+    screen.blit(les_createurs, rectangle_du_nom_des_createurs)
+    screen.blit(karl, rectangle_karl)
+    screen.blit(mathis, rectangle_mathis)
+    screen.blit(theophile, rectangle_theophile)
+
+    # gestion de la souris
+
+    pos_souris = pygame.mouse.get_pos()
+
+    for b in boutons :
+        if b["rect"].collidepoint(pos_souris):
+            color = (180, 180, 180)
+            pygame.draw.rect(screen, (255, 255, 255), b["rect"].inflate(4,4), border_radius = 10, width = 2)
+        else :
+            color = (100, 100, 100)
+
         pygame.draw.rect(screen, color, b["rect"], border_radius=10)
         
         text_rect = b["surf"].get_rect(center=b["rect"].center)
@@ -320,9 +401,16 @@ def crea_boutons_home():
 
         {
             "text": "PARAMETRES",
-            "rect": pygame.Rect(center_x, hauteur_premier + ecart*3, largeur_du_bouton, hauteur_du_bouton),
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*2, largeur_du_bouton, hauteur_du_bouton),
             "action": "parametres",
             "surf": font_bouton.render("PARAMETRES", True, (255, 255, 255))
+        },
+
+        {
+            "text": "CREDITS",
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*3, largeur_du_bouton, hauteur_du_bouton),
+            "action": "credits",
+            "surf": font_bouton.render("CREDITS", True, (255, 255, 255))
         },
 
         #bouton quitter (fermer la fenetre)
@@ -394,10 +482,10 @@ def crea_boutons_pause():
         #bouton quitter (fermer la fenetre)
 
         {
-            "text": "QUITTER",
+            "text": "QUITTER LE JEU",
             "rect": pygame.Rect(center_x, hauteur_premier + ecart*4 , largeur_du_bouton, hauteur_du_bouton),
             "action": "quit",
-            "surf": font_bouton.render("QUITTER", True, (255, 255, 255))
+            "surf": font_bouton.render("QUITTER LE JEU", True, (255, 255, 255))
         }
     ]
     return boutons
@@ -460,6 +548,36 @@ def crea_boutons_gameover():
     return boutons
 
 
+def crea_boutons_credits():
+
+    #couleur, taille et position
+
+    font_bouton = pygame.font.Font("assets/fonts/Pix32Thin.ttf", 20)
+    largeur_du_bouton, hauteur_du_bouton = 300, 60
+    center_x = SCREEN_WIDTH // 2 - largeur_du_bouton // 2
+
+    #hauteur d'affichage du premir bouton
+
+    hauteur_premier = SCREEN_HEIGHT // 2 - 50
+
+    #ecart entre les boutons
+
+    ecart = 80
+
+    boutons = [
+
+        #bouton quitter (fermer la fenetre)
+
+        {
+            "text": "RETOUR",
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart * 5 , largeur_du_bouton, hauteur_du_bouton),
+            "action": "qcredits",
+            "surf": font_bouton.render("RETOUR", True, (255, 255, 255))
+        }
+    ]
+    return boutons
+
+
 def crea_boutons_parametroge():
 
     #couleur, taille et position
@@ -487,6 +605,7 @@ def crea_boutons_parametroge():
 
     ]
     return boutons
+
 
 def ca_clique(event, boutons):
     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
