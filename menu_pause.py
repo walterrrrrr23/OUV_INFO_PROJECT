@@ -140,7 +140,7 @@ def gameover(screen, boutons):
 
     # le texte du menu pause
 
-    titre = police_du_titre.render("GAMEOVER", True, (255, 255, 255))
+    titre = police_du_titre.render("GAMEOVER", True, (255, 0, 0))
 
     # pour center ce qu'on a ecrit
 
@@ -239,7 +239,7 @@ def parametrage(screen, boutons, changementdecle = None):
         #le msg
         msg = "Cliquez sur une action pour modifier"
         #la couleur du msg
-        color = (0, 255, 255)
+        color = (255, 0, 0)
 
     blabla1 = police_du_texte.render(msg, True, color)
 
