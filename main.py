@@ -2,7 +2,7 @@
 import pygame
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, PAUSE
 from game import Game
-from menu_pause import pause, crea_boutons_pause, ca_clique, gameover, crea_boutons_gameover, home, crea_boutons_home, parametrage, crea_boutons_parametrage
+from menu_pause import pause, crea_boutons_pause, ca_clique, gameover, crea_boutons_gameover, home, crea_boutons_home, parametrage, crea_boutons_parametrage, credits, crea_boutons_credits
 
 def main():
     pygame.init()
@@ -28,6 +28,7 @@ def main():
     running = True      # execution du jeu (si false la fenetre s'eteint)
     hhome = True        # menu principal
     param = False       # menu parametre
+    cred = False        # menu credits
 
     changementdecle = None  # l'utilisateur est il en train de changer une touche
 
@@ -36,6 +37,7 @@ def main():
     les_boutons_pause = crea_boutons_pause()
     les_boutons_gameover = crea_boutons_gameover()
     les_boutons_home = crea_boutons_home()
+    les_boutons_cred = crea_boutons_credits()
     les_boutons_param = crea_boutons_parametrage(dicocle)
     
     while running:
@@ -57,13 +59,13 @@ def main():
                     les_boutons_param = crea_boutons_parametrage(dicocle)   # on met a jour les touches du menu param 
                     continue
 
-                # quiiter le jeu
+                # mettre en pause
                 if event.key == pygame.K_ESCAPE:
                     ppause = True
 
                 # afficher le menu pause
-                if event.key == pygame.K_p:
-                    ppause = True               # variable pour activer l'affichage du menu pause
+                if event.key == pygame.K_n:
+                    running = False               # variable pour activer l'affichage du menu pause
                 
                 # relancer la partie
                 if event.key == pygame.K_r:
@@ -86,6 +88,12 @@ def main():
                 
                 elif action and action.startswith("bind_"):
                     changementdecle = action.split("_")[1]
+            
+            elif cred:
+                action = ca_clique(event, les_boutons_cred)
+
+                if action == "qcredits": # qcredits pour quitter le menu credits
+                    cred = False
 
             # si on est dans le menu principal
             
@@ -102,6 +110,9 @@ def main():
 
                 elif action == "parametres":
                     param = True                # variable pour activer l'affichage du menu parametre
+
+                elif action == "credits":
+                    cred = True                # variable pour activer l'affichage du menu parametre
 
             # si on est dans le menu pause
 
@@ -145,6 +156,8 @@ def main():
 
                 elif action == "quit":          # on arrete le jeu, la fenetre se coupe
                     running = False
+
+            
                  
         # gestion du bordel
 
@@ -155,7 +168,7 @@ def main():
 
         # si on est pas en pause, ni mort ni dans le menu home ni ans le menu parametre alors on update
 
-        if not ppause and not estmort and not hhome and not param:
+        if not ppause and not estmort and not hhome and not param and not cred:
             game.update(dt)
         
         # si on est pas dans le menu principal alors on dessine
@@ -170,6 +183,8 @@ def main():
             gameover(screen, les_boutons_gameover)                      # affichage du menu gameover
         elif ppause:
             pause(screen, les_boutons_pause)
+        if cred:
+            credits(screen, les_boutons_cred)
         if param:
             parametrage(screen, les_boutons_param, changementdecle)
 
