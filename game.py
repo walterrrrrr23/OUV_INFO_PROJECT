@@ -60,7 +60,7 @@ class Game:
         self.camera.updateMouse(pygame.Vector2(mouse_x, mouse_y))
 
     def advancement(self):
-        if self.time > self.stage*10: #multiple de 10 secondes
+        if not self.sprite_mob or self.time > self.stage*30: #multiple de 10 secondes
             self.spawn()
             self.stage += 1
 

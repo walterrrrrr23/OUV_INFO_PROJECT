@@ -23,14 +23,14 @@ Tâches :
 - [x] Faire un bouton settings
 - [x] Faire un bouton quitter
 
-- [ ] Faire un menu settings
-- [ ] pouvoir changer ses touches
+- [x] Faire un menu settings
+- [x] pouvoir changer ses touches
 - [ ] bouton pour changer le volume de la musique
 - [ ] bouton pour changer le volume des interractions
 - [ ] pouvoir desactiver les vibrations
-- [ ] Faire un bouton retour
+- [x] Faire un bouton retour
 
-- [ ] faire une page credits
+- [x] faire une page credits
 
 - Partie ingame :
 
@@ -40,11 +40,13 @@ Tâches :
 - [ ] Faire un menu ingame pour les capacités de cette game
 - [ ] Faire une barre d'experience
 - [x] Faire la barre de vie
+- [ ] Implémanter une apparition d'ennemis (difficulté croissante)
 
 - Partie camera :
 
 - [x] La centrer sur le personnage
 - [x] Un offset
+- [ ] IMPORTANT : bug offset -> le joueur ne doit pas pouvoir sortir et être bloquer en dehors de l'offset
 
 - Partie ennemis :
 
