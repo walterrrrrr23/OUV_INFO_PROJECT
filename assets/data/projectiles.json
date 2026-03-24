@@ -1,8 +1,5 @@
 {
-<<<<<<< HEAD
-  "Orb": {
-    "spritexoffset" : 0,
-=======
+
   "ShootgunBulletYellow": {
     "spritexoffset" : 0,
     "spriteyoffset" : 0
@@ -63,8 +60,7 @@
   },
 
   "OrbRed": {
-    "spritexoffset" : 3,
->>>>>>> 5e47a06f467cdb5bdf54d272aa3188efc4e58948
+    "spritexoffset" : 0,
     "spriteyoffset" : 1
     
   },
