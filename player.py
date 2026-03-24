@@ -25,7 +25,7 @@ class Player(pygame.sprite.Sprite):
         )
         self.current_anim = "idle"
         self.frame_index = 0
-        self.animation_speed = 10 
+        self.animation_speed = 6 
         self.image = self.animations[self.current_anim][self.frame_index]
         self.direction = pygame.Vector2(0,0)
         self.rect = pygame.Rect((0,0), (35,60))
@@ -96,11 +96,12 @@ class Player(pygame.sprite.Sprite):
         else:
             self.facing_left = False
         if self.direction.length() > .2:
-    
+            self.animation_speed = 10
             self.current_anim = "walk"
           
             
         else:
+            self.animation_speed = 4
             self.current_anim = "idle"
 
         

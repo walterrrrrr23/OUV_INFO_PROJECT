@@ -10,7 +10,7 @@ class Projectile(pygame.sprite.Sprite):
 
         projectile_data = load_json("assets/data/projectiles.json")[name]
        
-        sheet = pygame.image.load("assets/sprites/bulletsheet.png").convert_alpha()
+        sheet = pygame.image.load("assets/sprites/bulletsheet2.png").convert_alpha()
         projectile_image = sheet.subsurface(pygame.Rect(projectile_data["spritexoffset"]*TAILLE_SPRITE, projectile_data["spriteyoffset"]*TAILLE_SPRITE, 64, 64))
         projectile_image = pygame.transform.scale(projectile_image, (64*ZOOM, 64*ZOOM))
 
