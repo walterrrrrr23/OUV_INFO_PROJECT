@@ -6,10 +6,150 @@
     "kb" : 10,
     "bulletspeed" : 1500,
     "cooldown" : 300,
-   "recoil_kick" : 40,       
+    "recoil_kick" : 40,       
     "recoil_return_speed" : 100,
     "spritexoffset": 1,
     "spriteyoffset": 0,
-    "projectile" : "SmallBullet"
+    "projectile" : "SmallBulletRed"
+  },
+
+  "Revolver_gold": {
+    "screenshakeammount" : 5,
+    "screenshaketime" : 4,
+    "damage" : 90,
+    "kb" : 10,
+    "bulletspeed" : 1500,
+    "cooldown" : 300,
+    "recoil_kick" : 40,       
+    "recoil_return_speed" : 100,
+    "spritexoffset": 2,
+    "spriteyoffset": 0,
+    "projectile" : "SmallBulletYellow"
+  },
+
+  "Ak47": {
+    "screenshakeammount" : 4,
+    "screenshaketime" : 3,
+    "damage" : 30,
+    "kb" : 10,
+    "bulletspeed" : 1500,
+    "cooldown" : 150,
+    "recoil_kick" : 15,       
+    "recoil_return_speed" : 100,
+    "spritexoffset": 0,
+    "spriteyoffset": 0,
+    "projectile" : "SmallBulletRed"
+  },
+
+  "Ak47_blue": {
+    "screenshakeammount" : 4,
+    "screenshaketime" : 3,
+    "damage" : 40,
+    "kb" : 10,
+    "bulletspeed" : 1500,
+    "cooldown" : 150,
+    "recoil_kick" : 15,       
+    "recoil_return_speed" : 100,
+    "spritexoffset": 3,
+    "spriteyoffset": 0,
+    "projectile" : "SmallBulletRed"
+  },
+
+  "Snipe": {
+    "screenshakeammount" : 6,
+    "screenshaketime" : 5,
+    "damage" : 135,
+    "kb" : 20,
+    "bulletspeed" : 2225,
+    "cooldown" : 500,
+    "recoil_kick" : 50,       
+    "recoil_return_speed" : 100,
+    "spritexoffset": 4,
+    "spriteyoffset": 0,
+    "projectile" : "LongBulletRed"
+  },
+
+  "Shootgun_long": {
+    "screenshakeammount" : 6,
+    "screenshaketime" : 5,
+    "damage" : 100,
+    "kb" : 15,
+    "bulletspeed" : 725,
+    "cooldown" : 300,
+    "recoil_kick" : 40,       
+    "recoil_return_speed" : 100,
+    "spritexoffset": 5,
+    "spriteyoffset": 0,
+    "projectile" : "ShootgunBulletRed"
+  },
+
+  "Shootgun_black": {
+    "screenshakeammount" : 6,
+    "screenshaketime" : 5,
+    "damage" : 90,
+    "kb" : 20,
+    "bulletspeed" : 725,
+    "cooldown" : 300,
+    "recoil_kick" : 40,       
+    "recoil_return_speed" : 100,
+    "spritexoffset": 6,
+    "spriteyoffset": 0,
+    "projectile" : "ShootgunBulletRed"
+  },
+
+  "RocketLancher_simple": {
+    "screenshakeammount" : 6,
+    "screenshaketime" : 5,
+    "damage" : 150,
+    "kb" : 20,
+    "bulletspeed" : 1500,
+    "cooldown" : 300,
+    "recoil_kick" : 40,       
+    "recoil_return_speed" : 100,
+    "spritexoffset": 8,
+    "spriteyoffset": 0,
+    "projectile" : "SmallRocketRed"
+  },
+
+  "PPsh41": {
+    "screenshakeammount" : 6,
+    "screenshaketime" : 5,
+    "damage" : 25,
+    "kb" : 5,
+    "bulletspeed" : 1500,
+    "cooldown" : 130,
+    "recoil_kick" : 10,       
+    "recoil_return_speed" : 100,
+    "spritexoffset": 9,
+    "spriteyoffset": 0,
+    "projectile" : "SmallBulletRed"
+  },
+
+  "RocketLancher_double": {
+    "screenshakeammount" : 6,
+    "screenshaketime" : 5,
+    "damage" : 270,
+    "kb" : 30,
+    "bulletspeed" : 1500,
+    "cooldown" : 300,
+    "recoil_kick" : 40,       
+    "recoil_return_speed" : 100,
+    "spritexoffset": 0,
+    "spriteyoffset": 1,
+    "projectile" : "BigRocketRed"
+  },
+
+  "Shootgun_short": {
+    "screenshakeammount" : 6,
+    "screenshaketime" : 5,
+    "damage" : 45,
+    "kb" : 10,
+    "bulletspeed" : 1500,
+    "cooldown" : 300,
+    "recoil_kick" : 40,       
+    "recoil_return_speed" : 100,
+    "spritexoffset": 7,
+    "spriteyoffset": 0,
+    "projectile" : "ShootgunBulletRed"
   }
 }
