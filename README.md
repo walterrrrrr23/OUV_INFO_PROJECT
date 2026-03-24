@@ -40,11 +40,13 @@ Tâches :
 - [ ] Faire un menu ingame pour les capacités de cette game
 - [ ] Faire une barre d'experience
 - [x] Faire la barre de vie
+- [ ] Implémanter une apparition d'ennemis (difficulté croissante)
 
 - Partie camera :
 
 - [x] La centrer sur le personnage
 - [x] Un offset
+- [ ] IMPORTANT : bug offset -> le joueur ne doit pas pouvoir sortir et être bloquer en dehors de l'offset
 
 - Partie ennemis :
 

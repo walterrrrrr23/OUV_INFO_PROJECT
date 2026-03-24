@@ -1,0 +1,11 @@
+- bug de l'offset
+
+- bug d'apparition -> pas chez moi mais chez Karl -> à surveille
+
+- spawn : 
+
+si ennemys down -> 3 secondes avant la nouvelle vague
+
+vague toutes les 30 secondes
+
+timeur
