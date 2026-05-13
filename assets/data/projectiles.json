@@ -59,7 +59,7 @@
    "Sword": {
     "spritexoffset" : 1,
     "spriteyoffset" : 1,
-    "rotate" : false
+    "rotate" : true
   },
 
   "LittleOrbRed": {

@@ -5,7 +5,7 @@
     "damage": 1,
     "cooldown" : 300,
     "sprite": "assets/sprites/enemies/white_knight_sheet.png",
-    "projectile" : "OrbRed",
+    "projectile" : "Sword",
     "kb" : 10,
     "bulletspeed" : 500,
     "range_min" : 500,
