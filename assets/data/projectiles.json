@@ -35,7 +35,7 @@
   "BigRocketYellow": {
     "spritexoffset" : 5,
     "spriteyoffset" : 0,
-    "rotate" : false
+    "rotate" : true
   },
 
   "ShortBulletYellow": {
@@ -59,7 +59,7 @@
    "Sword": {
     "spritexoffset" : 1,
     "spriteyoffset" : 1,
-    "rotate" : false
+    "rotate" : true
   },
 
   "LittleOrbRed": {

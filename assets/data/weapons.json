@@ -10,9 +10,7 @@
     "recoil_return_speed" : 100,
     "spritexoffset": 1,
     "spriteyoffset": 0,
-    "projectile" : "SmallBulletYellow",
-    "nbProj" : 3,
-    "angle" : 5
+    "projectile" : "SmallBulletYellow"
   },
 
   "Revolver_gold": {
@@ -26,9 +24,7 @@
     "recoil_return_speed" : 100,
     "spritexoffset": 2,
     "spriteyoffset": 0,
-    "projectile" : "SmallBulletYellow",
-    "nbProj" : 1,
-    "angle" : 0
+    "projectile" : "SmallBulletYellow"
   },
 
   "Ak47": {
@@ -42,9 +38,7 @@
     "recoil_return_speed" : 100,
     "spritexoffset": 0,
     "spriteyoffset": 0,
-    "projectile" : "SmallBulletYellow",
-    "nbProj" : 1,
-    "angle" : 0
+    "projectile" : "SmallBulletYellow"
   },
 
   "Ak47_blue": {
@@ -58,9 +52,7 @@
     "recoil_return_speed" : 100,
     "spritexoffset": 3,
     "spriteyoffset": 0,
-    "projectile" : "SmallBulletYellow",
-    "nbProj" : 1,
-    "angle" : 0
+    "projectile" : "SmallBulletYellow"
   },
 
   "Snipe": {
@@ -74,9 +66,7 @@
     "recoil_return_speed" : 100,
     "spritexoffset": 4,
     "spriteyoffset": 0,
-    "projectile" : "LongBulletYellow",
-    "nbProj" : 1,
-    "angle" : 0
+    "projectile" : "LongBulletYellow"
   },
 
   "Shootgun_long": {
@@ -90,9 +80,7 @@
     "recoil_return_speed" : 100,
     "spritexoffset": 5,
     "spriteyoffset": 0,
-    "projectile" : "ShootgunBulletYellow",
-    "nbProj" : 1,
-    "angle" : 0
+    "projectile" : "ShootgunBulletYellow"
   },
 
   "Shootgun_black": {
@@ -106,9 +94,7 @@
     "recoil_return_speed" : 100,
     "spritexoffset": 6,
     "spriteyoffset": 0,
-    "projectile" : "ShootgunBulletYellow",
-    "nbProj" : 1,
-    "angle" : 0
+    "projectile" : "ShootgunBulletYellow"
   },
 
   "RocketLancher_simple": {
@@ -122,9 +108,7 @@
     "recoil_return_speed" : 100,
     "spritexoffset": 8,
     "spriteyoffset": 0,
-    "projectile" : "SmallRocketYellow",
-    "nbProj" : 1,
-    "angle" : 0
+    "projectile" : "SmallRocketYellow"
   },
 
   "PPsh41": {
@@ -138,9 +122,7 @@
     "recoil_return_speed" : 100,
     "spritexoffset": 9,
     "spriteyoffset": 0,
-    "projectile" : "SmallBulletYellow",
-    "nbProj" : 1,
-    "angle" : 0
+    "projectile" : "SmallBulletYellow"
   },
 
   "RocketLancher_double": {
@@ -154,9 +136,7 @@
     "recoil_return_speed" : 100,
     "spritexoffset": 0,
     "spriteyoffset": 1,
-    "projectile" : "BigRocketYellow",
-    "nbProj" : 1,
-    "angle" : 0
+    "projectile" : "BigRocketYellow"
   },
 
   "Shootgun_short": {
@@ -170,8 +150,6 @@
     "recoil_return_speed" : 100,
     "spritexoffset": 7,
     "spriteyoffset": 0,
-    "projectile" : "ShootgunBulletYellow",
-    "nbProj" : 1,
-    "angle" : 0
+    "projectile" : "ShootgunBulletYellow"
   }
 }
