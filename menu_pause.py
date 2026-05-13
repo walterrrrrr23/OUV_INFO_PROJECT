@@ -4,10 +4,10 @@ from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM,
 
 def HealthBar(player, display):
 
-    bar_lenght_pixel = SCREEN_WIDTH//4 + 100
+    bar_lenght_pixel = SCREEN_WIDTH//4 + 50
     health = player.health
     maxhealth = player.max_health
-    offsetx = 240
+    offsetx = 280
     offsety = 200
     sizex = health/maxhealth*bar_lenght_pixel
     sizey = 35
@@ -17,13 +17,23 @@ def HealthBar(player, display):
     #bar rouge
     pygame.draw.rect(display, pygame.Color(255,0,0), (offsetx, offsety, sizex, sizey))
 
-    
+    sheet = pygame.image.load("assets/sprites/healthbar3.png").convert_alpha()
+
+    coin = pygame.transform.scale(sheet, (36*19, 36*4))
+
+    rect = pygame.Rect((0,0), (10,10))
+    rect.center = (offsetx - 70, offsety - 62 )
+    display.blit(coin, rect)
+
+
     police_du_texte = pygame.font.Font("assets/fonts/Pix32.ttf", 20)
     info1_surface = police_du_texte.render(f"{health} / {maxhealth}", True, (200, 200, 200))
 
     info_rect = info1_surface.get_rect(center=(bar_lenght_pixel//2 + offsetx, sizey//2 + offsety))
 
     display.blit(info1_surface, info_rect)
+
+
 
     sheet = pygame.image.load("assets/sprites/coin_sheet.png").convert_alpha()
     coin = sheet.subsurface(pygame.Rect(0*TAILLE_SPRITE, 0*TAILLE_SPRITE, 64, 64))

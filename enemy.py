@@ -58,6 +58,7 @@ class Enemy(pygame.sprite.Sprite):
         self.knockedtime = 0
         self.knockdirection = pygame.Vector2(0,0)
         self.knockammount = 100 #en ticks
+        self.Dashing = False
         #VARIABLES
 
         self.maxhealth = ennemy_data["health"]

@@ -2,12 +2,16 @@
 import pygame
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, PAUSE
 from game import Game
+
 from menu_pause import pause, crea_boutons_pause, ca_clique, gameover, crea_boutons_gameover, home, crea_boutons_home, parametrage, crea_boutons_parametrage, credits, crea_boutons_credits
+from menu_pause import HealthBar
 
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pygame.display.set_caption("test")
+    display = pygame.Surface((SCREEN_WIDTH//8, SCREEN_HEIGHT//8))
+    
+    pygame.display.set_caption("GAME")
 
     # dictionnaire contetant les touches par defaut pour les mouvements haut bas gauche droite
 
@@ -177,6 +181,9 @@ def main():
         if not hhome:
             game.draw(screen)
 
+       
+
+         #GUI
         if hhome:
             screen.fill((20,20,20))         # fond noir
             home(screen, les_boutons_home)  #
@@ -188,8 +195,11 @@ def main():
             credits(screen, les_boutons_cred)
         if param:
             parametrage(screen, les_boutons_param, changementdecle)
-
-
+       
+        if not hhome :
+            HealthBar(game.player, screen)
+      
+        
         pygame.display.flip() #screen update
 
     pygame.quit()

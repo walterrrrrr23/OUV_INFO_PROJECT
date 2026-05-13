@@ -25,7 +25,7 @@ class Player(pygame.sprite.Sprite):
         )
         self.current_anim = "idle"
         self.frame_index = 0
-        self.animation_speed = 10 
+        self.animation_speed = 6 
         self.image = self.animations[self.current_anim][self.frame_index]
         self.direction = pygame.Vector2(0,0)
         self.rect = pygame.Rect((0,0), (35,60))
@@ -41,6 +41,14 @@ class Player(pygame.sprite.Sprite):
         self.knockedtime = 0
         self.knockdirection = pygame.Vector2(0,0)
 
+        #DASH HANDLER
+        self.Dashing = False
+        self.DashCooldown = 800
+        self.DashTime = 200
+        self.Dashtick =  pygame.time.get_ticks()
+        self.Dashnow =  pygame.time.get_ticks()
+        self.DashDir = pygame.Vector2(0,0)
+        self.DashSpeed = 1500
 
         #VAR
 
@@ -52,6 +60,8 @@ class Player(pygame.sprite.Sprite):
         self.coin = 0
 
     def take_damage(self, damage, direction, kb):
+        if self.Dashing :
+            return
         self.health -= damage
         self.knocked = True
         self.knockdirection = direction * kb
@@ -84,30 +94,56 @@ class Player(pygame.sprite.Sprite):
         elif keys[self.dicocle["up"]] :
             self.direction.y -= PLAYER_ACCELERATION
             self.direction.y = max(self.direction.y, -dirmax)
-  
+
+
+       
    
         mouse_x, mouse_y = pygame.mouse.get_pos()
         mouse_x += self.camera.offset.x
+        mouse_y += self.camera.offset.y
+
+        
+  
 
         player_screen_x = self.rect.centerx  
+        player_screen_y = self.rect.centery
 
+
+        if keys[pygame.K_LSHIFT] :
+            if  -self.Dashtick + pygame.time.get_ticks() > self.DashCooldown :
+                self.Dashing = True
+                self.DashDir = pygame.Vector2(-player_screen_x+mouse_x,-player_screen_y+mouse_y).normalize() * self.DashSpeed
+               
+                self.Dashtick = pygame.time.get_ticks()
+                self.Dashnow = pygame.time.get_ticks()
+
+
+        if -self.Dashnow + pygame.time.get_ticks()  > self.DashTime :
+              self.Dashing = False
         if mouse_x < player_screen_x:
             self.facing_left = True
         else:
             self.facing_left = False
         if self.direction.length() > .2:
-    
+            self.animation_speed = 10
             self.current_anim = "walk"
           
             
         else:
+            self.animation_speed = 4
             self.current_anim = "idle"
 
         
         self.vel = self.direction * self.speed*dt
         if not self.knocked :
-            self.pos += self.vel
-            self.rect.center = self.pos
+            if not self.Dashing :
+                self.pos += self.vel
+                self.rect.center = self.pos
+            else :
+                self.vel = (dt*self.DashDir)/(1 + (-self.Dashnow + pygame.time.get_ticks())*.016)
+             
+                self.pos += self.vel
+                self.rect.center = self.pos
         else :
             self.vel = self.knockdirection
             self.pos += self.vel
