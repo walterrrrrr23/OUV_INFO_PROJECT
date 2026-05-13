@@ -3,7 +3,7 @@
     "health": 100,
     "speed": 150,
     "damage": 1,
-    "cooldown" : 300,
+    "cooldown" : 1000,
     "sprite": "assets/sprites/enemies/player_sheet.png",
     "projectile" : "OrbRed",
     "kb" : 10,

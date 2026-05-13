@@ -15,17 +15,21 @@ class Projectile(pygame.sprite.Sprite):
         projectile_image = pygame.transform.scale(projectile_image, (64*ZOOM, 64*ZOOM))
 
         self.camera = camera
+        self.image_originale = projectile_image
         self.image = projectile_image
         self.pos = position
         self.direction = direction
         self.speed = speed
         self.damage = damage
         self.kb = knockback
+        self.rotate = projectile_data['rotate']
         self.rect = pygame.Rect(position, (15,15))
 
         angle = self.direction.angle_to(pygame.Vector2(1,0))
 
         self.image = pygame.transform.rotate(self.image, angle)
+
+        self.angle = 0
 
     def is_out_of_screen(self, player_pos):
         distance = pygame.math.Vector2.distance_to(self.pos, player_pos)
@@ -37,6 +41,12 @@ class Projectile(pygame.sprite.Sprite):
         self.pos = self.pos + self.direction*self.speed*dt
         self.rect.center = self.pos
 
+        if self.rotate:
+            self.angle += 15
+            if self.angle % 360 == 0:
+                self.angle = 0
+            self.image = pygame.transform.rotate(self.image_originale, self.angle)
+
         hit_list = pygame.sprite.spritecollide(self, targetlist, False)
 
         for enemy in hit_list:
@@ -45,11 +55,14 @@ class Projectile(pygame.sprite.Sprite):
                 self.kill()  
                 break
 
+
     def draw(self, window):
 
-        screen_rect = self.camera.apply(self.rect)      
+        screen_rect = self.camera.apply(self.rect)   
+            
         image_rect = self.image.get_rect()    
-        image_rect.center = screen_rect.center 
+        image_rect.center = screen_rect.center
+
         window.blit(self.image, image_rect)
         #pygame.draw.rect(window, (255, 0, 0), screen_rect, 2)
         

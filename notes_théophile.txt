@@ -9,3 +9,6 @@ si ennemys down -> 3 secondes avant la nouvelle vague
 vague toutes les 30 secondes
 
 timeur
+
+
+weapons -> rotate (bool), 
