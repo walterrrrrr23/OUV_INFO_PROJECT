@@ -9,7 +9,7 @@ from weapon import Weapon
 from projectile import Projectile
 from enemy import Enemy
 from coin import Coin
-from menu_pause import HealthBar
+from menu_pause import HealthBar, EXPBar
 from damage_indicator import Damage_Indicator
 
 class Game:
@@ -28,7 +28,8 @@ class Game:
         self.damage_indicator = pygame.sprite.Group()
         self.sprite_bullets_player = pygame.sprite.Group()
         self.sprite_player.add(self.player)
-        self.weapon = Weapon(self.player, self.camera, "RocketLancher_double", self.sprite_bullets_player)
+        arme_actuelle = "RocketLancher_double"
+        self.weapon = Weapon(self.player, self.camera, arme_actuelle, self.sprite_bullets_player)
 
         #définition des tiles -> map
         self.tile1, self.tile2 = load_tiles("assets/sprites/tiles.png") 
@@ -114,3 +115,4 @@ class Game:
         #GUI
 
         HealthBar(self.player, window)
+        EXPBar(self.player, window)
