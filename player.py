@@ -60,6 +60,7 @@ class Player(pygame.sprite.Sprite):
         self.exp = 0
         self.knockammount = 100 #en ticks
         self.coin = 0
+        self.upgrade_en_cours = False
 
     def take_damage(self, damage, direction, kb):
         if self.Dashing :

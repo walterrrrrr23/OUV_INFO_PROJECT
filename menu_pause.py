@@ -70,7 +70,7 @@ def EXPBar(player, display):
     pygame.draw.rect(display, pygame.Color(0,250,0), (offsetx, offsety, sizex, sizey))
 
     # contour
-    sheet = pygame.image.load("assets/sprites/healthbar3.png").convert_alpha()
+    sheet = pygame.image.load("assets/sprites/expbar.png").convert_alpha()
     contour = pygame.transform.scale(sheet, (36*19, 36*4))
 
     rect = pygame.Rect((0,0), (10,10))
