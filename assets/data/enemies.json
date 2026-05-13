@@ -8,6 +8,7 @@
     "projectile" : "OrbRed",
     "kb" : 10,
     "bulletspeed" : 500,
-    "range_min" : 500 
+    "range_min" : 500,
+    "exp" : 15
   }
 }
