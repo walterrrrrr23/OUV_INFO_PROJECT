@@ -61,6 +61,7 @@ class Enemy(pygame.sprite.Sprite):
         self.Dashing = False
         #VARIABLES
 
+        self.name = name
         self.maxhealth = ennemy_data["health"]
         self.health =  self.maxhealth
         self.speed = ennemy_data["speed"]
@@ -81,6 +82,10 @@ class Enemy(pygame.sprite.Sprite):
         self.knockdirection = direction * kb
         self.knockedtime =  pygame.time.get_ticks()
         if self.health <= 0 :
+            enemy_data = load_json("assets/data/enemies.json")[self.name]
+            nb_exp = enemy_data.get("exp", 25)
+            self.target.add_exp(nb_exp)
+
             for i in self.loot_data["entries"]:
                 chance = random.randint(0, 100)
                 if chance < self.loot_data["entries"][i]["chance"] :
@@ -89,6 +94,7 @@ class Enemy(pygame.sprite.Sprite):
                         coin = Coin(self.pos, self.camera, self.target, i)
                         self.coingroup.add(coin)
             self.kill()
+
     def shoot(self):
         self.last = pygame.time.get_ticks()
         dir = (self.target.pos - self.pos).normalize()

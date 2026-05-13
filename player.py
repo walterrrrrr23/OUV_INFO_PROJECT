@@ -56,6 +56,8 @@ class Player(pygame.sprite.Sprite):
         self.acceleration = PLAYER_ACCELERATION
         self.max_health = 20
         self.health = 20
+        self.level = 1
+        self.exp = 0
         self.knockammount = 100 #en ticks
         self.coin = 0
 
@@ -67,6 +69,16 @@ class Player(pygame.sprite.Sprite):
         self.knockdirection = direction * kb
         self.knockedtime =  pygame.time.get_ticks()
         #Logique game over dans main
+
+    def levelsup(self, level):
+        return 100*1.05**level
+    
+    def add_exp(self, nb_exp):
+        self.exp += nb_exp
+        while self.exp >= self.levelsup(self.level):                        # tant qu il y a assez pour level up
+            self.exp -= self.levelsup(self.level)                           # on ce que le level a conso pour level up
+            self.level += 1                                                 # on monte le level
+            self.health = self.max_health                                   # soigne quand on level up
 
     def update(self, dt):
         keys = pygame.key.get_pressed()
