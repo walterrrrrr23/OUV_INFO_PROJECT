@@ -3,8 +3,13 @@
     "health": 100,
     "speed": 150,
     "damage": 1,
+<<<<<<< HEAD
+    "cooldown" : 300,
+    "sprite": "assets/sprites/enemies/white_knight_sheet.png",
+=======
     "cooldown" : 1000,
     "sprite": "assets/sprites/enemies/player_sheet.png",
+>>>>>>> f7859581a52e29af3f0e912cce05b6354735d9a3
     "projectile" : "OrbRed",
     "kb" : 10,
     "bulletspeed" : 500,
