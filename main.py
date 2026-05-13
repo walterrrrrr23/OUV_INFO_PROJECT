@@ -4,18 +4,15 @@ from settings import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, PAUSE
 from game import Game
 
 from menu_pause import pause, crea_boutons_pause, ca_clique, gameover, crea_boutons_gameover, home, crea_boutons_home, parametrage, crea_boutons_parametrage, credits, crea_boutons_credits
-import pygame_shaders
 from menu_pause import HealthBar
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.OPENGL | pygame.DOUBLEBUF)
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     display = pygame.Surface((SCREEN_WIDTH//8, SCREEN_HEIGHT//8))
     
     pygame.display.set_caption("GAME")
 
-    screen_shader = pygame_shaders.DefaultScreenShader(display) 
-    bloom_shader = pygame_shaders.Shader(pygame_shaders.DEFAULT_VERTEX_SHADER, "bloom.glsl", screen)  
     # dictionnaire contetant les touches par defaut pour les mouvements haut bas gauche droite
 
     dicocle = {
@@ -199,12 +196,10 @@ def main():
         if param:
             parametrage(screen, les_boutons_param, changementdecle)
        
-
-        screen_shader.render()         
-                
-        bloom_shader.render_direct(pygame.Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)) 
+        if not hhome :
+            HealthBar(game.player, screen)
+      
         
-        HealthBar(game.player, screen)
         pygame.display.flip() #screen update
 
     pygame.quit()

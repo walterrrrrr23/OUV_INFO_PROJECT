@@ -40,9 +40,10 @@ class Projectile(pygame.sprite.Sprite):
         hit_list = pygame.sprite.spritecollide(self, targetlist, False)
 
         for enemy in hit_list:
-            enemy.take_damage(self.damage, self.direction, self.kb)
-            self.kill()  
-            break
+            if not enemy.Dashing :
+                enemy.take_damage(self.damage, self.direction, self.kb)
+                self.kill()  
+                break
 
     def draw(self, window):
 

@@ -17,7 +17,7 @@
   },
 
   "OrbYellow": {
-    "spritexoffset" : 3,
+    "spritexoffset" :3,
     "spriteyoffset" : 0
     
   },
@@ -42,23 +42,25 @@
     "spriteyoffset" : 0
   },
 
-  "ShootgunBulletRed": {
+    "Fork": {
     "spritexoffset" : 0,
-    "spriteyoffset" : 0
+    "spriteyoffset" : 1
+    
   },
 
-
-  "SmallBulletRed": {
+   "Sword": {
     "spritexoffset" : 1,
     "spriteyoffset" : 1
+    
   },
 
+
+ 
   "LittleOrbRed": {
     "spritexoffset" : 2,
     "spriteyoffset" : 1
     
   },
-
   "OrbRed": {
     "spritexoffset" : 0,
     "spriteyoffset" : 1
