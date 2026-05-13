@@ -2,88 +2,99 @@
 
   "ShootgunBulletYellow": {
     "spritexoffset" : 0,
-    "spriteyoffset" : 0
+    "spriteyoffset" : 0,
+    "rotate" : false
   },
 
   "SmallBulletYellow": {
     "spritexoffset" : 1,
-    "spriteyoffset" : 0
+    "spriteyoffset" : 0,
+    "rotate" : false
   },
 
   "LittleOrbYellow": {
     "spritexoffset" : 2,
-    "spriteyoffset" : 0
+    "spriteyoffset" : 0,
+    "rotate" : false
     
   },
 
   "OrbYellow": {
     "spritexoffset" :3,
-    "spriteyoffset" : 0
+    "spriteyoffset" : 0,
+    "rotate" : false
     
   },
   
   "SmallRocketYellow": {
     "spritexoffset" : 4,
-    "spriteyoffset" : 0
+    "spriteyoffset" : 0,
+    "rotate" : false
   },
 
   "BigRocketYellow": {
     "spritexoffset" : 5,
-    "spriteyoffset" : 0
+    "spriteyoffset" : 0,
+    "rotate" : false
   },
 
   "ShortBulletYellow": {
     "spritexoffset" : 6,
-    "spriteyoffset" : 0
+    "spriteyoffset" : 0,
+    "rotate" : false
   },
 
   "LongBulletYellow": {
     "spritexoffset" : 7,
-    "spriteyoffset" : 0
+    "spriteyoffset" : 0,
+    "rotate" : false
   },
 
     "Fork": {
     "spritexoffset" : 0,
-    "spriteyoffset" : 1
-    
+    "spriteyoffset" : 1,
+    "rotate" : false
   },
 
    "Sword": {
     "spritexoffset" : 1,
-    "spriteyoffset" : 1
-    
+    "spriteyoffset" : 1,
+    "rotate" : false
   },
 
-
- 
   "LittleOrbRed": {
     "spritexoffset" : 2,
-    "spriteyoffset" : 1
-    
+    "spriteyoffset" : 1,
+    "rotate" : false
   },
+
   "OrbRed": {
     "spritexoffset" : 0,
-    "spriteyoffset" : 1
-    
+    "spriteyoffset" : 1,
+    "rotate" : false
   },
   
   "SmallRocketRed": {
     "spritexoffset" : 4,
-    "spriteyoffset" : 1
+    "spriteyoffset" : 1,
+    "rotate" : false
   },
 
   "BigRocketRed": {
     "spritexoffset" : 5,
-    "spriteyoffset" : 1
+    "spriteyoffset" : 1,
+    "rotate" : false
   },
 
   "ShortBulletRed": {
     "spritexoffset" : 6,
-    "spriteyoffset" : 1
+    "spriteyoffset" : 1,
+    "rotate" : false
   },
 
   "LongBulletRed": {
     "spritexoffset" : 7,
-    "spriteyoffset" : 1
+    "spriteyoffset" : 1,
+    "rotate" : false
   }
 }

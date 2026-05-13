@@ -89,6 +89,7 @@ class Enemy(pygame.sprite.Sprite):
                         coin = Coin(self.pos, self.camera, self.target, i)
                         self.coingroup.add(coin)
             self.kill()
+    
     def shoot(self):
         self.last = pygame.time.get_ticks()
         dir = (self.target.pos - self.pos).normalize()
