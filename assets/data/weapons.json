@@ -11,7 +11,9 @@
     "spritexoffset": 1,
     "spriteyoffset": 0,
     "projectile" : "SmallBulletYellow",
-    "price" : 200
+    "price" : 200,
+    "nbProj" : 3,
+    "angle" : 5
   },
 
   "Revolver_gold": {
@@ -26,7 +28,9 @@
     "spritexoffset": 2,
     "spriteyoffset": 0,
     "projectile" : "SmallBulletYellow",
-    "price" : 200
+    "price" : 200,
+    "nbProj" : 1,
+    "angle" : 0
   },
 
   "Ak47": {
@@ -41,7 +45,9 @@
     "spritexoffset": 0,
     "spriteyoffset": 0,
     "projectile" : "SmallBulletYellow",
-    "price" : 200
+    "price" : 200,
+    "nbProj" : 1,
+    "angle" : 0
   },
 
   "Ak47_blue": {
@@ -56,7 +62,9 @@
     "spritexoffset": 3,
     "spriteyoffset": 0,
     "projectile" : "SmallBulletYellow",
-    "price" : 200
+    "price" : 200,
+    "nbProj" : 1,
+    "angle" : 0
   },
 
   "Snipe": {
@@ -71,7 +79,9 @@
     "spritexoffset": 4,
     "spriteyoffset": 0,
     "projectile" : "LongBulletYellow",
-    "price" : 200
+    "price" : 200,
+    "nbProj" : 1,
+    "angle" : 0
   },
 
   "Shootgun_long": {
@@ -86,7 +96,9 @@
     "spritexoffset": 5,
     "spriteyoffset": 0,
     "projectile" : "ShootgunBulletYellow",
-    "price" : 200
+    "price" : 200,
+    "nbProj" : 1,
+    "angle" : 0
   },
 
   "Shootgun_black": {
@@ -101,7 +113,9 @@
     "spritexoffset": 6,
     "spriteyoffset": 0,
     "projectile" : "ShootgunBulletYellow",
-    "price" : 200
+    "price" : 200,
+    "nbProj" : 1,
+    "angle" : 0
   },
 
   "RocketLancher_simple": {
@@ -116,7 +130,9 @@
     "spritexoffset": 8,
     "spriteyoffset": 0,
     "projectile" : "SmallRocketYellow",
-    "price" : 200
+    "price" : 200,
+    "nbProj" : 1,
+    "angle" : 0
   },
 
   "PPsh41": {
@@ -131,7 +147,9 @@
     "spritexoffset": 9,
     "spriteyoffset": 0,
     "projectile" : "SmallBulletYellow",
-    "price" : 200
+    "price" : 200,
+    "nbProj" : 1,
+    "angle" : 0
   },
 
   "RocketLancher_double": {
@@ -146,7 +164,9 @@
     "spritexoffset": 0,
     "spriteyoffset": 1,
     "projectile" : "BigRocketYellow",
-    "price" : 200
+    "price" : 200,
+    "nbProj" : 1,
+    "angle" : 0
   },
 
   "Shootgun_short": {
@@ -161,6 +181,8 @@
     "spritexoffset": 7,
     "spriteyoffset": 0,
     "projectile" : "ShootgunBulletYellow",
-    "price" : 200
+    "price" : 200,
+    "nbProj" : 1,
+    "angle" : 0
   }
 }
