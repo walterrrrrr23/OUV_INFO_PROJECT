@@ -74,7 +74,7 @@ def EXPBar(player, display):
     contour = pygame.transform.scale(sheet, (36*19, 36*4))
 
     rect = pygame.Rect((0,0), (10,10))
-    rect.center = (offsetx - 70, offsety - 62 )
+    rect.center = (offsetx - 120, offsety - 62 )
     display.blit(contour, rect)
 
 
