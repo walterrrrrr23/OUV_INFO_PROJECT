@@ -41,6 +41,7 @@ class Weapon(pygame.sprite.Sprite):
         self.recoil_return_speed = weapon_data["recoil_return_speed"]
         self.nbProj = weapon_data["nbProj"]
         self.shoot_angle = weapon_data['angle']
+        self.longueur_arme = weapon_data['longueur_arme']
         
 
     def display_weapon(self, dt):
@@ -80,6 +81,41 @@ class Weapon(pygame.sprite.Sprite):
     
     def shoot(self):
         if self.nbProj > 1:
+            self.last = pygame.time.get_ticks()
+
+            base_pos = pygame.math.Vector2.copy(self.player.pos) 
+            mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
+            mouse_pos += self.camera.offset
+            bas_cone_shoot = (mouse_pos - base_pos).normalize()
+            bas_cone_shoot = pygame.math.Vector2.rotate(bas_cone_shoot, -(self.shoot_angle/2))
+ 
+            angle_subdivise = self.shoot_angle/(self.nbProj-1)
+
+            for i in range(self.nbProj):
+                direction = pygame.math.Vector2.rotate(bas_cone_shoot, i*angle_subdivise)
+                bullet_pos = base_pos + (direction * self.longueur_arme)
+                self.player_shoot = Projectile(self.camera, self.projectile, bullet_pos, direction, self.bulletspeed, self.damage, self.kb)
+                self.sprite_projectiles.add(self.player_shoot)
+
+            self.recoil_angle = self.recoil_kick
+
+        else:
+            self.last = pygame.time.get_ticks()
+            
+            bullet_pos = pygame.math.Vector2.copy(self.player.pos)
+            mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
+            mouse_pos += self.camera.offset
+            direction = (mouse_pos - bullet_pos).normalize()
+            
+            bullet_pos += direction * self.longueur_arme
+
+            self.player_shoot = Projectile(self.camera, self.projectile, bullet_pos, direction, self.bulletspeed, self.damage, self.kb)
+            self.sprite_projectiles.add(self.player_shoot)
+
+            self.recoil_angle = self.recoil_kick
+
+    def shoot(self):
+        if self.nbProj > 1:
             #direction de la balle relativement à la postion du joueur et de la caméra (cf. display_weapon)
             self.last = pygame.time.get_ticks()
             
@@ -95,7 +131,7 @@ class Weapon(pygame.sprite.Sprite):
             for i in range(self.nbProj):
 
                 direction = pygame.math.Vector2.rotate(bas_cone_shoot, i*angle_subdivise)
-                bullet_pos += direction*1
+                bullet_pos += direction*self.longueur_arme
 
                 self.player_shoot = Projectile(self.camera, self.projectile, bullet_pos, direction, self.bulletspeed, self.damage, self.kb)
                 self.sprite_projectiles.add(self.player_shoot)
@@ -112,8 +148,9 @@ class Weapon(pygame.sprite.Sprite):
             mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
             mouse_pos += self.camera.offset
             direction = (mouse_pos - bullet_pos).normalize()
-            bullet_pos += direction*1 # * taille sprite ???
-            
+            print(self.longueur_arme)
+            bullet_pos += direction*self.longueur_arme
+
             #Création du projectile
             self.player_shoot = Projectile(self.camera, self.projectile, bullet_pos, direction, self.bulletspeed, self.damage, self.kb)
             self.sprite_projectiles.add(self.player_shoot)

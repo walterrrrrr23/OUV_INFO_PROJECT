@@ -13,7 +13,8 @@
     "projectile" : "SmallBulletYellow",
     "price" : 200,
     "nbProj" : 3,
-    "angle" : 5
+    "angle" : 5,
+    "longueur_arme" : 8
   },
 
   "Revolver_gold": {
@@ -30,7 +31,8 @@
     "projectile" : "SmallBulletYellow",
     "price" : 200,
     "nbProj" : 1,
-    "angle" : 0
+    "angle" : 0,
+    "longueur_arme" : 8
   },
 
   "Ak47": {
@@ -47,7 +49,8 @@
     "projectile" : "SmallBulletYellow",
     "price" : 200,
     "nbProj" : 1,
-    "angle" : 0
+    "angle" : 0,
+    "longueur_arme" : 8
   },
 
   "Ak47_blue": {
@@ -64,7 +67,8 @@
     "projectile" : "SmallBulletYellow",
     "price" : 200,
     "nbProj" : 1,
-    "angle" : 0
+    "angle" : 0,
+    "longueur_arme" : 8
   },
 
   "Snipe": {
@@ -81,7 +85,8 @@
     "projectile" : "LongBulletYellow",
     "price" : 200,
     "nbProj" : 1,
-    "angle" : 0
+    "angle" : 0,
+    "longueur_arme" : 8
   },
 
   "Shootgun_long": {
@@ -98,7 +103,8 @@
     "projectile" : "ShootgunBulletYellow",
     "price" : 200,
     "nbProj" : 1,
-    "angle" : 0
+    "angle" : 0,
+    "longueur_arme" : 8
   },
 
   "Shootgun_black": {
@@ -115,7 +121,8 @@
     "projectile" : "ShootgunBulletYellow",
     "price" : 200,
     "nbProj" : 1,
-    "angle" : 0
+    "angle" : 0,
+    "longueur_arme" : 8
   },
 
   "RocketLancher_simple": {
@@ -132,7 +139,8 @@
     "projectile" : "SmallRocketYellow",
     "price" : 200,
     "nbProj" : 1,
-    "angle" : 0
+    "angle" : 0,
+    "longueur_arme" : 8
   },
 
   "PPsh41": {
@@ -149,7 +157,8 @@
     "projectile" : "SmallBulletYellow",
     "price" : 200,
     "nbProj" : 1,
-    "angle" : 0
+    "angle" : 0,
+    "longueur_arme" : 8
   },
 
   "RocketLancher_double": {
@@ -166,7 +175,8 @@
     "projectile" : "BigRocketYellow",
     "price" : 200,
     "nbProj" : 1,
-    "angle" : 0
+    "angle" : 0,
+    "longueur_arme" : 32
   },
 
   "Shootgun_short": {
@@ -183,6 +193,7 @@
     "projectile" : "ShootgunBulletYellow",
     "price" : 200,
     "nbProj" : 1,
-    "angle" : 0
+    "angle" : 0,
+    "longueur_arme" : 64
   }
 }
