@@ -83,7 +83,7 @@ class Game:
         self.sprite_bullets_player.update(dt, self.sprite_mob)
         self.sprite_coins.update(dt)
         self.update_camera()
-        #self.advancement()
+        self.advancement()
         self.damage_indicator.update(dt)
 
     def draw(self, window):
