@@ -2,16 +2,13 @@
 import pygame
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, PAUSE
 from game import Game
-
-from menu_pause import pause, crea_boutons_pause, ca_clique, gameover, crea_boutons_gameover, home, crea_boutons_home, parametrage, crea_boutons_parametrage, credits, crea_boutons_credits
-from menu_pause import HealthBar
+from menu_pause import pause, crea_boutons_pause, ca_clique, gameover, crea_boutons_gameover, home, crea_boutons_home, parametrage, crea_boutons_parametrage, credits, crea_boutons_credits, amelio, crea_boutons_amelio
+from player import Player
 
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    display = pygame.Surface((SCREEN_WIDTH//8, SCREEN_HEIGHT//8))
-    
-    pygame.display.set_caption("GAME")
+    pygame.display.set_caption("test")
 
     # dictionnaire contetant les touches par defaut pour les mouvements haut bas gauche droite
 
@@ -42,6 +39,7 @@ def main():
     les_boutons_gameover = crea_boutons_gameover()
     les_boutons_home = crea_boutons_home()
     les_boutons_cred = crea_boutons_credits()
+    les_boutons_amelio = crea_boutons_amelio()
     les_boutons_param = crea_boutons_parametrage(dicocle)
     
     while running:
@@ -142,6 +140,31 @@ def main():
                 elif action == "quit":          # on arrete le jeu, la fenetre se coupe
                     running = False
             
+            # si il choisi son amelio
+
+            elif game.player.amelio_en_cours:
+                
+                action = ca_clique(event, les_boutons_amelio)
+
+                for b in les_boutons_amelio:
+                    if action == b["action"]:
+                        if game.player.coin >= b["prix"]:
+                            game.player.coin -= b["prix"]
+
+                            if action == "augmente_vie":
+
+                                game.player.max_health += 10                    # on augmente le maxi de PV
+                                game.player.health = game.player.max_health     # vu qu'on soigne a chaque monter en niveau, on set les PV au max
+                                game.player.amelio_en_cours = False             # il a fini de choisir son amelio
+                            
+                            elif action == "augmente_vitesse":
+
+                                game.player.speed += 50
+                                game.player.amelio_en_cours = False
+            
+                if action == "resume":          # la partie n'est plus en pause et le menu pause disparait
+                    game.player.amelio_en_cours = False              # variable pour activer l'affichage du menu pause
+
             # si l'utilisateur a perdu
             
             elif estmort:
@@ -162,8 +185,6 @@ def main():
                 elif action == "quit":          # on arrete le jeu, la fenetre se coupe
                     running = False
 
-            
-                 
         # gestion du bordel
 
         # gestion de la mort (si les hp atteingne 0)
@@ -173,7 +194,7 @@ def main():
 
         # si on est pas en pause, ni mort ni dans le menu home ni ans le menu parametre alors on update
 
-        if not ppause and not estmort and not hhome and not param and not cred:
+        if not ppause and not estmort and not hhome and not param and not cred and not game.player.amelio_en_cours:
             game.update(dt)
         
         # si on est pas dans le menu principal alors on dessine
@@ -181,9 +202,6 @@ def main():
         if not hhome:
             game.draw(screen)
 
-       
-
-         #GUI
         if hhome:
             screen.fill((20,20,20))         # fond noir
             home(screen, les_boutons_home)  #
@@ -191,15 +209,14 @@ def main():
             gameover(screen, les_boutons_gameover)                      # affichage du menu gameover
         elif ppause:
             pause(screen, les_boutons_pause)
+        elif game.player.amelio_en_cours:
+            amelio(screen, les_boutons_amelio, game.player)
         if cred:
             credits(screen, les_boutons_cred)
         if param:
             parametrage(screen, les_boutons_param, changementdecle)
-       
-        if not hhome :
-            HealthBar(game.player, screen)
-      
-        
+
+
         pygame.display.flip() #screen update
 
     pygame.quit()

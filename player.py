@@ -60,7 +60,7 @@ class Player(pygame.sprite.Sprite):
         self.exp = 0
         self.knockammount = 100 #en ticks
         self.coin = 0
-        self.upgrade_en_cours = False
+        self.amelio_en_cours = False
 
     def take_damage(self, damage, direction, kb):
         if self.Dashing :
@@ -80,6 +80,8 @@ class Player(pygame.sprite.Sprite):
             self.exp -= self.levelsup(self.level)                           # on ce que le level a conso pour level up
             self.level += 1                                                 # on monte le level
             self.health = self.max_health                                   # soigne quand on level up
+            if self.level % 2 == 0:
+                self.amelio_en_cours = True
 
     def update(self, dt):
         keys = pygame.key.get_pressed()
