@@ -31,9 +31,9 @@ class Projectile(pygame.sprite.Sprite):
 
         self.angle = 0
 
-    def is_out_of_screen(self, player_pos):
+    def is_out_of_range(self, player_pos, portee):
         distance = pygame.math.Vector2.distance_to(self.pos, player_pos)
-        if distance > SCREEN_WIDTH:
+        if distance > portee:
             return True
         return False
 

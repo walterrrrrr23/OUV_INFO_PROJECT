@@ -28,7 +28,7 @@ class Game:
         self.damage_indicator = pygame.sprite.Group()
         self.sprite_bullets_player = pygame.sprite.Group()
         self.sprite_player.add(self.player)
-        arme_actuelle = "RocketLancher_double"
+        arme_actuelle = "Shootgun_black"
         self.weapon = Weapon(self.player, self.camera, arme_actuelle, self.sprite_bullets_player)
 
         #définition des tiles -> map

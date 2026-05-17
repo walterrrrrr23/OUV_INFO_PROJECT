@@ -14,7 +14,8 @@
     "price" : 200,
     "nbProj" : 1,
     "angle" : 5,
-    "longueur_arme" : 1
+    "longueur_arme" : 1,
+    "portee" : 1920
   },
 
   "Revolver_gold": {
@@ -32,7 +33,8 @@
     "price" : 200,
     "nbProj" : 1,
     "angle" : 0,
-    "longueur_arme" : 1
+    "longueur_arme" : 1,
+    "portee" : 1920
   },
 
   "Ak47": {
@@ -50,7 +52,8 @@
     "price" : 200,
     "nbProj" : 1,
     "angle" : 0,
-    "longueur_arme" : 4
+    "longueur_arme" : 4,
+    "portee" : 1920
   },
 
   "Ak47_blue": {
@@ -68,7 +71,8 @@
     "price" : 200,
     "nbProj" : 1,
     "angle" : 0,
-    "longueur_arme" : 4
+    "longueur_arme" : 4,
+    "portee" : 1920
   },
 
   "Snipe": {
@@ -86,7 +90,8 @@
     "price" : 200,
     "nbProj" : 1,
     "angle" : 0,
-    "longueur_arme" : 12
+    "longueur_arme" : 12,
+    "portee" : 1920
   },
 
   "Shootgun_long": {
@@ -104,7 +109,8 @@
     "price" : 200,
     "nbProj" : 1,
     "angle" : 0,
-    "longueur_arme" : 48
+    "longueur_arme" : 48,
+    "portee" : 1920
   },
 
   "Shootgun_black": {
@@ -120,9 +126,10 @@
     "spriteyoffset": 0,
     "projectile" : "ShootgunBulletYellow",
     "price" : 200,
-    "nbProj" : 1,
-    "angle" : 0,
-    "longueur_arme" : 32
+    "nbProj" : 3,
+    "angle" : 5,
+    "longueur_arme" : 32,
+    "portee" : 500
   },
 
   "RocketLancher_simple": {
@@ -140,7 +147,8 @@
     "price" : 200,
     "nbProj" : 1,
     "angle" : 0,
-    "longueur_arme" : 28
+    "longueur_arme" : 28,
+    "portee" : 1920
   },
 
   "PPsh41": {
@@ -158,7 +166,8 @@
     "price" : 200,
     "nbProj" : 1,
     "angle" : 0,
-    "longueur_arme" : 32
+    "longueur_arme" : 32,
+    "portee" : 1920
   },
 
   "RocketLancher_double": {
@@ -176,7 +185,8 @@
     "price" : 200,
     "nbProj" : 1,
     "angle" : 0,
-    "longueur_arme" : 32
+    "longueur_arme" : 32,
+    "portee" : 1920
   },
 
   "Shootgun_short": {
@@ -194,6 +204,7 @@
     "price" : 200,
     "nbProj" : 1,
     "angle" : 0,
-    "longueur_arme" : 16
+    "longueur_arme" : 16,
+    "portee" : 1920
   }
 }
