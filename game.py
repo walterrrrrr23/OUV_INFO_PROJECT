@@ -29,7 +29,9 @@ class Game:
         self.damage_indicator = pygame.sprite.Group()
         self.sprite_bullets_player = pygame.sprite.Group()
         self.sprite_player.add(self.player)
+
         arme_actuelle = "Shootgun_black"
+        self.player.armes_possedees = [arme_actuelle]
         self.weapon = Weapon(self.player, self.camera, arme_actuelle, self.sprite_bullets_player)
 
         #définition des tiles -> map
@@ -40,9 +42,6 @@ class Game:
     def get_scaled_vignette(self):
         w, h = SCREEN_WIDTH, SCREEN_HEIGHT 
         return pygame.transform.smoothscale(self.vignette, (w, h))
-
-    
-
 
     def update_camera(self):
         self.camera.calculateOffset()

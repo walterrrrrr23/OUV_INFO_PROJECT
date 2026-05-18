@@ -1,23 +1,25 @@
 import pygame
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE, MOUSE_SENSITIVITY
-
+from utils import load_json
+import random
 
 def HealthBar(player, display):
 
-    bar_lenght_pixel = SCREEN_WIDTH//4 + 50
+    bar_lenght_pixel = SCREEN_WIDTH//4 -50
+
     health = player.health
     maxhealth = player.max_health
-    offsetx = 280
-    offsety = 200
+    offsetx = 180
+    offsety = 170
     sizex = health/maxhealth*bar_lenght_pixel
     sizey = 35
 
     #bar de fond
-    pygame.draw.rect(display, pygame.Color(0,0,0), (offsetx, offsety, bar_lenght_pixel, sizey))
+    pygame.draw.rect(display, pygame.Color(0,0,0), (offsetx+30, offsety+15, bar_lenght_pixel, sizey-15))
     #bar rouge
-    pygame.draw.rect(display, pygame.Color(255,0,0), (offsetx, offsety, sizex, sizey))
+    pygame.draw.rect(display, pygame.Color(255,0,0), (offsetx+30, offsety+15, sizex, sizey-15))
 
-    sheet = pygame.image.load("assets/sprites/healthbar3.png").convert_alpha()
+    sheet = pygame.image.load("assets/sprites/healthbar.png").convert_alpha()
 
     coin = pygame.transform.scale(sheet, (36*19, 36*4))
 
@@ -29,7 +31,7 @@ def HealthBar(player, display):
     police_du_texte = pygame.font.Font("assets/fonts/Pix32.ttf", 20)
     info1_surface = police_du_texte.render(f"{health} / {maxhealth}", True, (200, 200, 200))
 
-    info_rect = info1_surface.get_rect(center=(bar_lenght_pixel//2 + offsetx, sizey//2 + offsety))
+    info_rect = info1_surface.get_rect(center=(bar_lenght_pixel//2 + offsetx+45, sizey//2 + offsety+42))
 
     display.blit(info1_surface, info_rect)
 
@@ -38,18 +40,19 @@ def HealthBar(player, display):
     coin = pygame.transform.scale(coin, (64*ZOOM*1.5, 64*ZOOM*1.5))
 
     rect = pygame.Rect((0,0), (10,10))
-    rect.center = (offsetx-90, offsety + 15)
+    rect.center = (offsetx-30, offsety + 80)
     display.blit(coin, rect)
 
     info1_surface = police_du_texte.render(f"{player.coin}", True, (200, 200, 200))
 
-    info_rect = info1_surface.get_rect(center=(offsetx+60, offsety+120))
+    info_rect = info1_surface.get_rect(center=(offsetx+120, offsety+185))
 
     display.blit(info1_surface, info_rect)
 
+
 def EXPBar(player, display):
 
-    bar_lenght_pixel = SCREEN_WIDTH//4 + 50             # longeur de la barre
+    bar_lenght_pixel = SCREEN_WIDTH//4  - 25             # longeur de la barre
     level_actu = player.level                           # level actuel      
     exp = player.exp                                    # exp totale du joueur
     exp_pour_level_up = 100*1.05**level_actu            # exp pour atteindre le prochain level
@@ -57,17 +60,17 @@ def EXPBar(player, display):
     if exp_pour_level_up <= 0:                          # pour eviter la div par 0 plus tard
         exp_pour_level_up = 1
 
-    offsetx = SCREEN_WIDTH - bar_lenght_pixel - 50
-    offsety = 200
+    offsetx =  230
+    offsety = 260
     sizex = (exp/exp_pour_level_up)*bar_lenght_pixel
     sizex = min(sizex, bar_lenght_pixel)                # secu  
     sizey = 35
 
     # bar de fond
-    pygame.draw.rect(display, pygame.Color(0,0,0), (offsetx, offsety, bar_lenght_pixel, sizey))
+    pygame.draw.rect(display, pygame.Color(0,0,0), (offsetx, offsety+10, bar_lenght_pixel, sizey-15))
     
     # bar rouge
-    pygame.draw.rect(display, pygame.Color(0,250,0), (offsetx, offsety, sizex, sizey))
+    pygame.draw.rect(display, pygame.Color(100,200,115), (offsetx, offsety+10, sizex, sizey-15))
 
     # contour
     sheet = pygame.image.load("assets/sprites/expbar.png").convert_alpha()
@@ -82,7 +85,7 @@ def EXPBar(player, display):
     texte_bar_exp = f"LV.{level_actu} | {int(exp)} / {int(exp_pour_level_up)}"
     info1_surface = police_du_texte.render(texte_bar_exp, True, (200, 200, 200))
 
-    info_rect = info1_surface.get_rect(center=(bar_lenght_pixel//2 + offsetx, sizey//2 + offsety))
+    info_rect = info1_surface.get_rect(center=(bar_lenght_pixel//2 + offsetx, sizey//2 + offsety+30))
 
     display.blit(info1_surface, info_rect)
 
@@ -128,7 +131,7 @@ def home(screen, boutons):
         text_rect = b["surf"].get_rect(center=b["rect"].center)
         screen.blit(b["surf"], text_rect)
 
-  
+
 def pause(screen, boutons):
 
     # floutage
@@ -213,6 +216,7 @@ def gameover(screen, boutons):
         text_rect = b["surf"].get_rect(center=b["rect"].center)
         screen.blit(b["surf"], text_rect)
 
+
 def parametroge(screen, boutons):
     # floutage
 
@@ -256,7 +260,7 @@ def parametroge(screen, boutons):
         text_rect = b["surf"].get_rect(center=b["rect"].center)
         screen.blit(b["surf"], text_rect)
 
-        
+    
 def parametrage(screen, boutons, changementdecle = None):
 
     # floutage
@@ -708,44 +712,44 @@ def crea_boutons_amelio():
     #couleur, taille et position
 
     font_bouton = pygame.font.Font("assets/fonts/Pix32Thin.ttf", 20)
-    largeur_du_bouton, hauteur_du_bouton = 700, 60
+    largeur_du_bouton, hauteur_du_bouton = 700, 45
     center_x = SCREEN_WIDTH // 2 - largeur_du_bouton // 2
 
     #hauteur d'affichage du premir bouton
 
-    hauteur_premier = SCREEN_HEIGHT // 2 - 50
+    hauteur_premier = 140
 
     #ecart entre les boutons
 
-    ecart = 80
+    ecart = 52
 
-    boutons = [
+    boutons = []
 
-        {
-            "text": "AUGMENTER LES PV",
-            "prix" : 10,
-            "rect": pygame.Rect(center_x, hauteur_premier, largeur_du_bouton, hauteur_du_bouton),
-            "action": "augmente_vie",
-            "surf": font_bouton.render("AUGMENTER LES PV", True, (255, 255, 255))
-        },
+    weapons_data = load_json("assets/data/weapons.json")
+    
+    liste_armes = list(weapons_data.items())
+    nombre_a_choisir = min(3, len(liste_armes))
+    armes_aleatoires = random.sample(liste_armes, nombre_a_choisir)
 
-        {
-            "text": "AUGMENTER LA VITESSE",
-            "prix" : 100,
-            "rect": pygame.Rect(center_x, hauteur_premier + ecart, largeur_du_bouton, hauteur_du_bouton),
-            "action": "augmente_vitesse",
-            "surf": font_bouton.render("AUGMENTER LA VITESSE", True, (255, 255, 255))
-        },
+    for i, (weapon_name, data) in enumerate(armes_aleatoires):
+        prix = data.get("price", 200)
+        
+        boutons.append({
+            "text": f"ACHETER {weapon_name.upper()}",
+            "prix": prix,
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart * i, largeur_du_bouton, hauteur_du_bouton),
+            "action": f"buy_{weapon_name}",
+            "surf": font_bouton.render(f"ACHETER {weapon_name.upper()}", True, (255, 255, 255))
+        })
 
-        {
-            "text": "REPRENDRE",
-            "prix" : 0,
-            "rect": pygame.Rect(center_x, hauteur_premier + ecart*2 , largeur_du_bouton, hauteur_du_bouton),
-            "action": "resume",
-            "surf": font_bouton.render("REPRENDRE", True, (255, 255, 255))
-        }
-
-    ]
+   
+    boutons.append({
+        "text": "REPRENDRE",
+        "prix": 0,
+        "rect": pygame.Rect(center_x, hauteur_premier + ecart * nombre_a_choisir + 15, largeur_du_bouton, hauteur_du_bouton),
+        "action": "reprendre",  # <-- CORRECTION ICI
+        "surf": font_bouton.render("REPRENDRE", True, (255, 255, 255))
+    })
 
     return boutons
 
