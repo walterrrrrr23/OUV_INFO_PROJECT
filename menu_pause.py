@@ -47,6 +47,7 @@ def HealthBar(player, display):
 
     display.blit(info1_surface, info_rect)
 
+
 def EXPBar(player, display):
 
     bar_lenght_pixel = SCREEN_WIDTH//4 + 50             # longeur de la barre
@@ -128,7 +129,7 @@ def home(screen, boutons):
         text_rect = b["surf"].get_rect(center=b["rect"].center)
         screen.blit(b["surf"], text_rect)
 
-  
+
 def pause(screen, boutons):
 
     # floutage
@@ -213,6 +214,7 @@ def gameover(screen, boutons):
         text_rect = b["surf"].get_rect(center=b["rect"].center)
         screen.blit(b["surf"], text_rect)
 
+
 def parametroge(screen, boutons):
     # floutage
 
@@ -256,7 +258,7 @@ def parametroge(screen, boutons):
         text_rect = b["surf"].get_rect(center=b["rect"].center)
         screen.blit(b["surf"], text_rect)
 
-        
+    
 def parametrage(screen, boutons, changementdecle = None):
 
     # floutage
