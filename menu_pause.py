@@ -70,11 +70,11 @@ def EXPBar(player, display):
     pygame.draw.rect(display, pygame.Color(0,250,0), (offsetx, offsety, sizex, sizey))
 
     # contour
-    sheet = pygame.image.load("assets/sprites/healthbar3.png").convert_alpha()
+    sheet = pygame.image.load("assets/sprites/expbar.png").convert_alpha()
     contour = pygame.transform.scale(sheet, (36*19, 36*4))
 
     rect = pygame.Rect((0,0), (10,10))
-    rect.center = (offsetx - 70, offsety - 62 )
+    rect.center = (offsetx - 120, offsety - 62 )
     display.blit(contour, rect)
 
 
@@ -212,7 +212,6 @@ def gameover(screen, boutons):
         
         text_rect = b["surf"].get_rect(center=b["rect"].center)
         screen.blit(b["surf"], text_rect)
-
 
 def parametroge(screen, boutons):
     # floutage
@@ -653,6 +652,102 @@ def crea_boutons_parametroge():
     ]
     return boutons
 
+def amelio(screen, boutons, player):
+
+    # floutage
+
+    floutage = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+    floutage.set_alpha(150)     # 0 transparant -> 255 opaque
+    floutage.fill((0,0,0))
+    screen.blit(floutage,(0,0))
+
+    # les polices d'ecritures du menu pause
+
+    police_du_titre = pygame.font.Font("assets/fonts/Pix32.ttf", 50)
+    police_du_bouton = pygame.font.Font("assets/fonts/Pix32Thin.ttf", 20)
+    
+    # le texte du menu pause
+
+    titre = police_du_titre.render("UPGRADE", True, (255, 255, 255))
+
+    # pour center ce qu'on a ecrit
+
+    rectangle_du_titre = titre.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 80))
+
+    # afficher le titre
+
+    screen.blit(titre, rectangle_du_titre)
+
+    # gestion de la souris
+
+    pos_souris = pygame.mouse.get_pos()
+
+    for b in boutons :
+
+        if player.coin >= b["prix"]:                # argent dispo
+            couleur_texte = (255, 255, 255)         # couleur blanche
+        else:                                       # argent pas dispo
+            couleur_texte = (255, 0, 0)             # couleur rouge
+        
+        texte = f"{b['text']} ({b['prix']} coins)"
+        surf_texte = police_du_bouton.render(texte, True, couleur_texte)
+
+        if b["rect"].collidepoint(pos_souris):
+            color = (180, 180, 180)
+            pygame.draw.rect(screen, (255, 255, 255), b["rect"].inflate(4,4), border_radius = 10, width = 2)
+        else :
+            color = (100, 100, 100)
+
+        pygame.draw.rect(screen, color, b["rect"], border_radius=10)
+        
+        text_rect = surf_texte.get_rect(center=b["rect"].center)
+        screen.blit(surf_texte, text_rect)
+
+def crea_boutons_amelio():
+
+    #couleur, taille et position
+
+    font_bouton = pygame.font.Font("assets/fonts/Pix32Thin.ttf", 20)
+    largeur_du_bouton, hauteur_du_bouton = 700, 60
+    center_x = SCREEN_WIDTH // 2 - largeur_du_bouton // 2
+
+    #hauteur d'affichage du premir bouton
+
+    hauteur_premier = SCREEN_HEIGHT // 2 - 50
+
+    #ecart entre les boutons
+
+    ecart = 80
+
+    boutons = [
+
+        {
+            "text": "AUGMENTER LES PV",
+            "prix" : 10,
+            "rect": pygame.Rect(center_x, hauteur_premier, largeur_du_bouton, hauteur_du_bouton),
+            "action": "augmente_vie",
+            "surf": font_bouton.render("AUGMENTER LES PV", True, (255, 255, 255))
+        },
+
+        {
+            "text": "AUGMENTER LA VITESSE",
+            "prix" : 100,
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart, largeur_du_bouton, hauteur_du_bouton),
+            "action": "augmente_vitesse",
+            "surf": font_bouton.render("AUGMENTER LA VITESSE", True, (255, 255, 255))
+        },
+
+        {
+            "text": "REPRENDRE",
+            "prix" : 0,
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart*2 , largeur_du_bouton, hauteur_du_bouton),
+            "action": "resume",
+            "surf": font_bouton.render("REPRENDRE", True, (255, 255, 255))
+        }
+
+    ]
+
+    return boutons
 
 def ca_clique(event, boutons):
     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
