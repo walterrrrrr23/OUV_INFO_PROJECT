@@ -23,6 +23,7 @@ class Projectile(pygame.sprite.Sprite):
         self.damage = damage
         self.kb = knockback
         self.rotate = projectile_data['rotate']
+        self.rotate_speed = projectile_data['rotate_speed']
         self.rect = pygame.Rect(position, (15,15))
 
         angle = self.direction.angle_to(pygame.Vector2(1,0))
@@ -42,7 +43,7 @@ class Projectile(pygame.sprite.Sprite):
         self.rect.center = self.pos
 
         if self.rotate:
-            self.angle += 5
+            self.angle += self.rotate_speed
             if self.angle % 360 == 0:
                 self.angle = 0
             self.image = pygame.transform.rotate(self.image_originale, self.angle)
