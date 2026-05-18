@@ -11,7 +11,7 @@
     "spritexoffset": 1,
     "spriteyoffset": 0,
     "projectile" : "SmallBulletYellow",
-    "price" : 200,
+    "price" : 10,
     "nbProj" : 1,
     "angle" : 5,
     "longueur_arme" : 1,

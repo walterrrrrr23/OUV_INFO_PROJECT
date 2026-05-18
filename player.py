@@ -1,7 +1,7 @@
 
 import pygame
 from settings import PLAYER_SPEED, ZOOM, PLAYER_ACCELERATION
-from utils import load_spritesheet  
+from utils import load_spritesheet
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, camera, dicocle):
@@ -61,6 +61,7 @@ class Player(pygame.sprite.Sprite):
         self.knockammount = 100 #en ticks
         self.coin = 0
         self.amelio_en_cours = False
+        self.besoin_maj_boutons = False
 
     def take_damage(self, damage, direction, kb):
         if self.Dashing :
@@ -82,6 +83,7 @@ class Player(pygame.sprite.Sprite):
             self.health = self.max_health                                   # soigne quand on level up
             if self.level % 2 == 0:
                 self.amelio_en_cours = True
+                self.besoin_maj_boutons = True
 
     def update(self, dt):
         keys = pygame.key.get_pressed()

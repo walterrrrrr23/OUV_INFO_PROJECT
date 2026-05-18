@@ -4,6 +4,7 @@ from settings import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, PAUSE
 from game import Game
 from menu_pause import pause, crea_boutons_pause, ca_clique, gameover, crea_boutons_gameover, home, crea_boutons_home, parametrage, crea_boutons_parametrage, credits, crea_boutons_credits, amelio, crea_boutons_amelio
 from player import Player
+from weapon import Weapon
 
 def main():
     pygame.init()
@@ -146,24 +147,26 @@ def main():
                 
                 action = ca_clique(event, les_boutons_amelio)
 
-                for b in les_boutons_amelio:
-                    if action == b["action"]:
-                        if game.player.coin >= b["prix"]:
-                            game.player.coin -= b["prix"]
+                if action == "reprendre":
+                    game.player.amelio_en_cours = False
 
-                            if action == "augmente_vie":
+                elif action and action.startswith("buy_"):
 
-                                game.player.max_health += 10                    # on augmente le maxi de PV
-                                game.player.health = game.player.max_health     # vu qu'on soigne a chaque monter en niveau, on set les PV au max
-                                game.player.amelio_en_cours = False             # il a fini de choisir son amelio
-                            
-                            elif action == "augmente_vitesse":
+                    nom_arme = action.replace("buy_", "")
+                    
+                    bouton_clique = None
+                    for b in les_boutons_amelio:
+                        if b["action"] == action:
+                            bouton_clique = b
+                            break
 
-                                game.player.speed += 50
-                                game.player.amelio_en_cours = False
-            
-                if action == "resume":          # la partie n'est plus en pause et le menu pause disparait
-                    game.player.amelio_en_cours = False              # variable pour activer l'affichage du menu pause
+                    prix_arme = bouton_clique["prix"]
+                        
+                    if game.player.coin >= prix_arme:                                                           # si assez riche
+
+                        game.player.coin -= prix_arme                                                           # on prend l'argent                            
+                        game.weapon = Weapon(game.player, game.camera, nom_arme, game.sprite_bullets_player)    # changement de l'arme sur le joueur
+                        game.player.amelio_en_cours = False                         
 
             # si l'utilisateur a perdu
             
@@ -191,6 +194,10 @@ def main():
 
         if game.player.health <= 0 :
             estmort = True
+        
+        if game.player.besoin_maj_boutons:
+            les_boutons_amelio = crea_boutons_amelio()
+            game.player.besoin_maj_boutons = False
 
         # si on est pas en pause, ni mort ni dans le menu home ni ans le menu parametre alors on update
 
