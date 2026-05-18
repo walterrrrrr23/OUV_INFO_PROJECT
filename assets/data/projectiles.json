@@ -16,7 +16,6 @@
     "spritexoffset" : 2,
     "spriteyoffset" : 0,
     "rotate" : false
-    
   },
 
   "OrbYellow": {
@@ -50,7 +49,7 @@
     "rotate" : false
   },
 
-    "Fork": {
+  "Fork": {
     "spritexoffset" : 0,
     "spriteyoffset" : 1,
     "rotate" : false
@@ -69,8 +68,8 @@
   },
 
   "OrbRed": {
-    "spritexoffset" : 0,
-    "spriteyoffset" : 1,
+    "spritexoffset" : 1,
+    "spriteyoffset" : 3,
     "rotate" : false
   },
   

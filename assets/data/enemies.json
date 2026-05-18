@@ -5,6 +5,34 @@
     "damage": 1,
     "cooldown" : 1000,
     "sprite": "assets/sprites/enemies/farmer3_sheet.png",
+    "projectile" : "Fork",
+    "kb" : 10,
+    "bulletspeed" : 250,
+    "range_min" : 500,
+    "range_max" : 1000,
+    "exp" : 100
+  }, 
+
+  "Knight": {
+    "health": 100,
+    "speed": 150,
+    "damage": 1,
+    "cooldown" : 1000,
+    "sprite": "assets/sprites/enemies/knight_sheet.png",
+    "projectile" : "Sword",
+    "kb" : 10,
+    "bulletspeed" : 250,
+    "range_min" : 500,
+    "range_max" : 1000,
+    "exp" : 100
+  },
+
+  "King": {
+    "health": 100,
+    "speed": 150,
+    "damage": 1,
+    "cooldown" : 1000,
+    "sprite": "assets/sprites/enemies/boss_sheet.png",
     "projectile" : "OrbRed",
     "kb" : 10,
     "bulletspeed" : 250,
