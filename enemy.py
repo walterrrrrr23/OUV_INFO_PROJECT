@@ -71,6 +71,7 @@ class Enemy(pygame.sprite.Sprite):
         self.kb = ennemy_data["kb"]
         self.bulletspeed = ennemy_data["bulletspeed"]
         self.range_min = ennemy_data["range_min"]
+        self.range_max = ennemy_data["range_max"]
         
 
     def take_damage(self, damage, direction, kb):
@@ -96,10 +97,12 @@ class Enemy(pygame.sprite.Sprite):
             self.kill()
 
     def shoot(self):
-        self.last = pygame.time.get_ticks()
-        dir = (self.target.pos - self.pos).normalize()
-        self.player_shoot = Projectile(self.camera,  self.projectile, self.pos, dir,   self.bulletspeed,  self.damage,   self.kb)
-        self.sprite_projectiles.add(self.player_shoot)
+        distance = pygame.math.Vector2.distance_to(self.pos, self.target.pos)
+        if distance <= self.range_max:
+            self.last = pygame.time.get_ticks()
+            dir = (self.target.pos - self.pos).normalize()
+            self.player_shoot = Projectile(self.camera,  self.projectile, self.pos, dir,   self.bulletspeed,  self.damage,   self.kb)
+            self.sprite_projectiles.add(self.player_shoot)
 
 
     def update(self, dt, player):

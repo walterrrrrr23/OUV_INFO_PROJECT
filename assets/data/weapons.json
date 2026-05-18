@@ -11,7 +11,7 @@
     "spritexoffset": 1,
     "spriteyoffset": 0,
     "projectile" : "SmallBulletYellow",
-    "price" : 200,
+    "price" : 10,
     "nbProj" : 1,
     "angle" : 5,
     "longueur_arme" : 1,
@@ -119,17 +119,17 @@
     "damage" : 90,
     "kb" : 20,
     "bulletspeed" : 725,
-    "cooldown" : 300,
+    "cooldown" : 1000,
     "recoil_kick" : 40,       
     "recoil_return_speed" : 100,
     "spritexoffset": 6,
     "spriteyoffset": 0,
     "projectile" : "ShootgunBulletYellow",
     "price" : 200,
-    "nbProj" : 3,
+    "nbProj" : 5,
     "angle" : 5,
     "longueur_arme" : 32,
-    "portee" : 500
+    "portee" : 350
   },
 
   "RocketLancher_simple": {
