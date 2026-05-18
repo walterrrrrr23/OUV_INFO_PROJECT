@@ -11,6 +11,12 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("test")
 
+
+    pygame.mouse.set_visible(False)
+    cursor_img =  pygame.image.load("assets/sprites/cursor.png").convert_alpha()
+    cursor_img_rect = cursor_img.get_rect()
+
+
     # dictionnaire contetant les touches par defaut pour les mouvements haut bas gauche droite
 
     dicocle = {
@@ -40,7 +46,7 @@ def main():
     les_boutons_gameover = crea_boutons_gameover()
     les_boutons_home = crea_boutons_home()
     les_boutons_cred = crea_boutons_credits()
-    les_boutons_amelio = crea_boutons_amelio()
+    les_boutons_amelio = crea_boutons_amelio(screen)
     les_boutons_param = crea_boutons_parametrage(dicocle)
     
     while running:
@@ -196,7 +202,7 @@ def main():
             estmort = True
         
         if game.player.besoin_maj_boutons:
-            les_boutons_amelio = crea_boutons_amelio()
+            les_boutons_amelio = crea_boutons_amelio(screen)
             game.player.besoin_maj_boutons = False
 
         # si on est pas en pause, ni mort ni dans le menu home ni ans le menu parametre alors on update
@@ -223,7 +229,8 @@ def main():
         if param:
             parametrage(screen, les_boutons_param, changementdecle)
 
-
+        cursor_img_rect.center = pygame.mouse.get_pos()  
+        screen.blit(cursor_img, cursor_img_rect) 
         pygame.display.flip() #screen update
 
     pygame.quit()

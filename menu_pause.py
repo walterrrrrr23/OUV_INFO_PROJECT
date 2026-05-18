@@ -686,14 +686,28 @@ def amelio(screen, boutons, player):
 
     pos_souris = pygame.mouse.get_pos()
 
+    sheet = pygame.image.load("assets/sprites/weaponsheet.png").convert_alpha()
+    ecart = 400
+   
+   
+    center_x = SCREEN_WIDTH // 2 
+    center_y = SCREEN_HEIGHT // 2 
+
+    #hauteur d'affichage du premir bouton
+
+    hauteur_premier = 140
+    weapons_data = load_json("assets/data/weapons.json")
     for b in boutons :
+        
 
         if player.coin >= b["prix"]:                # argent dispo
             couleur_texte = (255, 255, 255)         # couleur blanche
         else:                                       # argent pas dispo
             couleur_texte = (255, 0, 0)             # couleur rouge
-        
-        texte = f"{b['text']} ({b['prix']} coins)"
+        if  b["name"] == "" :
+            texte = f"{b['text']}"
+        else :
+            texte = ''
         surf_texte = police_du_bouton.render(texte, True, couleur_texte)
 
         if b["rect"].collidepoint(pos_souris):
@@ -707,13 +721,34 @@ def amelio(screen, boutons, player):
         text_rect = surf_texte.get_rect(center=b["rect"].center)
         screen.blit(surf_texte, text_rect)
 
-def crea_boutons_amelio():
+        police_du_texte = pygame.font.Font("assets/fonts/Pix32.ttf", 20)
+      
 
+        info1_surface = police_du_texte.render(f"{b['prix']}", True, (200, 200, 200))
+
+        info_rect = info1_surface.get_rect(center=(center_x + ecart * (b["index"]-1), center_y + 250))
+
+        screen.blit(info1_surface, info_rect)
+
+        
+        if b["name"] != "" :
+
+            weapon_image = sheet.subsurface(pygame.Rect(weapons_data[b["name"]]["spritexoffset"]*TAILLE_SPRITE, weapons_data[b["name"]]["spriteyoffset"]*TAILLE_SPRITE, 64, 64))
+            weapon_image = pygame.transform.scale(weapon_image, (100*ZOOM, 100*ZOOM))
+
+            rect = pygame.Rect((0,0), (64,64))
+            rect.center = (center_x+ ecart *( b["index"]-1) - 80,  center_y + 25 )
+            screen.blit(weapon_image, rect)
+
+
+def crea_boutons_amelio(display):
+  
     #couleur, taille et position
 
     font_bouton = pygame.font.Font("assets/fonts/Pix32Thin.ttf", 20)
-    largeur_du_bouton, hauteur_du_bouton = 700, 45
+    largeur_du_bouton = 200
     center_x = SCREEN_WIDTH // 2 - largeur_du_bouton // 2
+    center_y = SCREEN_HEIGHT // 2 
 
     #hauteur d'affichage du premir bouton
 
@@ -721,7 +756,7 @@ def crea_boutons_amelio():
 
     #ecart entre les boutons
 
-    ecart = 52
+    ecart = 400
 
     boutons = []
 
@@ -730,24 +765,32 @@ def crea_boutons_amelio():
     liste_armes = list(weapons_data.items())
     nombre_a_choisir = min(3, len(liste_armes))
     armes_aleatoires = random.sample(liste_armes, nombre_a_choisir)
-
+    
+  
     for i, (weapon_name, data) in enumerate(armes_aleatoires):
         prix = data.get("price", 200)
+
+      
+    
         
         boutons.append({
             "text": f"ACHETER {weapon_name.upper()}",
             "prix": prix,
-            "rect": pygame.Rect(center_x, hauteur_premier + ecart * i, largeur_du_bouton, hauteur_du_bouton),
+            "rect": pygame.Rect(center_x+ ecart * (i-1)  , center_y  , largeur_du_bouton, largeur_du_bouton),
             "action": f"buy_{weapon_name}",
+            "name" : weapon_name,
+            "index" : i,
             "surf": font_bouton.render(f"ACHETER {weapon_name.upper()}", True, (255, 255, 255))
         })
 
    
     boutons.append({
         "text": "REPRENDRE",
-        "prix": 0,
-        "rect": pygame.Rect(center_x, hauteur_premier + ecart * nombre_a_choisir + 15, largeur_du_bouton, hauteur_du_bouton),
+         "prix": 0,
+        "rect": pygame.Rect(center_x, center_y + 280, largeur_du_bouton, 70),
         "action": "reprendre",  # <-- CORRECTION ICI
+         "name" : "",
+        "index" : 4,
         "surf": font_bouton.render("REPRENDRE", True, (255, 255, 255))
     })
 
