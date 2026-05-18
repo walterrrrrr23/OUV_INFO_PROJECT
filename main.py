@@ -25,13 +25,13 @@ def main():
 
     # variables pour gerer les etats du jeu
 
-    ppause = False      # jeu en pause
-    estmort = False     # je joueur a perdu
-    running = True      # execution du jeu (si false la fenetre s'eteint)
-    hhome = True        # menu principal
-    param = False       # menu parametre
-    cred = False        # menu credits
-
+    ppause = False              # jeu en pause
+    estmort = False             # je joueur a perdu
+    running = True              # execution du jeu (si false la fenetre s'eteint)
+    hhome = True                # menu principal
+    param = False               # menu parametre
+    cred = False                # menu credits
+    inventaire_armes = False    # menu armes posedes
     changementdecle = None  # l'utilisateur est il en train de changer une touche
 
     # initialisation des boutons des differents menus
@@ -71,13 +71,20 @@ def main():
                     running = False               # variable pour activer l'affichage du menu pause
                 
                 # relancer la partie
-                if event.key == pygame.K_r:
-                    game = Game(dicocle)
+                #if event.key == pygame.K_r:
+                    #game = Game(dicocle)
                 
                 # aller sur le menu principal (abandon de la game)
-                if event.key == pygame.K_m:
-                    hhome = True                # variable pour activer l'affichage du menu principal
+                #if event.key == pygame.K_m:
+                    #hhome = True                # variable pour activer l'affichage du menu principal
 
+                if event.key == pygame.K_w:
+                    # On ne peut l'ouvrir que si on est en train de jouer (pas mort, pas dans le menu principal, etc.)
+                    if not hhome and not estmort and not ppause and not param and not cred and not game.player.amelio_en_cours:
+                        inventaire_armes = not inventaire_armes
+                    elif inventaire_armes: 
+                        # Si le menu était déjà ouvert, on permet de le fermer
+                        inventaire_armes = False
             # gestion boutons selon les etats du jeu
 
             # si on est dans le menu parametre et qu'on n'est pas en train de changeer les touches
@@ -201,7 +208,7 @@ def main():
 
         # si on est pas en pause, ni mort ni dans le menu home ni ans le menu parametre alors on update
 
-        if not ppause and not estmort and not hhome and not param and not cred and not game.player.amelio_en_cours:
+        if not ppause and not estmort and not hhome and not param and not cred and not game.player.amelio_en_cours and not inventaire_armes:
             game.update(dt)
         
         # si on est pas dans le menu principal alors on dessine
@@ -218,6 +225,8 @@ def main():
             pause(screen, les_boutons_pause)
         elif game.player.amelio_en_cours:
             amelio(screen, les_boutons_amelio, game.player)
+        elif inventaire_armes:
+            menu_inventaire(screen, game.player.armes_possedees)
         if cred:
             credits(screen, les_boutons_cred)
         if param:
