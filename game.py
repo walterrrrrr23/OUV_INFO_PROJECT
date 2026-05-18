@@ -1,6 +1,7 @@
 # game.py
 import pygame
 from random import randint
+from math import sqrt
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE, MOUSE_SENSITIVITY
 from player import Player
 from camera import Camera
@@ -60,17 +61,26 @@ class Game:
         self.camera.updateMouse(pygame.Vector2(mouse_x, mouse_y))
 
     def advancement(self):
-        if not self.sprite_mob or self.time > self.stage*30: #multiple de 10 secondes
+        if self.time > self.stage*15 or self.stage == 0: #multiple de 10 secondes
             self.spawn()
             self.stage += 1
 
+    def spawn_evolution(self, x): #x = self.stage
+        return int(1.5*sqrt(x) + 2)
+
     def spawn(self):
-        #for i in range((self.stage)):
-        pos_x = self.camera.offset.x + SCREEN_WIDTH//2 + randint(-1,1)*randint(SCREEN_WIDTH//2, SCREEN_WIDTH)
-        pos_y = self.camera.offset.y + SCREEN_HEIGHT//2 + randint(-1,1)*randint(SCREEN_HEIGHT//2, SCREEN_HEIGHT)
-        self.enemy = Enemy((pos_x, pos_y), self.camera, self.player, "Knight", self.sprite_coins, self.sprite_bullets, self.damage_indicator)
-        print(pos_x, pos_x)
-        self.sprite_mob.add(self.enemy)
+        nb_spawn_in_wave = self.spawn_evolution(self.stage)
+        for i in range((nb_spawn_in_wave)):
+            pos_x = self.camera.offset.x + SCREEN_WIDTH//2 + randint(-1,1)*randint(SCREEN_WIDTH//2, SCREEN_WIDTH)
+            pos_y = self.camera.offset.y + SCREEN_HEIGHT//2 + randint(-1,1)*randint(SCREEN_HEIGHT//2, SCREEN_HEIGHT)
+            proba = randint(0,99)
+            if proba < 75: 
+                self.enemy = Enemy((pos_x, pos_y), self.camera, self.player, "Paysan", self.sprite_coins, self.sprite_bullets, self.damage_indicator)
+            elif proba < 95: 
+                self.enemy = Enemy((pos_x, pos_y), self.camera, self.player, "Knight", self.sprite_coins, self.sprite_bullets, self.damage_indicator)
+            else: 
+                self.enemy = Enemy((pos_x, pos_y), self.camera, self.player, "King", self.sprite_coins, self.sprite_bullets, self.damage_indicator)
+            self.sprite_mob.add(self.enemy)
 
     def update(self, dt):
         self.time += dt
