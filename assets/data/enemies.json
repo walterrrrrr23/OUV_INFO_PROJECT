@@ -4,7 +4,7 @@
     "speed": 150,
     "damage": 1,
     "cooldown" : 300,
-    "sprite": "assets/sprites/enemies/knight_sheet.png",
+    "sprite": "assets/sprites/enemies/boss_sheet.png",
     "projectile" : "OrbRed",
     "kb" : 10,
     "bulletspeed" : 500,
