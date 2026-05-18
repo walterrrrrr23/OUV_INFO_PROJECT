@@ -8,6 +8,7 @@ from coin import Coin
 import random
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, CAMERA_OFFSET_THRESHOLD, ZOOM, TAILLE_SPRITE, MOUSE_SENSITIVITY
 from damage_indicator import Damage_Indicator
+from random import randint
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, pos, camera, target, name, coingroup, sprite_bullets, sprite_dmg_ind):
         super().__init__()
@@ -101,9 +102,60 @@ class Enemy(pygame.sprite.Sprite):
         if distance <= self.range_max:
             self.last = pygame.time.get_ticks()
             dir = (self.target.pos - self.pos).normalize()
-            self.player_shoot = Projectile(self.camera,  self.projectile, self.pos, dir,   self.bulletspeed,  self.damage,   self.kb)
-            self.sprite_projectiles.add(self.player_shoot)
+          
+            if self.name == "Joker" :
+                rand = randint(1,3)
+                if rand == 1 :
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(30,0), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(30,30), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(0,30), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(-30,0), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(-30,30), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(-30,-30), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(30,-30), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(0,-30), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                elif rand == 2 :
 
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(-30,-30), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(30,-30), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(0,-30), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(15,-0), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(-15,-0), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(0,30), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                else :
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(30,0), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(0,30), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(-30,0), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(0,-30), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(20,20), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(-20,20), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(20,-20), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+                    self.player_shoot = Projectile(self.camera,  self.projectile, self.pos + pygame.Vector2(-20,-20), dir,   self.bulletspeed,  self.damage,   self.kb)
+                    self.sprite_projectiles.add(self.player_shoot)
+            else :
+                self.player_shoot = Projectile(self.camera,  self.projectile, self.pos, dir,   self.bulletspeed,  self.damage,   self.kb)
+                self.sprite_projectiles.add(self.player_shoot)
 
     def update(self, dt, player):
       
