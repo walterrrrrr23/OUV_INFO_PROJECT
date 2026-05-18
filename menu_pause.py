@@ -783,7 +783,22 @@ def crea_boutons_amelio(display):
             "surf": font_bouton.render(f"ACHETER {weapon_name.upper()}", True, (255, 255, 255))
         })
 
-   
+    boutons.append({
+            "text": "AUGMENTER LES PV",
+            "prix" : 10,
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart * nombre_a_choisir + 15, largeur_du_bouton, hauteur_du_bouton),
+            "action": "augmente_vie",
+            "surf": font_bouton.render("AUGMENTER LES PV", True, (255, 255, 255))
+        })
+
+    boutons.append({
+            "text": "AUGMENTER LA VITESSE",
+            "prix" : 100,
+            "rect": pygame.Rect(center_x, hauteur_premier + ecart * nombre_a_choisir + 15 + ecart, largeur_du_bouton, hauteur_du_bouton),
+            "action": "augmente_vitesse",
+            "surf": font_bouton.render("AUGMENTER LA VITESSE", True, (255, 255, 255))
+        })
+    
     boutons.append({
         "text": "REPRENDRE",
          "prix": 0,

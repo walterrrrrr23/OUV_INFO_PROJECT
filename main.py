@@ -31,13 +31,12 @@ def main():
 
     # variables pour gerer les etats du jeu
 
-    ppause = False      # jeu en pause
-    estmort = False     # je joueur a perdu
-    running = True      # execution du jeu (si false la fenetre s'eteint)
-    hhome = True        # menu principal
-    param = False       # menu parametre
-    cred = False        # menu credits
-
+    ppause = False              # jeu en pause
+    estmort = False             # je joueur a perdu
+    running = True              # execution du jeu (si false la fenetre s'eteint)
+    hhome = True                # menu principal
+    param = False               # menu parametre
+    cred = False                # menu credits
     changementdecle = None  # l'utilisateur est il en train de changer une touche
 
     # initialisation des boutons des differents menus
@@ -77,12 +76,12 @@ def main():
                     running = False               # variable pour activer l'affichage du menu pause
                 
                 # relancer la partie
-                if event.key == pygame.K_r:
-                    game = Game(dicocle)
+                #if event.key == pygame.K_r:
+                    #game = Game(dicocle)
                 
                 # aller sur le menu principal (abandon de la game)
-                if event.key == pygame.K_m:
-                    hhome = True                # variable pour activer l'affichage du menu principal
+                #if event.key == pygame.K_m:
+                    #hhome = True                # variable pour activer l'affichage du menu principal
 
             # gestion boutons selon les etats du jeu
 
@@ -154,6 +153,17 @@ def main():
                 action = ca_clique(event, les_boutons_amelio)
 
                 if action == "reprendre":
+                    game.player.amelio_en_cours = False
+                
+                elif action == "augmente_vie":
+
+                    game.player.max_health += 10                    # on augmente le maxi de PV
+                    game.player.health = game.player.max_health     # vu qu'on soigne a chaque monter en niveau, on set les PV au max
+                    game.player.amelio_en_cours = False             # il a fini de choisir son amelio
+                            
+                elif action == "augmente_vitesse":
+
+                    game.player.speed += 50
                     game.player.amelio_en_cours = False
 
                 elif action and action.startswith("buy_"):
